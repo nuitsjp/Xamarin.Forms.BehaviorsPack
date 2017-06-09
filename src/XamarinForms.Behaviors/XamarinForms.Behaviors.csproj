@@ -3,6 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>0.0.1-pre</Version>
+    <AssemblyVersion>0.0.0.1</AssemblyVersion>
+    <FileVersion>0.0.0.1</FileVersion>
+    <Authors>nuits.jp</Authors>
+    <Company>nuits.jp</Company>
+    <Product>Behaviors for Xamarin.Forms</Product>
+    <Description>Planned place of Behaviors for Xamarin.Forms</Description>
+    <PackageLicenseUrl>https://github.com/nuitsjp/BehaviorsOfXamarinForms/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nuitsjp/BehaviorsOfXamarinForms</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nuitsjp/BehaviorsOfXamarinForms</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
