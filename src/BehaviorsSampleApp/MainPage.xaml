@@ -2,10 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BehaviorsSampleApp"
+             xmlns:behaviors="clr-namespace:XamarinForms.Behaviors;assembly=XamarinForms.Behaviors"
              x:Class="BehaviorsSampleApp.MainPage">
-
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout 
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" >
+        <Label Text="{Binding Message}"/>
+        <Button Text="Update Message">
+            <Button.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="Clicked" Command="{Binding UpdateMessageCommand}"/>
+            </Button.Behaviors>
+        </Button>
+        <Button Text="Display Alert">
+            <Button.Behaviors>
+                <behaviors:DisplayAlertBehavior EventName="Clicked" Message="Alert Message" Accept="OK" Cancel="Cancel" Command="{Binding DisplayAlertCommand}"/>
+            </Button.Behaviors>
+        </Button>
+    </StackLayout>
 
 </ContentPage>

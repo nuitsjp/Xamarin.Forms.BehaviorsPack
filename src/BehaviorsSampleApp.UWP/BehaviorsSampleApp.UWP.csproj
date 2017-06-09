@@ -151,6 +151,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BehaviorsSampleApp\BehaviorsSampleApp.csproj">
+      <Project>{6b6f90d8-76f2-4cc5-bfde-d42bdcbfa587}</Project>
+      <Name>BehaviorsSampleApp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
