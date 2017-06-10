@@ -8,10 +8,10 @@ using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
-    public abstract class ReactToEventBehavior<T> : BindableBehavior<T> where T : BindableObject
+    public abstract class ReceiveEventBehavior<T> : InheritBindingBehavior<T> where T : BindableObject
     {
         public static readonly BindableProperty EventNameProperty =
-            BindableProperty.Create(nameof(EventName), typeof(string), typeof(ReactToEventBehavior<T>));
+            BindableProperty.Create(nameof(EventName), typeof(string), typeof(ReceiveEventBehavior<T>));
         /// <summary>
         /// 監視対象のイベント名
         /// </summary>
@@ -64,8 +64,11 @@ namespace XamarinForms.Behaviors
         /// <param name="bindable"></param>
         protected override void OnDetachingFrom(BindableObject bindable)
         {
-            if (_eventInfo != null && _eventHandler != null)
+            if (_eventHandler != null)
                 _eventInfo.RemoveEventHandler(AssociatedObject, _eventHandler);
+
+            _eventInfo = null;
+            _eventHandler = null;
 
             base.OnDetachingFrom(bindable);
         }

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
-    public class EventToCommandBehavior : ReactToEventBehavior<VisualElement>
+    public class EventToCommandBehavior : ReceiveEventBehavior<VisualElement>
     {
         #region Command BindableProperty
         public static readonly BindableProperty CommandProperty = BindableProperty.Create<EventToCommandBehavior, ICommand>(p => p.Command, null);

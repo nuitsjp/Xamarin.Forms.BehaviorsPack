@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
-    public class BindableBehavior<T> : Behavior<T> where T : BindableObject
+    public class InheritBindingBehavior<T> : Behavior<T> where T : BindableObject
     {
         /// <summary>
         /// Property to which the Behavior is attached.
@@ -29,7 +29,7 @@ namespace XamarinForms.Behaviors
 
         private void OnBindingContextChanged(object sender, EventArgs e)
         {
-            OnBindingContextChanged();
+            BindingContext = AssociatedObject.BindingContext;
         }
 
         /// <summary>
@@ -39,15 +39,6 @@ namespace XamarinForms.Behaviors
         protected override void OnDetachingFrom(T bindableObject)
         {
             bindableObject.BindingContextChanged -= OnBindingContextChanged;
-        }
-
-        /// <summary>
-        /// When the BindingContext of attached object or own is changed, Set the BindingContext to be attached to own BindingContext.
-        /// </summary>
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            BindingContext = AssociatedObject.BindingContext;
         }
     }
 }
