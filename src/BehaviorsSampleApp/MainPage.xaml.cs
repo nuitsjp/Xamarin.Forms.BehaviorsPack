@@ -13,5 +13,10 @@ namespace BehaviorsSampleApp
         {
             InitializeComponent();
         }
+
+        private void NavigateListViewButton_OnClicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new ListViewPage());
+        }
     }
 }

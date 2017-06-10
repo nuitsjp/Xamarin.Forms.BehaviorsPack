@@ -47,6 +47,7 @@
             </Button.Behaviors>
         </Button>
         <Button Text="Display ActionSheet Request" Command="{Binding DisplayActionSheetRequestCommand}"/>
+        <Button Text="Navigate ListView" Clicked="NavigateListViewButton_OnClicked"/>
     </StackLayout>
 
 </ContentPage>
