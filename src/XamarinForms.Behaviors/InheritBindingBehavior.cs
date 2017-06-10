@@ -21,7 +21,7 @@ namespace XamarinForms.Behaviors
 
             AssociatedObject = bindableObject;
             // Inherit BindingContext of attached object.
-            if (bindableObject.BindingContext != null)
+            if (BindingContext != null && bindableObject.BindingContext != null)
                 BindingContext = bindableObject.BindingContext;
 
             bindableObject.BindingContextChanged += OnBindingContextChanged;

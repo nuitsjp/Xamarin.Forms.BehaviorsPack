@@ -9,32 +9,50 @@ namespace XamarinForms.Behaviors
 {
     public class EventToCommandBehavior : ReceiveEventBehavior<VisualElement>
     {
-        #region Command BindableProperty
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create<EventToCommandBehavior, ICommand>(p => p.Command, null);
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty CommandParameterProperty =
+            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty EventArgsConverterProperty =
+            BindableProperty.Create(nameof(EventArgsConverter), typeof(IValueConverter), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty EventArgsConverterParameterProperty =
+            BindableProperty.Create(nameof(EventArgsConverterParameter), typeof(object), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty EventArgsPropertyPathProperty =
+            BindableProperty.Create(nameof(EventArgsPropertyPath), typeof(string), typeof(EventToCommandBehavior));
+
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
         }
-        #endregion
 
-        #region CommandParameter BindableProperty
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create<EventToCommandBehavior, object>(p => p.CommandParameter, null);
         public object CommandParameter
         {
-            get { return GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
-        #endregion
 
-        #region Converter BindableProperty
-        public static readonly BindableProperty ConverterProperty = BindableProperty.Create<EventToCommandBehavior, IValueConverter>(p => p.Converter, null);
-        public IValueConverter Converter
+        public IValueConverter EventArgsConverter
         {
-            get { return (IValueConverter)GetValue(ConverterProperty); }
-            set { SetValue(ConverterProperty, value); }
+            get => (IValueConverter)GetValue(EventArgsConverterProperty);
+            set => SetValue(EventArgsConverterProperty, value);
         }
-        #endregion
+
+        public object EventArgsConverterParameter
+        {
+            get => GetValue(EventArgsConverterParameterProperty);
+            set => SetValue(EventArgsConverterParameterProperty, value);
+        }
+
+        public string EventArgsPropertyPath
+        {
+            get => (string)GetValue(EventArgsPropertyPathProperty);
+            set => SetValue(EventArgsPropertyPathProperty, value);
+        }
 
         /// <summary>
         /// イベントを購読する
@@ -43,35 +61,7 @@ namespace XamarinForms.Behaviors
         /// <param name="eventArgs"></param>
         protected override void OnEventRaised(object sender, EventArgs eventArgs)
         {
-            // コマンドがバインドされていない場合、何もしない
-            if (Command == null)
-            {
-                return;
-            }
-
-            // コマンド実行時のパラメータを決定する
-            object resolvedParameter;
-            if (CommandParameter != null)
-            {
-                // Commandプロパティに値が指定されていた場合、対象の値を利用する
-                resolvedParameter = CommandParameter;
-            }
-            else if (Converter != null)
-            {
-                // Converterが指定されていた場合、イベントパラメータをコンバータで変換した結果を利用する
-                resolvedParameter = Converter.Convert(eventArgs, typeof(object), null, null);
-            }
-            else
-            {
-                // それ以外の場合、イベント引数を利用する
-                resolvedParameter = eventArgs;
-            }
-
-            // コマンドが実行可能であれば、コマンドを実行する
-            if (Command.CanExecute(resolvedParameter))
-            {
-                Command.Execute(resolvedParameter);
-            }
+            Command?.Execute(eventArgs, CommandParameter, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
         }
     }
 }
