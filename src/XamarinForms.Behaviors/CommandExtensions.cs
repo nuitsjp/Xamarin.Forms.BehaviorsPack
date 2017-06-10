@@ -10,8 +10,13 @@ namespace XamarinForms.Behaviors
 {
     public static class CommandExtensions
     {
-        public static void Execute(this ICommand command, EventArgs eventArgs, object commandParameter,
-            IValueConverter eventArgsCoverter, object eventArgsConverterParameter, string eventArgsPropertyPath)
+        public static void Execute(
+            this ICommand command, 
+            object commandParameter = null,
+            EventArgs eventArgs = null,
+            IValueConverter eventArgsCoverter = null, 
+            object eventArgsConverterParameter = null, 
+            string eventArgsPropertyPath = null)
         {
             if (command == null)
             {

@@ -61,7 +61,7 @@ namespace XamarinForms.Behaviors
         /// <param name="eventArgs"></param>
         protected override void OnEventRaised(object sender, EventArgs eventArgs)
         {
-            Command?.Execute(eventArgs, CommandParameter, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
+            Command?.Execute(CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
         }
     }
 }

@@ -26,9 +26,14 @@ namespace BehaviorsSampleApp
             Message = "Updated message";
         });
 
-        public ICommand DisplayAlertCommand => new Command(() =>
+        public ICommand DisplayAlertAcceptCommand => new Command(() =>
         {
-            Message = "DisplayAlertCommand";
+            Message = "DisplayAlertAcceptCommand";
+        });
+
+        public ICommand DisplayAlertCancelCommand => new Command(() =>
+        {
+            Message = "DisplayAlertCancelCommand";
         });
 
         #region INotifyPropertyChanged
