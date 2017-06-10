@@ -161,7 +161,20 @@ namespace XamarinForms.Behaviors
             if (currentPage != null)
             {
                 var buttons = ActionSheetButtons.Select(x => x.Message).ToArray();
-                await currentPage.DisplayActionSheet(Title, Cancel, Destruction, buttons);
+                var result = await currentPage.DisplayActionSheet(Title, Cancel, Destruction, buttons);
+                if (result == Cancel)
+                {
+                    CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+                }
+                else if (result == Destruction)
+                {
+                    DestructionCommand?.Execute(DestructionCommandParameter, eventArgs, DestructionEventArgsConverter, DestructionEventArgsConverterParameter, DestructionEventArgsPropertyPath);
+                }
+                else
+                {
+                    var button = ActionSheetButtons.Single(x => x.Message == result);
+                    button.OnClick(sender, eventArgs);
+                }
             }
         }
     }

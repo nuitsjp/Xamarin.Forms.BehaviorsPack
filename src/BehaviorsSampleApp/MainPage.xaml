@@ -25,13 +25,17 @@
         </Button>
         <Button Text="Display Alert(Cancel Only)">
             <Button.Behaviors>
-                <behaviors:DisplayAlertBehavior EventName="Clicked" Title="Alert Title" Message="Alert Message" Cancel="Cancel" 
+                <behaviors:DisplayAlertBehavior EventName="Clicked" 
+                                                InteractionRequest="{Binding DisplayAlertRequest}"
+                                                Title="Alert Title" Message="Alert Message" Cancel="Cancel" 
                                                 CancelCommand="{Binding DisplayAlertCancelCommand}"/>
             </Button.Behaviors>
         </Button>
+        <Button Text="Display Alert Request(Cancel Only)" Command="{Binding DisplayAlertRequestCommand}"/>
         <Button Text="Display Action Sheet">
             <Button.Behaviors>
                 <behaviors:DisplayActionSheetBehavior EventName="Clicked" 
+                                                      InteractionRequest="{Binding DisplayActionSheetRequest}"
                                                       Title="Alert Title" 
                                                       Cancel="Cancel Sheet" 
                                                       CancelCommand="{Binding ActionSheetCancelCommand}"
@@ -42,6 +46,7 @@
                 </behaviors:DisplayActionSheetBehavior>
             </Button.Behaviors>
         </Button>
+        <Button Text="Display ActionSheet Request" Command="{Binding DisplayActionSheetRequestCommand}"/>
     </StackLayout>
 
 </ContentPage>

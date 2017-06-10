@@ -12,6 +12,8 @@ namespace XamarinForms.Behaviors
     {
         public static readonly BindableProperty EventNameProperty =
             BindableProperty.Create(nameof(EventName), typeof(string), typeof(ReceiveEventBehavior<T>));
+        public static readonly BindableProperty InteractionRequestProperty =
+            BindableProperty.Create(nameof(InteractionRequest), typeof(IInteractionRequest), typeof(ReceiveEventBehavior<T>));
         /// <summary>
         /// 監視対象のイベント名
         /// </summary>
@@ -19,6 +21,11 @@ namespace XamarinForms.Behaviors
         {
             get => (string)GetValue(EventNameProperty);
             set => SetValue(EventNameProperty, value);
+        }
+        public IInteractionRequest InteractionRequest
+        {
+            get => (IInteractionRequest)GetValue(InteractionRequestProperty);
+            set => SetValue(InteractionRequestProperty, value);
         }
         /// <summary>
         /// アタッチしているオブジェクトのEventNameと一致する名称のEventInfo
@@ -29,14 +36,13 @@ namespace XamarinForms.Behaviors
         /// </summary>
         private Delegate _eventHandler;
 
-        /// <summary>
-        /// アタッチ時に、対象のイベントの購読設定を行う
-        /// </summary>
-        /// <param name="bindable"></param>
-        protected override void OnAttachedTo(BindableObject bindable)
+        public ReceiveEventBehavior()
         {
-            base.OnAttachedTo(bindable);
+            BindingContextChanged += OnBindingContextChanged;
+        }
 
+        private void OnBindingContextChanged(object sender, EventArgs eventArgs)
+        {
             // 指定された名称のイベントが存在しない場合、例外をスローする
             if (!string.IsNullOrEmpty(EventName))
             {
@@ -59,6 +65,19 @@ namespace XamarinForms.Behaviors
 
                 _eventInfo.AddEventHandler(AssociatedObject, _eventHandler);
             }
+            if (InteractionRequest != null)
+            {
+                InteractionRequest.Requested += OnEventRaised;
+            }
+        }
+
+        /// <summary>
+        /// アタッチ時に、対象のイベントの購読設定を行う
+        /// </summary>
+        /// <param name="bindable"></param>
+        protected override void OnAttachedTo(BindableObject bindable)
+        {
+            base.OnAttachedTo(bindable);
         }
 
         /// <summary>
@@ -72,6 +91,11 @@ namespace XamarinForms.Behaviors
 
             _eventInfo = null;
             _eventHandler = null;
+
+            if (InteractionRequest != null)
+            {
+                InteractionRequest.Requested -= OnEventRaised;
+            }
 
             base.OnDetachingFrom(bindable);
         }

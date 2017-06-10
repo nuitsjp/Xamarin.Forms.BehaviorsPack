@@ -17,7 +17,6 @@ namespace XamarinForms.Behaviors
             BindableProperty.Create(nameof(Accept), typeof(string), typeof(DisplayAlertBehavior));
         public static readonly BindableProperty CancelProperty =
             BindableProperty.Create(nameof(Cancel), typeof(string), typeof(DisplayAlertBehavior));
-
         public string Title
         {
             get => (string)GetValue(TitleProperty);

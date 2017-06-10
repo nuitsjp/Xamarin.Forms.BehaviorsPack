@@ -6,10 +6,10 @@ using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
-    public class ActionSheetButton : InheritBindableObject
+    public class ActionSheetButton : InheritBindingObject<DisplayActionSheetBehavior>
     {
         public static readonly BindableProperty MessageProperty =
-            BindableProperty.Create(nameof(Message), typeof(string), typeof(DisplayAlertBehavior));
+            BindableProperty.Create(nameof(Message), typeof(string), typeof(ActionSheetButton));
 
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ActionSheetButton));

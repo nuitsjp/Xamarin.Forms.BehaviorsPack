@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using BehaviorsSampleApp.Annotations;
 using Xamarin.Forms;
+using XamarinForms.Behaviors;
 
 namespace BehaviorsSampleApp
 {
@@ -55,6 +56,13 @@ namespace BehaviorsSampleApp
         {
             Message = "ActionSheetButton2Command";
         });
+
+        public InteractionRequest DisplayAlertRequest { get; } = new InteractionRequest();
+        public ICommand DisplayAlertRequestCommand => new Command(() => DisplayAlertRequest.Request());
+
+        public InteractionRequest DisplayActionSheetRequest { get; } = new InteractionRequest();
+        public ICommand DisplayActionSheetRequestCommand => new Command(() => DisplayActionSheetRequest.Request());
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
