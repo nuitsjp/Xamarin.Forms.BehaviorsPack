@@ -38,24 +38,27 @@ namespace XamarinForms.Behaviors
             base.OnAttachedTo(bindable);
 
             // 指定された名称のイベントが存在しない場合、例外をスローする
-            _eventInfo = AssociatedObject.GetType().GetRuntimeEvent(EventName);
-            if (_eventInfo == null)
-                throw new ArgumentException($"EventToCommandBehavior: Can't register the '{EventName}' event.");
+            if (!string.IsNullOrEmpty(EventName))
+            {
+                _eventInfo = AssociatedObject.GetType().GetRuntimeEvent(EventName);
+                if (_eventInfo == null)
+                    throw new ArgumentException($"EventToCommandBehavior: Can't register the '{EventName}' event.");
 
-            var senderParameter = Expression.Parameter(typeof(object));
-            var eventParameter = Expression.Parameter(typeof(EventArgs));
-            ParameterExpression[] eventParameters = { senderParameter, eventParameter };
+                var senderParameter = Expression.Parameter(typeof(object));
+                var eventParameter = Expression.Parameter(typeof(EventArgs));
+                ParameterExpression[] eventParameters = { senderParameter, eventParameter };
 
 
-            var actionInvoke = typeof(Action<object, EventArgs>).GetRuntimeMethods().First(m => m.Name == "Invoke");
+                var actionInvoke = typeof(Action<object, EventArgs>).GetRuntimeMethods().First(m => m.Name == "Invoke");
 
-            _eventHandler =
-                Expression.Lambda(
-                    _eventInfo.EventHandlerType,
-                    Expression.Call(Expression.Constant((Action<object, EventArgs>)OnEventRaised), actionInvoke, senderParameter, eventParameter),
-                    eventParameters).Compile();
+                _eventHandler =
+                    Expression.Lambda(
+                        _eventInfo.EventHandlerType,
+                        Expression.Call(Expression.Constant((Action<object, EventArgs>)OnEventRaised), actionInvoke, senderParameter, eventParameter),
+                        eventParameters).Compile();
 
-            _eventInfo.AddEventHandler(AssociatedObject, _eventHandler);
+                _eventInfo.AddEventHandler(AssociatedObject, _eventHandler);
+            }
         }
 
         /// <summary>

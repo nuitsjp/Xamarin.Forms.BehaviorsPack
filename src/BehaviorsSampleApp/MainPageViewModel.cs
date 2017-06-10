@@ -36,6 +36,25 @@ namespace BehaviorsSampleApp
             Message = "DisplayAlertCancelCommand";
         });
 
+        public ICommand ActionSheetCancelCommand => new Command(() =>
+        {
+            Message = "ActionSheetCancelCommand";
+        });
+
+        public ICommand ActionSheetDestructionCommand => new Command(() =>
+        {
+            Message = "ActionSheetDestructionCommand";
+        });
+
+        public ICommand ActionSheetButton1Command => new Command(() =>
+        {
+            Message = "ActionSheetButton1Command";
+        });
+
+        public ICommand ActionSheetButton2Command => new Command(() =>
+        {
+            Message = "ActionSheetButton2Command";
+        });
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 

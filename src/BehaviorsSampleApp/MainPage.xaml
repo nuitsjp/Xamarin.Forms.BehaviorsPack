@@ -16,7 +16,7 @@
                 <behaviors:EventToCommandBehavior EventName="Clicked" Command="{Binding UpdateMessageCommand}"/>
             </Button.Behaviors>
         </Button>
-        <Button Text="Display Alert(Accept and Cancel)">
+        <Button Text="Display Alert(Destruction and Cancel)">
             <Button.Behaviors>
                 <behaviors:DisplayAlertBehavior EventName="Clicked" Title="Alert Title" Message="Alert Message" Accept="OK" Cancel="Cancel" 
                                                 AcceptCommand="{Binding DisplayAlertAcceptCommand}"
@@ -27,6 +27,19 @@
             <Button.Behaviors>
                 <behaviors:DisplayAlertBehavior EventName="Clicked" Title="Alert Title" Message="Alert Message" Cancel="Cancel" 
                                                 CancelCommand="{Binding DisplayAlertCancelCommand}"/>
+            </Button.Behaviors>
+        </Button>
+        <Button Text="Display Action Sheet">
+            <Button.Behaviors>
+                <behaviors:DisplayActionSheetBehavior EventName="Clicked" 
+                                                      Title="Alert Title" 
+                                                      Cancel="Cancel Sheet" 
+                                                      CancelCommand="{Binding ActionSheetCancelCommand}"
+                                                      Destruction="Destruction Sheet"
+                                                      DestructionCommand="{Binding ActionSheetDestructionCommand}">
+                    <behaviors:ActionSheetButton Message="Action Sheet 1" Command="{Binding ActionSheetButton1Command}"/>
+                    <behaviors:ActionSheetButton Message="Action Sheet 2" Command="{Binding ActionSheetButton2Command}"/>
+                </behaviors:DisplayActionSheetBehavior>
             </Button.Behaviors>
         </Button>
     </StackLayout>

@@ -46,6 +46,15 @@ namespace XamarinForms.Behaviors
         public static readonly BindableProperty AcceptCommandParameterProperty =
             BindableProperty.Create(nameof(AcceptCommandParameter), typeof(object), typeof(EventToCommandBehavior));
 
+        public static readonly BindableProperty AcceptEventArgsConverterProperty =
+            BindableProperty.Create(nameof(AcceptEventArgsConverter), typeof(IValueConverter), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty AcceptEventArgsConverterParameterProperty =
+            BindableProperty.Create(nameof(AcceptEventArgsConverterParameter), typeof(object), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty AcceptEventArgsPropertyPathProperty =
+            BindableProperty.Create(nameof(AcceptEventArgsPropertyPath), typeof(string), typeof(EventToCommandBehavior));
+
         public ICommand AcceptCommand
         {
             get => (ICommand)GetValue(AcceptCommandProperty);
@@ -57,6 +66,23 @@ namespace XamarinForms.Behaviors
             get => GetValue(AcceptCommandParameterProperty);
             set => SetValue(AcceptCommandParameterProperty, value);
         }
+        public IValueConverter AcceptEventArgsConverter
+        {
+            get => (IValueConverter)GetValue(AcceptEventArgsConverterProperty);
+            set => SetValue(AcceptEventArgsConverterProperty, value);
+        }
+
+        public object AcceptEventArgsConverterParameter
+        {
+            get => GetValue(AcceptEventArgsConverterParameterProperty);
+            set => SetValue(AcceptEventArgsConverterParameterProperty, value);
+        }
+
+        public string AcceptEventArgsPropertyPath
+        {
+            get => (string)GetValue(AcceptEventArgsPropertyPathProperty);
+            set => SetValue(AcceptEventArgsPropertyPathProperty, value);
+        }
         #endregion
 
         #region Cancel
@@ -65,6 +91,15 @@ namespace XamarinForms.Behaviors
 
         public static readonly BindableProperty CancelCommandParameterProperty =
             BindableProperty.Create(nameof(CancelCommandParameter), typeof(object), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty CancelEventArgsConverterProperty =
+            BindableProperty.Create(nameof(CancelEventArgsConverter), typeof(IValueConverter), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty CancelEventArgsConverterParameterProperty =
+            BindableProperty.Create(nameof(CancelEventArgsConverterParameter), typeof(object), typeof(EventToCommandBehavior));
+
+        public static readonly BindableProperty CancelEventArgsPropertyPathProperty =
+            BindableProperty.Create(nameof(CancelEventArgsPropertyPath), typeof(string), typeof(EventToCommandBehavior));
 
         public ICommand CancelCommand
         {
@@ -77,6 +112,23 @@ namespace XamarinForms.Behaviors
             get => GetValue(CancelCommandParameterProperty);
             set => SetValue(CancelCommandParameterProperty, value);
         }
+        public IValueConverter CancelEventArgsConverter
+        {
+            get => (IValueConverter)GetValue(CancelEventArgsConverterProperty);
+            set => SetValue(CancelEventArgsConverterProperty, value);
+        }
+
+        public object CancelEventArgsConverterParameter
+        {
+            get => GetValue(CancelEventArgsConverterParameterProperty);
+            set => SetValue(CancelEventArgsConverterParameterProperty, value);
+        }
+
+        public string CancelEventArgsPropertyPath
+        {
+            get => (string)GetValue(CancelEventArgsPropertyPathProperty);
+            set => SetValue(CancelEventArgsPropertyPathProperty, value);
+        }
         #endregion
 
         protected override async void OnEventRaised(object sender, EventArgs eventArgs)
@@ -87,18 +139,18 @@ namespace XamarinForms.Behaviors
                 if (string.IsNullOrEmpty(Accept))
                 {
                     await currentPage.DisplayAlert(Title, Message, Cancel);
-                    CancelCommand?.Execute(CancelCommandParameter);
+                    CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
                 }
                 else
                 {
                     var result = await currentPage.DisplayAlert(Title, Message, Accept, Cancel);
                     if (result)
                     {
-                        AcceptCommand?.Execute(AcceptCommandParameter);
+                        AcceptCommand?.Execute(AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
                     }
                     else
                     {
-                        CancelCommand?.Execute(CancelCommandParameter);
+                        CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
                     }
                 }
             }
