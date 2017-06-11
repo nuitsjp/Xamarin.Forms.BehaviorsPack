@@ -2,9 +2,9 @@
 
 namespace XamarinForms.Behaviors
 {
-    internal static class ElementExtensions
+    public static class ElementExtensions
     {
-        internal static Page GetCurrentPage(this Element element)
+	    public static Page GetCurrentPage(this Element element)
         {
             while (true)
             {
