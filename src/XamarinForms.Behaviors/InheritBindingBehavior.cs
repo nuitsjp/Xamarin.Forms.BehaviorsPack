@@ -7,10 +7,12 @@ namespace XamarinForms.Behaviors
 {
     public class InheritBindingBehavior<T> : Behavior<T> where T : BindableObject
     {
+        private bool _inheritedBindingContedt = false;
         /// <summary>
         /// Property to which the Behavior is attached.
         /// </summary>
         protected T AssociatedObject { get; private set; }
+
         /// <summary>
         /// When attached, inherit BindingContext and monitor change events of BindingContext
         /// </summary>
@@ -20,24 +22,32 @@ namespace XamarinForms.Behaviors
             base.OnAttachedTo(bindableObject);
 
             AssociatedObject = bindableObject;
-            // Inherit BindingContext of attached object.
-            if (BindingContext != null && bindableObject.BindingContext != null)
-                BindingContext = bindableObject.BindingContext;
+	        InheritBindingContext(bindableObject);
 
-            bindableObject.BindingContextChanged += OnBindingContextChanged;
+			bindableObject.BindingContextChanged += OnBindingContextChanged;
         }
 
         private void OnBindingContextChanged(object sender, EventArgs e)
         {
-            BindingContext = AssociatedObject.BindingContext;
+	        InheritBindingContext(AssociatedObject);
         }
 
-        /// <summary>
-        /// Remove event handler.
-        /// </summary>
-        /// <param name="bindableObject"></param>
-        protected override void OnDetachingFrom(T bindableObject)
+		private void InheritBindingContext(T bindableObject)
+	    {
+		    if (BindingContext == null || _inheritedBindingContedt)
+		    {
+			    BindingContext = bindableObject.BindingContext;
+			    _inheritedBindingContedt = true;
+		    }
+		}
+
+		/// <summary>
+		/// Remove event handler.
+		/// </summary>
+		/// <param name="bindableObject"></param>
+		protected override void OnDetachingFrom(T bindableObject)
         {
+            BindingContext = null;
             bindableObject.BindingContextChanged -= OnBindingContextChanged;
         }
     }

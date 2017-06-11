@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace XamarinForms.Behaviors
 {
+	[Preserve]
     [ContentProperty("ActionSheetButtons")]
     public class DisplayActionSheetBehavior : ReceiveEventBehavior<VisualElement>
     {
@@ -139,20 +141,21 @@ namespace XamarinForms.Behaviors
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems != null)
+            if (e.NewItems == null) return;
+
+            foreach (var newItem in e.NewItems)
             {
-                foreach (var newItem in e.NewItems)
-                {
-                    ((ActionSheetButton)newItem).OnAttachedTo(this);
-                }
+                SetInheritedBindingContext(((ActionSheetButton)newItem), BindingContext);
             }
-            if (e.OldItems != null)
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            foreach (var actionSheetButton in ActionSheetButtons)
             {
-                foreach (var oldItem in e.OldItems)
-                {
-                    ((ActionSheetButton)oldItem).OnDetachingFrom(this);
-                }
+                SetInheritedBindingContext(actionSheetButton, BindingContext);
             }
+            base.OnBindingContextChanged();
         }
 
         protected override async void OnEventRaised(object sender, EventArgs eventArgs)

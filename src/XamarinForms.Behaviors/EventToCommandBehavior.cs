@@ -4,9 +4,11 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace XamarinForms.Behaviors
 {
+	[Preserve]
     public class EventToCommandBehavior : ReceiveEventBehavior<VisualElement>
     {
         public static readonly BindableProperty CommandProperty =

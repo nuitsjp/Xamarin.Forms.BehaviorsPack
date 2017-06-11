@@ -10,6 +10,7 @@
     <FileVersion>0.0.3.0</FileVersion>
     <Authors>nuits.jp</Authors>
     <Company>nuits.jp</Company>
+    <Title>Behaviors for Xamarin.Forms</Title>
     <Product>Behaviors for Xamarin.Forms</Product>
     <Description>Behaviors for Xamarin.Forms</Description>
     <PackageLicenseUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms/blob/master/LICENSE</PackageLicenseUrl>

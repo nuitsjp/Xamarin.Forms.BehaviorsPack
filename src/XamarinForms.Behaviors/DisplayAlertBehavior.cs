@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace XamarinForms.Behaviors
 {
+	[Preserve]
     public class DisplayAlertBehavior : ReceiveEventBehavior<VisualElement>
     {
         public static readonly BindableProperty TitleProperty =

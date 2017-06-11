@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace XamarinForms.Behaviors
 {
-    public class ActionSheetButton : InheritBindingObject<DisplayActionSheetBehavior>
-    {
+	[Preserve]
+    public class ActionSheetButton : BindableObject
+	{
         public static readonly BindableProperty MessageProperty =
             BindableProperty.Create(nameof(Message), typeof(string), typeof(ActionSheetButton));
 
