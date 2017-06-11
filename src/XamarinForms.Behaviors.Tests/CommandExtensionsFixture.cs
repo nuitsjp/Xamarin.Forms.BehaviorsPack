@@ -114,18 +114,18 @@ namespace XamarinForms.Behaviors.Tests
 		    CommandExtensions.Execute(command: null);
 	    }
 
-	    public class EventArgsMock : EventArgs
+	    private class EventArgsMock : EventArgs
 	    {
 		    public EventArgsMockProperty Property { get; set; }
 	    }
 
-	    public class EventArgsMockProperty
+	    private class EventArgsMockProperty
 	    {
 		    public string Value { get; set; } = "EventArgsMockPropertyValue";
 
 	    }
 
-		public class ValueConverterMock : IValueConverter
+	    private class ValueConverterMock : IValueConverter
 		{
 			public object Value { get; set; }
 			public Type TargetType { get; set; }
@@ -146,7 +146,7 @@ namespace XamarinForms.Behaviors.Tests
 			}
 		}
 
-	    public class CommandMock : ICommand
+	    private class CommandMock : ICommand
 	    {
 		    public bool CanExecuteProperty { get; set; } = true;
 		    public object CanExecuteParameter { get; set; }
