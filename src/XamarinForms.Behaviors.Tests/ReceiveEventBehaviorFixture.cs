@@ -128,7 +128,7 @@ namespace XamarinForms.Behaviors.Tests
 		    Assert.Equal(EventArgs.Empty, behavior.EventArgs);
 	    }
 
-		public class PageMock : ContentPage
+		private class PageMock : ContentPage
 	    {
 		    public event EventHandler<EventArgs> TestEventA;
 		    public event EventHandler<EventArgs> TestEventB;
@@ -142,7 +142,7 @@ namespace XamarinForms.Behaviors.Tests
 		    }
 	    }
 
-		public class BehaviorMock : ReceiveEventBehavior<Page>
+		private class BehaviorMock : ReceiveEventBehavior<Page>
 	    {
 		    public object Sender { get; set; }
 		    public object EventArgs { get; set; }

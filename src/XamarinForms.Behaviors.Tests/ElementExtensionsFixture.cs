@@ -17,12 +17,19 @@ namespace XamarinForms.Behaviors.Tests
 	    }
 
 	    [Fact]
-	    public void ReturnPage()
+	    public void ReturnPageOfElement()
 	    {
 			var page = new ContentPage();
 		    var layout = new StackLayout();
 		    page.Content = layout;
 		    Assert.Equal(page, layout.GetCurrentPage());
+	    }
+
+	    [Fact]
+	    public void ReturnPage()
+	    {
+		    var page = new ContentPage();
+		    Assert.Equal(page, page.GetCurrentPage());
 	    }
 	}
 }

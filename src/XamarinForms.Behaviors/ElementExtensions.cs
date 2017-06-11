@@ -10,7 +10,7 @@ namespace XamarinForms.Behaviors
             {
                 if (element == null) return null;
 
-                if (element.Parent is Page page)
+                if (element is Page page)
                 {
                     return page;
                 }

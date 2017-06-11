@@ -140,21 +140,32 @@ namespace XamarinForms.Behaviors
                 if (string.IsNullOrEmpty(Accept))
                 {
                     await currentPage.DisplayAlert(Title, Message, Cancel);
-                    CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+	                ExecuteCancelCommand(eventArgs);
+
                 }
                 else
                 {
                     var result = await currentPage.DisplayAlert(Title, Message, Accept, Cancel);
                     if (result)
                     {
-                        AcceptCommand?.Execute(AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
+						ExecuteAcceptCommand(eventArgs);
                     }
                     else
                     {
-                        CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+	                    ExecuteCancelCommand(eventArgs);
                     }
-                }
+				}
             }
         }
-    }
+
+	    private void ExecuteAcceptCommand(EventArgs eventArgs)
+	    {
+		    AcceptCommand?.Execute(AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
+	    }
+
+		private void ExecuteCancelCommand(EventArgs eventArgs)
+	    {
+		    CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+	    }
+	}
 }
