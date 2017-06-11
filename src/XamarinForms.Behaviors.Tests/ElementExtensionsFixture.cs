@@ -13,7 +13,7 @@ namespace XamarinForms.Behaviors.Tests
 	    public void ReturnNull()
 	    {
 		    var layout = new StackLayout();
-			Assert.Null(ElementExtensions.GetCurrentPage(layout));
+			Assert.Null(layout.GetCurrentPage());
 	    }
 
 	    [Fact]
@@ -22,7 +22,7 @@ namespace XamarinForms.Behaviors.Tests
 			var page = new ContentPage();
 		    var layout = new StackLayout();
 		    page.Content = layout;
-		    Assert.Equal(page, ElementExtensions.GetCurrentPage(layout));
+		    Assert.Equal(page, layout.GetCurrentPage());
 	    }
 	}
 }

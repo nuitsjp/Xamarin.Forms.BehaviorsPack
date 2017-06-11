@@ -28,7 +28,7 @@ namespace XamarinForms.Behaviors
             {
                 parameter = commandParameter;
             }
-            else if (eventArgs != EventArgs.Empty)
+            else if (eventArgs != null && eventArgs != EventArgs.Empty)
             {
                 if (eventArgsCoverter != null)
                 {
@@ -42,6 +42,10 @@ namespace XamarinForms.Behaviors
                     {
                         var propInfo = propertyValue.GetType().GetTypeInfo().GetDeclaredProperty(propertyPathPart);
                         propertyValue = propInfo.GetValue(propertyValue);
+	                    if (propertyValue == null)
+	                    {
+		                    break;
+	                    }
                     }
                     parameter = propertyValue;
                 }
