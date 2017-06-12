@@ -7,7 +7,7 @@ namespace Xamarin.Forms.BehaviorsPack
 {
 	public class NotificationBehavior : NotificationBehavior<BindableObject, EventArgs>
 	{
-		public EventHandler<EventArgs> Received;
+		public event EventHandler Received;
 		protected override void OnReceived(object sender, EventArgs eventArgs)
 		{
 			Received?.Invoke(sender, eventArgs);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using BehaviorsSampleApp.Views;
 using Xamarin.Forms;
 
 namespace BehaviorsSampleApp
@@ -13,7 +13,7 @@ namespace BehaviorsSampleApp
         {
             InitializeComponent();
 
-            MainPage = new BehaviorsSampleApp.MainPage();
+            MainPage = new NavigationPage(new MenuPage());
         }
 
         protected override void OnStart()

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="BehaviorsSampleApp.Views.DisplayActionSheetPage"
+             Title="DisplayActionSheetBehavior Sample">
+    <ContentPage.BindingContext>
+        <viewModels:DisplayActionSheetPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Button Text="Show ActionSheet">
+                <Button.Behaviors>
+                    <behaviorsPack:DisplayActionSheetBehavior
+                        EventName="Clicked"
+                        Title="ActionSheet Title"
+                        Cancel="Cancel"
+                        CancelCommand="{Binding CancelCommand}"
+                        CancelCommandParameter="Selected Cancel button."
+                        Destruction="Delete"
+                        DestructionCommand="{Binding DestructionCommand}">
+                        <behaviorsPack:ActionSheetButton 
+                            Message="First Action Sheet Item"
+                            Command="{Binding FirstActionSheetCommand}"/>
+                        <behaviorsPack:ActionSheetButton 
+                            Message="Second Action Sheet Item"
+                            Command="{Binding SecondActionSheetCommand}"/>
+                    </behaviorsPack:DisplayActionSheetBehavior>
+                </Button.Behaviors>
+            </Button>
+            <Label Text="{Binding Message}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

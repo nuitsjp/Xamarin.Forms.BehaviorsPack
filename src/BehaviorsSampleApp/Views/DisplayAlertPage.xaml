@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="BehaviorsSampleApp.Views.DisplayAlertPage"
+             Title="DisplayAlertBehavior Sample">
+    <ContentPage.BindingContext>
+        <viewModels:DisplayAlertPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Button Text="Show Display Alert">
+                <Button.Behaviors>
+                    <behaviorsPack:DisplayAlertBehavior
+                        EventName="Clicked"
+                        Title="Alert Title"
+                        Message="Please select either."
+                        Accept="OK"
+                        AcceptCommand="{Binding AcceptCommand}"
+                        Cancel="Cancel"
+                        CancelCommand="{Binding CancelCommand}"
+                        CancelCommandParameter="Selected Cancel button."/>
+                </Button.Behaviors>
+            </Button>
+            <Label Text="{Binding Message}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

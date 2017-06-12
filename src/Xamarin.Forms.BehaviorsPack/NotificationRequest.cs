@@ -8,9 +8,14 @@ namespace Xamarin.Forms.BehaviorsPack
 
         public void Request(object sender)
         {
-            Requested?.Invoke(sender, EventArgs.Empty);
+	        Request(sender, EventArgs.Empty);
         }
-    }
+
+	    public void Request(object sender, EventArgs eventArgs)
+	    {
+		    Requested?.Invoke(sender, eventArgs);
+	    }
+	}
 
 	public class NotificationRequest<TEventArgs> : INotificationRequest<TEventArgs> where TEventArgs : EventArgs
 	{

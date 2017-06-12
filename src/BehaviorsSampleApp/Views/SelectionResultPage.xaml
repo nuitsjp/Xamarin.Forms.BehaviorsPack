@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
+             x:Class="BehaviorsSampleApp.Views.SelectionResultPage">
+    <ContentPage.BindingContext>
+        <viewModels:SelectionResultPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+            <BoxView HeightRequest="10" WidthRequest="10" Color="{Binding Fruit.Color}"/>
+            <Label Text="{Binding Fruit.Name}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

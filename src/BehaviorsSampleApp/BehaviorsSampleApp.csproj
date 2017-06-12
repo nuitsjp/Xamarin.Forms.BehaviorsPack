@@ -38,22 +38,36 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListViewPage.xaml.cs">
-      <DependentUpon>ListViewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ListViewPageViewModel.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPageViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DisplayActionSheetPageViewModel.cs" />
+    <Compile Include="ViewModels\DisplayAlertPageViewModel.cs" />
+    <Compile Include="ViewModels\EventToCommandPageViewModel.cs" />
+    <Compile Include="ViewModels\Fruit.cs" />
+    <Compile Include="ViewModels\NotificationRequestPageViewModel.cs" />
+    <Compile Include="ViewModels\SelectedFruitEventArgs.cs" />
+    <Compile Include="ViewModels\SelectionResultPageViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\DisplayActionSheetPage.xaml.cs">
+      <DependentUpon>DisplayActionSheetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayAlertPage.xaml.cs">
+      <DependentUpon>DisplayAlertPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventToCommandPage.xaml.cs">
+      <DependentUpon>EventToCommandPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationRequestPage.xaml.cs">
+      <DependentUpon>NotificationRequestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionResultPage.xaml.cs">
+      <DependentUpon>SelectionResultPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -74,16 +88,46 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ListViewPage.xaml">
+    <ProjectReference Include="..\Xamarin.Forms.BehaviorsPack\Xamarin.Forms.BehaviorsPack.csproj">
+      <Project>{dd31af2f-2049-4ea0-b9f6-493a95b93190}</Project>
+      <Name>Xamarin.Forms.BehaviorsPack</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamarinForms.Behaviors\XamarinForms.Behaviors.csproj">
-      <Project>{fbc80d67-df98-48f7-8f85-03c5888ccc97}</Project>
-      <Name>XamarinForms.Behaviors</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Views\DisplayActionSheetPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DisplayAlertPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationRequestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EventToCommandPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SelectionResultPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

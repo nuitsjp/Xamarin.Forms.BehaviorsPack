@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BehaviorsSampleApp.Views.MenuPage"
+             Title="Menu">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <Label Text="Please select one." />
+            <Button Text="Event to Command Sample" Clicked="EventToCommandButton_OnClicked"/>
+            <Button Text="Display Alert Sample" Clicked="DisplayAlertButton_OnClicked"/>
+            <Button Text="Display Action Sheet Sample" Clicked="DisplayActionSheetButton_OnClicked"/>
+            <Button Text="Notification Request Sample" Clicked="NotificationRequestButton_OnClicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="BehaviorsSampleApp.Views.NotificationRequestPage"
+             Title="NotificationRequest Sample">
+    <ContentPage.BindingContext>
+        <viewModels:NotificationRequestPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <behaviorsPack:DisplayAlertBehavior
+            NotificationRequest="{Binding ConfirmRequest}"
+            Title="Confirm"
+            Message="Do you want to register?"
+            Accept="Regist"
+            AcceptCommand="{Binding RegistCommand}"
+            Cancel="Cancel"/>
+        <behaviorsPack:DisplayAlertBehavior
+            NotificationRequest="{Binding NotifyRegisteredRequest}"
+            Title="Notice"
+            Message="Registration has been completed."
+            Cancel="OK"
+            CancelCommand="{Binding GoBackCommand}"/>
+        <behaviorsPack:NotificationBehavior
+            NotificationRequest="{Binding GoBackRequest}"
+            Received="NotificationBehavior_OnReceived"/>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="DisplayAlert is displayed according to notification from ViewModel.!" />
+            <Button Text="Please click!" Command="{Binding ConfirmCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
