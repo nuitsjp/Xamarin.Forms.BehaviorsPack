@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
-	internal interface ICommandExecutor
+	public interface ICommandExecutor
 	{
 		void Execute(
 			ICommand command,

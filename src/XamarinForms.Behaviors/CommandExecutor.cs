@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
-	internal class CommandExecutor : ICommandExecutor
+	public class CommandExecutor : ICommandExecutor
     {
 	    public void Execute(ICommand command, object commandParameter = null, EventArgs eventArgs = null,
 		    IValueConverter eventArgsCoverter = null, object eventArgsConverterParameter = null,
