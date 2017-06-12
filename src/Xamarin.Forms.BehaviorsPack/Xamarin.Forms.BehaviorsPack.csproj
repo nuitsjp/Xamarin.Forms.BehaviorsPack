@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>0.0.1-pre</Version>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+    <Authors>nuits.jp</Authors>
+    <Company>nuits.jp</Company>
+    <Title>Xamarin.Forms.BehaviorsPack</Title>
+    <Product>Xamarin.Forms.BehaviorsPack</Product>
+    <Description>Xamarin.Forms.BehaviorsPack</Description>
+    <PackageLicenseUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors Xamarin.Forms.BehaviorsPack BehaviorsPack</PackageTags>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
+  </ItemGroup>
+
+</Project>
