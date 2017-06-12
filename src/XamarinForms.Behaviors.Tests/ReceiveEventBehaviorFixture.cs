@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 using Xunit;
 
@@ -130,7 +128,9 @@ namespace XamarinForms.Behaviors.Tests
 
 		private class PageMock : ContentPage
 	    {
+		    // ReSharper disable once EventNeverSubscribedTo.Local
 		    public event EventHandler<EventArgs> TestEventA;
+		    // ReSharper disable once EventNeverSubscribedTo.Local
 		    public event EventHandler<EventArgs> TestEventB;
 		    public void RiseTestEventA(object sender, EventArgs eventArgs)
 		    {

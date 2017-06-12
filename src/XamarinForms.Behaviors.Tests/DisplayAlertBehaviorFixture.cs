@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Moq;
 using Xamarin.Forms;
@@ -203,6 +200,7 @@ namespace XamarinForms.Behaviors.Tests
 
 		private class PageMock : ContentPage
 	    {
+		    // ReSharper disable once EventNeverSubscribedTo.Local
 		    public event EventHandler<EventArgs> TestEvent;
 		    public void RiseTestEvent(object sender, EventArgs eventArgs)
 		    {

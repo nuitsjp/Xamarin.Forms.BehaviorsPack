@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {

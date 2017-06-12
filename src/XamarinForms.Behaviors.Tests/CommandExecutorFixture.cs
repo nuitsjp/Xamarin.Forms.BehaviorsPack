@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Windows.Input;
 using Moq;
 using Xamarin.Forms;
@@ -116,11 +114,13 @@ namespace XamarinForms.Behaviors.Tests
 
 	    private class EventArgsMock : EventArgs
 	    {
+		    // ReSharper disable once UnusedAutoPropertyAccessor.Local
 		    public EventArgsMockProperty Property { get; set; }
 	    }
 
 	    private class EventArgsMockProperty
 	    {
+		    // ReSharper disable once UnusedMember.Local
 		    public string Value { get; set; } = "EventArgsMockPropertyValue";
 
 	    }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Moq;
 using Xamarin.Forms;
@@ -29,7 +27,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var destructionEventArgsConverterParameter = new object();
 		    var destructionEventArgsPropertyPath = "destructionEventArgsPropertyPath";
 
-			var behavior = new DisplayActionSheetBehaviorMock()
+			var behavior = new DisplayActionSheetBehavior()
 		    {
 			    CommandExecutor = commandExecutorMock.Object,
 			    EventName = "TestEvent",
@@ -102,7 +100,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var destructionEventArgsConverterParameter = new object();
 		    var destructionEventArgsPropertyPath = "destructionEventArgsPropertyPath";
 
-		    var behavior = new DisplayActionSheetBehaviorMock()
+		    var behavior = new DisplayActionSheetBehavior()
 		    {
 			    CommandExecutor = commandExecutorMock.Object,
 			    EventName = "TestEvent",
@@ -175,7 +173,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var destructionEventArgsConverterParameter = new object();
 		    var destructionEventArgsPropertyPath = "destructionEventArgsPropertyPath";
 
-		    var behavior = new DisplayActionSheetBehaviorMock()
+		    var behavior = new DisplayActionSheetBehavior()
 		    {
 			    CommandExecutor = commandExecutorMock.Object,
 			    EventName = "TestEvent",
@@ -260,16 +258,9 @@ namespace XamarinForms.Behaviors.Tests
 		    Assert.Equal(bindingObject, actionSeetButtonB.BindingContext);
 	    }
 
-		private class DisplayActionSheetBehaviorMock : DisplayActionSheetBehavior
-		{
-		    public void Rise(object sender, EventArgs eventArgs)
-		    {
-			    OnEventRaised(sender, eventArgs);
-		    }
-	    }
-
 	    private class PageMock : ContentPage
 	    {
+		    // ReSharper disable once EventNeverSubscribedTo.Local
 		    public event EventHandler<EventArgs> TestEvent;
 		    public void RiseTestEvent(object sender, EventArgs eventArgs)
 		    {

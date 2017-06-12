@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xunit;
 using Assert = Xunit.Assert;
 
@@ -58,9 +55,8 @@ namespace XamarinForms.Behaviors.Tests
             var contextObject = new object();
             page.BindingContext = contextObject;
 
-            var behavior = new BehaviorMock();
-            behavior.BindingContext = new object();
-            page.Behaviors.Add(behavior);
+	        var behavior = new BehaviorMock {BindingContext = new object()};
+	        page.Behaviors.Add(behavior);
 
             Assert.NotNull(behavior.BindingContext);
             Assert.NotEqual(contextObject, behavior.BindingContext);

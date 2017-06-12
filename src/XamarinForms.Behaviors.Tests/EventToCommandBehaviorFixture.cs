@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using System.Windows.Input;
 using Moq;
 using Xamarin.Forms;

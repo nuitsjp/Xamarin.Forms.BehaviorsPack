@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace XamarinForms.Behaviors
 {
     public class InheritBindingBehavior<T> : Behavior<T> where T : BindableObject
     {
-        private bool _inheritedBindingContedt = false;
+        private bool _inheritedBindingContedt;
         /// <summary>
         /// Property to which the Behavior is attached.
         /// </summary>
