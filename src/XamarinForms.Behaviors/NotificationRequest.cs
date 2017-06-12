@@ -2,7 +2,7 @@
 
 namespace XamarinForms.Behaviors
 {
-    public class InteractionRequest : IInteractionRequest
+    public class NotificationRequest : INotificationRequest
     {
         public event EventHandler<EventArgs> Requested;
 

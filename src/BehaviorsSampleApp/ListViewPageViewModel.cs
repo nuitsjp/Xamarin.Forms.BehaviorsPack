@@ -39,7 +39,7 @@ namespace BehaviorsSampleApp
             NotifyCompletedRequest.Request();
         });
 
-        public InteractionRequest NotifyCompletedRequest { get; } = new InteractionRequest();
+        public NotificationRequest NotifyCompletedRequest { get; } = new NotificationRequest();
 
         public ListViewPageViewModel()
         {

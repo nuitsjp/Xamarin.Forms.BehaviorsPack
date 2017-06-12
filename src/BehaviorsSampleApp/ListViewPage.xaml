@@ -32,7 +32,7 @@
                                                 Accept="OK"
                                                 Cancel="Cancel"
                                                 AcceptCommand="{Binding RegistCommand}"/>
-                <behaviors:DisplayAlertBehavior InteractionRequest="{Binding NotifyCompletedRequest}" 
+                <behaviors:DisplayAlertBehavior NotificationRequest="{Binding NotifyCompletedRequest}" 
                                                 Title="登録結果"
                                                 Message="登録が無事完了しました"
                                                 Cancel="OK"/>

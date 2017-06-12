@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 namespace XamarinForms.Behaviors
 {
 	[Preserve]
-    public class DisplayAlertBehavior : ReceiveEventBehavior<VisualElement>
+    public class DisplayAlertBehavior : ReceiveNotificationBehavior<VisualElement>
     {
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(nameof(Title), typeof(string), typeof(DisplayAlertBehavior));
@@ -132,7 +132,7 @@ namespace XamarinForms.Behaviors
         }
         #endregion
 
-        protected override async void OnEventRaised(object sender, EventArgs eventArgs)
+        protected override async void OnReceived(object sender, EventArgs eventArgs)
         {
             var currentPage = AssociatedObject.GetCurrentPage();
             if (currentPage != null)

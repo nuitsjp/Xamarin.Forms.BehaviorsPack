@@ -26,7 +26,7 @@
         <Button Text="Display Alert(Cancel Only)">
             <Button.Behaviors>
                 <behaviors:DisplayAlertBehavior EventName="Clicked" 
-                                                InteractionRequest="{Binding DisplayAlertRequest}"
+                                                NotificationRequest="{Binding DisplayAlertRequest}"
                                                 Title="Alert Title" Message="Alert Message" Cancel="Cancel" 
                                                 CancelCommand="{Binding DisplayAlertCancelCommand}"/>
             </Button.Behaviors>
@@ -35,7 +35,7 @@
         <Button Text="Display Action Sheet">
             <Button.Behaviors>
                 <behaviors:DisplayActionSheetBehavior EventName="Clicked" 
-                                                      InteractionRequest="{Binding DisplayActionSheetRequest}"
+                                                      NotificationRequest="{Binding DisplayActionSheetRequest}"
                                                       Title="Alert Title" 
                                                       Cancel="Cancel Sheet" 
                                                       CancelCommand="{Binding ActionSheetCancelCommand}"

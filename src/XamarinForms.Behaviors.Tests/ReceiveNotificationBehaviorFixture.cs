@@ -4,7 +4,7 @@ using Xunit;
 
 namespace XamarinForms.Behaviors.Tests
 {
-    public class ReceiveEventBehaviorFixture
+    public class ReceiveNotificationBehaviorFixture
     {
 	    [Fact]
 	    public void ReceiveEvent()
@@ -82,8 +82,8 @@ namespace XamarinForms.Behaviors.Tests
 		[Fact]
 	    public void ReceiveInteragtionRequest()
 	    {
-		    var request = new InteractionRequest();
-		    var behavior = new BehaviorMock { InteractionRequest = request};
+		    var request = new NotificationRequest();
+		    var behavior = new BehaviorMock { NotificationRequest = request};
 		    var page = new PageMock();
 		    page.Behaviors.Add(behavior);
 
@@ -106,13 +106,13 @@ namespace XamarinForms.Behaviors.Tests
 	    [Fact]
 	    public void ReceiveInteragtionRequestAfterInteractionRequestChanged()
 	    {
-		    var requestA = new InteractionRequest();
-		    var behavior = new BehaviorMock { InteractionRequest = requestA };
+		    var requestA = new NotificationRequest();
+		    var behavior = new BehaviorMock { NotificationRequest = requestA };
 		    var page = new PageMock();
 		    page.Behaviors.Add(behavior);
 
-			var requestB = new InteractionRequest();
-		    behavior.InteractionRequest = requestB;
+			var requestB = new NotificationRequest();
+		    behavior.NotificationRequest = requestB;
 
 			requestA.Request();
 		    Assert.Null(behavior.Sender);
@@ -142,11 +142,11 @@ namespace XamarinForms.Behaviors.Tests
 		    }
 	    }
 
-		private class BehaviorMock : ReceiveEventBehavior<Page>
+		private class BehaviorMock : ReceiveNotificationBehavior<Page>
 	    {
 		    public object Sender { get; set; }
 		    public object EventArgs { get; set; }
-		    protected override void OnEventRaised(object sender, EventArgs eventArgs)
+		    protected override void OnReceived(object sender, EventArgs eventArgs)
 		    {
 			    Sender = sender;
 			    EventArgs = eventArgs;

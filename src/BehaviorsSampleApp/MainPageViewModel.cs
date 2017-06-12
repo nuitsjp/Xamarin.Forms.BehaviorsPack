@@ -57,10 +57,10 @@ namespace BehaviorsSampleApp
             Message = "ActionSheetButton2Command";
         });
 
-        public InteractionRequest DisplayAlertRequest { get; } = new InteractionRequest();
+        public NotificationRequest DisplayAlertRequest { get; } = new NotificationRequest();
         public ICommand DisplayAlertRequestCommand => new Command(() => DisplayAlertRequest.Request());
 
-        public InteractionRequest DisplayActionSheetRequest { get; } = new InteractionRequest();
+        public NotificationRequest DisplayActionSheetRequest { get; } = new NotificationRequest();
         public ICommand DisplayActionSheetRequestCommand => new Command(() => DisplayActionSheetRequest.Request());
 
         #region INotifyPropertyChanged

@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 namespace XamarinForms.Behaviors
 {
 	[Preserve]
-    public class EventToCommandBehavior : ReceiveEventBehavior<VisualElement>
+    public class EventToCommandBehavior : ReceiveNotificationBehavior<VisualElement>
     {
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EventToCommandBehavior));
@@ -55,12 +55,7 @@ namespace XamarinForms.Behaviors
             set => SetValue(EventArgsPropertyPathProperty, value);
         }
 
-        /// <summary>
-        /// イベントを購読する
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="eventArgs"></param>
-        protected override void OnEventRaised(object sender, EventArgs eventArgs)
+        protected override void OnReceived(object sender, EventArgs eventArgs)
         {
 	        CommandExecutor.Execute(Command, CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
         }

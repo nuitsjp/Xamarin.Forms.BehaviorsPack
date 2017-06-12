@@ -40,7 +40,7 @@ namespace XamarinForms.Behaviors.Tests
 	    {
 		    public void Rise(object sender, EventArgs eventArgs)
 		    {
-			    OnEventRaised(sender, eventArgs);
+			    OnReceived(sender, eventArgs);
 		    }
 	    }
     }

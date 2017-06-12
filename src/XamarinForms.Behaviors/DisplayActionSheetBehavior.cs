@@ -10,7 +10,7 @@ namespace XamarinForms.Behaviors
 {
 	[Preserve]
     [ContentProperty("ActionSheetButtons")]
-    public class DisplayActionSheetBehavior : ReceiveEventBehavior<VisualElement>
+    public class DisplayActionSheetBehavior : ReceiveNotificationBehavior<VisualElement>
     {
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(nameof(Title), typeof(string), typeof(DisplayAlertBehavior));
@@ -160,7 +160,7 @@ namespace XamarinForms.Behaviors
             base.OnBindingContextChanged();
         }
 
-        protected override async void OnEventRaised(object sender, EventArgs eventArgs)
+        protected override async void OnReceived(object sender, EventArgs eventArgs)
         {
             var currentPage = AssociatedObject.GetCurrentPage();
             if (currentPage != null)

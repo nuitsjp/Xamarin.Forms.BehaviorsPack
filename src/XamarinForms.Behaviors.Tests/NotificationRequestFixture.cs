@@ -3,12 +3,12 @@ using Xunit;
 
 namespace XamarinForms.Behaviors.Tests
 {
-    public class InteractionRequestFixture
+    public class NotificationRequestFixture
     {
 	    [Fact]
 	    public void Request()
 	    {
-			var request = new InteractionRequest();
+			var request = new NotificationRequest();
 		    var requestedEvent = Assert.Raises<EventArgs>(h => request.Requested += h, h => request.Requested -= h, () => request.Request());
 
 			Assert.NotNull(requestedEvent);
@@ -19,7 +19,7 @@ namespace XamarinForms.Behaviors.Tests
 		[Fact]
 		public void RequestWithSender()
 		{
-			var request = new InteractionRequest();
+			var request = new NotificationRequest();
 			var requestedEvent = Assert.Raises<EventArgs>(h => request.Requested += h, h => request.Requested -= h, () => request.Request(this));
 
 			Assert.NotNull(requestedEvent);
