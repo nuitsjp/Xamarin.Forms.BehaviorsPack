@@ -17,6 +17,8 @@ namespace XamarinForms.Behaviors
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(nameof(Title), typeof(string), typeof(DisplayAlertBehavior));
 
+		internal ICommandExecutor CommandExecutor { get; set; } = new CommandExecutor();
+
         public string Title
         {
             get => (string)GetValue(TitleProperty);
@@ -167,11 +169,11 @@ namespace XamarinForms.Behaviors
                 var result = await currentPage.DisplayActionSheet(Title, Cancel, Destruction, buttons);
                 if (result == Cancel)
                 {
-                    CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+                    CommandExecutor.Execute(CancelCommand, CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
                 }
                 else if (result == Destruction)
                 {
-                    DestructionCommand?.Execute(DestructionCommandParameter, eventArgs, DestructionEventArgsConverter, DestructionEventArgsConverterParameter, DestructionEventArgsPropertyPath);
+                    CommandExecutor.Execute(DestructionCommand, DestructionCommandParameter, eventArgs, DestructionEventArgsConverter, DestructionEventArgsConverterParameter, DestructionEventArgsPropertyPath);
                 }
                 else
                 {

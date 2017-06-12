@@ -19,6 +19,9 @@ namespace XamarinForms.Behaviors
             BindableProperty.Create(nameof(Accept), typeof(string), typeof(DisplayAlertBehavior));
         public static readonly BindableProperty CancelProperty =
             BindableProperty.Create(nameof(Cancel), typeof(string), typeof(DisplayAlertBehavior));
+
+		internal ICommandExecutor CommandExecutor { get; set; } = new CommandExecutor();
+
         public string Title
         {
             get => (string)GetValue(TitleProperty);
@@ -160,12 +163,12 @@ namespace XamarinForms.Behaviors
 
 	    private void ExecuteAcceptCommand(EventArgs eventArgs)
 	    {
-		    AcceptCommand?.Execute(AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
+		    CommandExecutor.Execute(AcceptCommand, AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
 	    }
 
 		private void ExecuteCancelCommand(EventArgs eventArgs)
 	    {
-		    CancelCommand?.Execute(CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+		    CommandExecutor.Execute(CancelCommand, CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
 	    }
 	}
 }

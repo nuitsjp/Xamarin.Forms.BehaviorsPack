@@ -28,6 +28,8 @@ namespace XamarinForms.Behaviors
         public static readonly BindableProperty EventArgsPropertyPathProperty =
             BindableProperty.Create(nameof(EventArgsPropertyPath), typeof(string), typeof(ActionSheetButton));
 
+		internal ICommandExecutor CommandExecutor { get; set; } = new CommandExecutor();
+
         public string Message
         {
             get => (string)GetValue(MessageProperty);
@@ -66,7 +68,7 @@ namespace XamarinForms.Behaviors
 
         public void OnClick(object sender, EventArgs eventArgs)
         {
-            Command?.Execute(CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
+            CommandExecutor.Execute(Command, CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
         }
     }
 }

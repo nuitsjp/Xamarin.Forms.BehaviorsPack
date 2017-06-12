@@ -26,6 +26,8 @@ namespace XamarinForms.Behaviors
         public static readonly BindableProperty EventArgsPropertyPathProperty =
             BindableProperty.Create(nameof(EventArgsPropertyPath), typeof(string), typeof(EventToCommandBehavior));
 
+		internal ICommandExecutor CommandExecutor { get; set; } = new CommandExecutor();
+
         public ICommand Command
         {
             get => (ICommand)GetValue(CommandProperty);
@@ -63,7 +65,7 @@ namespace XamarinForms.Behaviors
         /// <param name="eventArgs"></param>
         protected override void OnEventRaised(object sender, EventArgs eventArgs)
         {
-            Command?.Execute(CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
+	        CommandExecutor.Execute(Command, CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
         }
     }
 }

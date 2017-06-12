@@ -8,13 +8,13 @@ using Xunit;
 
 namespace XamarinForms.Behaviors.Tests
 {
-    public class CommandExtensionsFixture
+    public class CommandExecutorFixture
     {
 	    [Fact]
 	    public void WhenCanNotExecute()
 	    {
 		    var command = new CommandMock { CanExecuteProperty = false };
-		    command.Execute();
+		    new CommandExecutor().Execute(command);
 
 		    Assert.True(command.CalledCanExecute);
 			Assert.Null(command.CanExecuteParameter);
@@ -31,7 +31,7 @@ namespace XamarinForms.Behaviors.Tests
 			var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "";
 
-			command.Execute(commandParameter, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
+		    new CommandExecutor().Execute(command, commandParameter, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
 
 			Assert.True(command.CalledCanExecute);
 			Assert.Equal(commandParameter, command.CanExecuteParameter);
@@ -48,7 +48,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "";
 
-		    command.Execute(null, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
+		    new CommandExecutor().Execute(command, null, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
 
 		    Assert.True(command.CalledCanExecute);
 		    Assert.Equal("Success", command.CanExecuteParameter);
@@ -69,7 +69,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "Property.Value";
 
-		    command.Execute(null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
+		    new CommandExecutor().Execute(command, null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
 
 		    Assert.True(command.CalledCanExecute);
 		    Assert.Equal("EventArgsMockPropertyValue", command.CanExecuteParameter);
@@ -85,7 +85,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "Property.Value";
 
-		    command.Execute(null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
+		    new CommandExecutor().Execute(command, null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
 
 		    Assert.True(command.CalledCanExecute);
 		    Assert.Equal(null, command.CanExecuteParameter);
@@ -100,7 +100,7 @@ namespace XamarinForms.Behaviors.Tests
 		    var eventArgs = new EventArgsMock();
 		    var eventArgsConverterParameter = new object();
 
-		    command.Execute(null, eventArgs, null, eventArgsConverterParameter);
+		    new CommandExecutor().Execute(command, null, eventArgs, null, eventArgsConverterParameter);
 
 		    Assert.True(command.CalledCanExecute);
 		    Assert.Equal(null, command.CanExecuteParameter);
@@ -111,7 +111,7 @@ namespace XamarinForms.Behaviors.Tests
 	    [Fact]
 	    public void WhenCommandIsNull()
 	    {
-		    CommandExtensions.Execute(command: null);
+		    new CommandExecutor().Execute(null);
 	    }
 
 	    private class EventArgsMock : EventArgs
