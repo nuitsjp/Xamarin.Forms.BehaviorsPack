@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows.Input;
+using Moq;
 using Xamarin.Forms;
 using Xunit;
 
@@ -13,102 +14,101 @@ namespace XamarinForms.Behaviors.Tests
 	    [Fact]
 	    public void WhenCanNotExecute()
 	    {
-		    var command = new CommandMock { CanExecuteProperty = false };
-		    new CommandExecutor().Execute(command);
+		    var commandMock = new Mock<ICommand>();
+		    commandMock.Setup(x => x.CanExecute(It.IsAny<object>())).Returns(false);
+		    new CommandExecutor().Execute(commandMock.Object);
 
-		    Assert.True(command.CalledCanExecute);
-			Assert.Null(command.CanExecuteParameter);
-			Assert.False(command.CalledExecute);
+			commandMock.Verify(x => x.CanExecute(It.IsAny<object>()), Times.Once);
+		    commandMock.Verify(x => x.Execute(It.IsAny<object>()), Times.Never);
 	    }
 
 	    [Fact]
 	    public void WhenUseCommandParameter()
 	    {
-		    var command = new CommandMock();
+		    var commandMock = new Mock<ICommand>();
 			var commandParameter = new object();
 			var eventArgs = new EventArgs();
-			var converter = new ValueConverterMock();
+			var converter = new Mock<IValueConverter>().Object;
 			var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "";
 
-		    new CommandExecutor().Execute(command, commandParameter, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
+		    commandMock.Setup(x => x.CanExecute(commandParameter)).Returns(true);
 
-			Assert.True(command.CalledCanExecute);
-			Assert.Equal(commandParameter, command.CanExecuteParameter);
-			Assert.True(command.CalledExecute);
-			Assert.Equal(commandParameter, command.ExecuteParameter);
+		    new CommandExecutor().Execute(commandMock.Object, commandParameter, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
+
+		    commandMock.Verify(x => x.CanExecute(commandParameter), Times.Once);
+		    commandMock.Verify(x => x.Execute(commandParameter), Times.Once);
 	    }
 
 	    [Fact]
 	    public void WhenUseValueConverter()
 	    {
-		    var command = new CommandMock();
+		    var commandMock = new Mock<ICommand>();
 		    var eventArgs = new EventArgs();
-		    var converter = new ValueConverterMock();
+		    var converterMock = new Mock<IValueConverter>();
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "";
 
-		    new CommandExecutor().Execute(command, null, eventArgs, converter, eventArgsConverterParameter, eventArgsPropertyPath);
+		    converterMock.Setup(x => x.Convert(eventArgs, typeof(object), eventArgsConverterParameter,
+			    CultureInfo.CurrentUICulture)).Returns("Success");
+		    commandMock.Setup(x => x.CanExecute("Success")).Returns(true);
 
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal("Success", command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal("Success", command.ExecuteParameter);
+			new CommandExecutor().Execute(commandMock.Object, null, eventArgs, converterMock.Object, eventArgsConverterParameter, eventArgsPropertyPath);
 
-			Assert.Equal(eventArgs, converter.Value);
-		    Assert.Equal(typeof(object), converter.TargetType);
-		    Assert.Equal(eventArgsConverterParameter, converter.Parameter);
-		    Assert.Equal(CultureInfo.CurrentUICulture, converter.CultureInfo);
+			commandMock.Verify(x => x.CanExecute("Success"), Times.Once);
+		    commandMock.Verify(x => x.Execute("Success"), Times.Once);
+
+			converterMock.Verify(x => x.Convert(eventArgs, typeof(object), eventArgsConverterParameter, CultureInfo.CurrentUICulture), Times.Once);
 		}
 
-	    [Fact]
+		[Fact]
 	    public void WhenUseEventArgsPropertyPath()
 	    {
-		    var command = new CommandMock();
+		    var commandMock = new Mock<ICommand>();
 		    var eventArgs = new EventArgsMock { Property = new EventArgsMockProperty()};
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "Property.Value";
 
-		    new CommandExecutor().Execute(command, null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
+		    commandMock.Setup(x => x.CanExecute("EventArgsMockPropertyValue")).Returns(true);
 
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal("EventArgsMockPropertyValue", command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal("EventArgsMockPropertyValue", command.ExecuteParameter);
+			new CommandExecutor().Execute(commandMock.Object, null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
+
+		    commandMock.Verify(x => x.CanExecute("EventArgsMockPropertyValue"), Times.Once);
+		    commandMock.Verify(x => x.Execute("EventArgsMockPropertyValue"), Times.Once);
 	    }
 
 	    [Fact]
 	    public void WhenUseEventArgsPropertyPath_WhenPropertyIsNull()
 	    {
-		    var command = new CommandMock();
+		    var commandMock = new Mock<ICommand>();
 		    var eventArgs = new EventArgsMock();
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "Property.Value";
 
-		    new CommandExecutor().Execute(command, null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
+		    commandMock.Setup(x => x.CanExecute(null)).Returns(true);
 
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal(null, command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal(null, command.ExecuteParameter);
+			new CommandExecutor().Execute(commandMock.Object, null, eventArgs, null, eventArgsConverterParameter, eventArgsPropertyPath);
+
+		    commandMock.Verify(x => x.CanExecute(null), Times.Once);
+		    commandMock.Verify(x => x.Execute(null), Times.Once);
 	    }
 
 	    [Fact]
 	    public void WhenParameterIsNull()
 	    {
-		    var command = new CommandMock();
+		    var commandMock = new Mock<ICommand>();
 		    var eventArgs = new EventArgsMock();
 		    var eventArgsConverterParameter = new object();
 
-		    new CommandExecutor().Execute(command, null, eventArgs, null, eventArgsConverterParameter);
+		    commandMock.Setup(x => x.CanExecute(null)).Returns(true);
 
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal(null, command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal(null, command.ExecuteParameter);
+			new CommandExecutor().Execute(commandMock.Object, null, eventArgs, null, eventArgsConverterParameter);
+
+		    commandMock.Verify(x => x.CanExecute(null), Times.Once);
+		    commandMock.Verify(x => x.Execute(null), Times.Once);
 	    }
 
-	    [Fact]
+		[Fact]
 	    public void WhenCommandIsNull()
 	    {
 		    new CommandExecutor().Execute(null);
@@ -123,51 +123,6 @@ namespace XamarinForms.Behaviors.Tests
 	    {
 		    public string Value { get; set; } = "EventArgsMockPropertyValue";
 
-	    }
-
-	    private class ValueConverterMock : IValueConverter
-		{
-			public object Value { get; set; }
-			public Type TargetType { get; set; }
-			public object Parameter { get; set; }
-			public CultureInfo CultureInfo { get; set; }
-			public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-			{
-				Value = value;
-				TargetType = targetType;
-				Parameter = parameter;
-				CultureInfo = culture;
-				return "Success";
-			}
-
-			public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-	    private class CommandMock : ICommand
-	    {
-		    public bool CanExecuteProperty { get; set; } = true;
-		    public object CanExecuteParameter { get; set; }
-		    public object ExecuteParameter { get; set; }
-		    public bool CalledCanExecute { get; set; }
-		    public bool CalledExecute { get; set; }
-		    public bool CanExecute(object parameter)
-		    {
-			    CanExecuteParameter = parameter;
-			    CalledCanExecute = true;
-
-				return CanExecuteProperty;
-		    }
-
-		    public void Execute(object parameter)
-		    {
-			    ExecuteParameter = parameter;
-			    CalledExecute = true;
-		    }
-
-		    public event EventHandler CanExecuteChanged;
 	    }
     }
 }
