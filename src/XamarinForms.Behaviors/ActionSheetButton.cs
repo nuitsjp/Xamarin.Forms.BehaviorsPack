@@ -8,7 +8,7 @@ using Xamarin.Forms.Internals;
 namespace XamarinForms.Behaviors
 {
 	[Preserve]
-    public class ActionSheetButton : BindableObject
+    public class ActionSheetButton : BindableObject, IActionSheetButton
 	{
         public static readonly BindableProperty MessageProperty =
             BindableProperty.Create(nameof(Message), typeof(string), typeof(ActionSheetButton));

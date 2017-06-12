@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows.Input;
+using Moq;
 using Xamarin.Forms;
 using Xunit;
 
@@ -18,155 +19,31 @@ namespace XamarinForms.Behaviors.Tests
 	    }
 
 	    [Fact]
-	    public void WhenCanNotExecute()
+	    public void OnClick()
 	    {
-		    var command = new CommandMock { CanExecuteProperty = false };
-		    var actionSheetButton =
-			    new ActionSheetButton
-				{
-				    Command = command
-			    };
-		    actionSheetButton.OnClick(this, EventArgs.Empty);
-
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Null(command.CanExecuteParameter);
-		    Assert.False(command.CalledExecute);
-	    }
-
-	    [Fact]
-	    public void WhenUseCommandParameter()
-	    {
-		    var command = new CommandMock();
+		    var commandExecuterMock = new Mock<ICommandExecutor>();
+		    var command = new Mock<ICommand>().Object;
 		    var commandParameter = new object();
 		    var eventArgs = new EventArgs();
-		    var converter = new ValueConverterMock();
+		    var eventArgsConverter = new Mock<IValueConverter>().Object;
 		    var eventArgsConverterParameter = new object();
 		    var eventArgsPropertyPath = "";
 
-		    var actionSheetButton =
-			    new ActionSheetButton
-				{
+		    var button =
+			    new ActionSheetButton()
+			    {
+				    CommandExecutor = commandExecuterMock.Object,
 				    Command = command,
 				    CommandParameter = commandParameter,
-				    EventArgsConverter = converter,
+				    EventArgsConverter = eventArgsConverter,
 				    EventArgsConverterParameter = eventArgsConverterParameter,
 				    EventArgsPropertyPath = eventArgsPropertyPath
 			    };
-		    actionSheetButton.OnClick(this, eventArgs);
+		    button.OnClick(this, eventArgs);
 
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal(commandParameter, command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal(commandParameter, command.ExecuteParameter);
-	    }
-
-	    [Fact]
-	    public void WhenUseValueConverter()
-	    {
-		    var command = new CommandMock();
-		    var eventArgs = new EventArgs();
-		    var converter = new ValueConverterMock();
-		    var eventArgsConverterParameter = new object();
-		    var eventArgsPropertyPath = "";
-
-		    var actionSheetButton =
-			    new ActionSheetButton
-				{
-				    Command = command,
-				    EventArgsConverter = converter,
-				    EventArgsConverterParameter = eventArgsConverterParameter,
-				    EventArgsPropertyPath = eventArgsPropertyPath
-			    };
-		    actionSheetButton.OnClick(this, eventArgs);
-
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal("Success", command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal("Success", command.ExecuteParameter);
-
-		    Assert.Equal(eventArgs, converter.Value);
-		    Assert.Equal(typeof(object), converter.TargetType);
-		    Assert.Equal(eventArgsConverterParameter, converter.Parameter);
-		    Assert.Equal(CultureInfo.CurrentUICulture, converter.CultureInfo);
-	    }
-
-	    [Fact]
-	    public void WhenUseEventArgsPropertyPath()
-	    {
-		    var command = new CommandMock();
-		    var eventArgs = new EventArgsMock { Property = new EventArgsMockProperty() };
-		    var eventArgsConverterParameter = new object();
-		    var eventArgsPropertyPath = "Property.Value";
-
-		    var actionSheetButton =
-			    new ActionSheetButton
-				{
-				    Command = command,
-				    EventArgsConverterParameter = eventArgsConverterParameter,
-				    EventArgsPropertyPath = eventArgsPropertyPath
-			    };
-		    actionSheetButton.OnClick(this, eventArgs);
-
-		    Assert.True(command.CalledCanExecute);
-		    Assert.Equal("EventArgsMockPropertyValue", command.CanExecuteParameter);
-		    Assert.True(command.CalledExecute);
-		    Assert.Equal("EventArgsMockPropertyValue", command.ExecuteParameter);
-	    }
-
-	    private class EventArgsMock : EventArgs
-	    {
-		    public EventArgsMockProperty Property { get; set; }
-	    }
-
-	    private class EventArgsMockProperty
-	    {
-		    public string Value { get; set; } = "EventArgsMockPropertyValue";
-
-	    }
-
-	    private class ValueConverterMock : IValueConverter
-	    {
-		    public object Value { get; set; }
-		    public Type TargetType { get; set; }
-		    public object Parameter { get; set; }
-		    public CultureInfo CultureInfo { get; set; }
-		    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		    {
-			    Value = value;
-			    TargetType = targetType;
-			    Parameter = parameter;
-			    CultureInfo = culture;
-			    return "Success";
-		    }
-
-		    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		    {
-			    throw new NotImplementedException();
-		    }
-	    }
-
-	    private class CommandMock : ICommand
-	    {
-		    public bool CanExecuteProperty { get; set; } = true;
-		    public object CanExecuteParameter { get; set; }
-		    public object ExecuteParameter { get; set; }
-		    public bool CalledCanExecute { get; set; }
-		    public bool CalledExecute { get; set; }
-		    public bool CanExecute(object parameter)
-		    {
-			    CanExecuteParameter = parameter;
-			    CalledCanExecute = true;
-
-			    return CanExecuteProperty;
-		    }
-
-		    public void Execute(object parameter)
-		    {
-			    ExecuteParameter = parameter;
-			    CalledExecute = true;
-		    }
-
-		    public event EventHandler CanExecuteChanged;
+		    commandExecuterMock.Verify(
+			    executer => executer.Execute(command, commandParameter, eventArgs, eventArgsConverter, eventArgsConverterParameter, eventArgsPropertyPath),
+			    Times.Once);
 	    }
     }
 }

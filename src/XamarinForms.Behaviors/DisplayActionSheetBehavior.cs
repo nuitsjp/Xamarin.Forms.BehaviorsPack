@@ -134,7 +134,7 @@ namespace XamarinForms.Behaviors
         }
         #endregion Destruction
 
-        public ObservableCollection<ActionSheetButton> ActionSheetButtons { get;  } = new ObservableCollection<ActionSheetButton>();
+        public ObservableCollection<IActionSheetButton> ActionSheetButtons { get;  } = new ObservableCollection<IActionSheetButton>();
 
         public DisplayActionSheetBehavior()
         {
@@ -147,7 +147,8 @@ namespace XamarinForms.Behaviors
 
             foreach (var newItem in e.NewItems)
             {
-                SetInheritedBindingContext(((ActionSheetButton)newItem), BindingContext);
+	            if (newItem is BindableObject bindableObject)
+		            SetInheritedBindingContext(bindableObject, BindingContext);
             }
         }
 
@@ -155,7 +156,8 @@ namespace XamarinForms.Behaviors
         {
             foreach (var actionSheetButton in ActionSheetButtons)
             {
-                SetInheritedBindingContext(actionSheetButton, BindingContext);
+				if(actionSheetButton is BindableObject bindableObject)
+	                SetInheritedBindingContext(bindableObject, BindingContext);
             }
             base.OnBindingContextChanged();
         }
