@@ -1,6 +1,7 @@
 # EventToCommandBehavior  
 
 EventToCommandBehaviorは、UIコントロール側で発生した任意のイベントに応じて、バインドされたCommandを実行します。  
+
 たとえば、ListViewのItemTappedイベントには、Commandをバインドするプロパティは用意されていません。  
 つぎのように実装することで、ItemTappedイベント発生時にバインドされたCommandを実行します。  
 
