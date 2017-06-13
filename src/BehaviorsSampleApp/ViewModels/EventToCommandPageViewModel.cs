@@ -13,7 +13,7 @@ namespace BehaviorsSampleApp.ViewModels
 	{
 		public IList<Fruit> Fruits { get; }= new List<Fruit>();
 
-		public ICommand TappedItemCommand => new Command<string>(name =>
+		public ICommand SelectedFruitCommand => new Command<string>(name =>
 		{
 			var fruit = Fruits.Single(x => x.Name == name);
 			NavigateNextPageRequest.Raise(new SelectedFruitEventArgs {SelectedFruit = fruit});
