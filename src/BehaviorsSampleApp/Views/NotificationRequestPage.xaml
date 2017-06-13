@@ -18,9 +18,6 @@
             Cancel="Cancel"/>
         <behaviorsPack:DisplayAlertBehavior
             NotificationRequest="{Binding NotifyRegisteredRequest}"
-            Title="Notice"
-            Message="Registration has been completed."
-            Cancel="OK"
             CancelCommand="{Binding GoBackCommand}"/>
         <behaviorsPack:NotificationBehavior
             NotificationRequest="{Binding GoBackRequest}"
@@ -28,7 +25,7 @@
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="DisplayAlert is displayed according to notification from ViewModel.!" />
+            <Label Text="DisplayAlert is displayed according to notification from ViewModel." />
             <Button Text="Please click!" Command="{Binding ConfirmCommand}"/>
         </StackLayout>
     </ContentPage.Content>

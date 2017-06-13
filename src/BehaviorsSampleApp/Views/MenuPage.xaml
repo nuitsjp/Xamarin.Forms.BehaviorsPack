@@ -4,7 +4,7 @@
              x:Class="BehaviorsSampleApp.Views.MenuPage"
              Title="Menu">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
+        <StackLayout VerticalOptions="Center" Margin="10">
             <Label Text="Please select one." />
             <Button Text="Display Alert Sample" Clicked="DisplayAlertButton_OnClicked"/>
             <Button Text="Display Action Sheet Sample" Clicked="DisplayActionSheetButton_OnClicked"/>

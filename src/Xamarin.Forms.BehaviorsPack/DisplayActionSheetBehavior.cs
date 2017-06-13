@@ -74,10 +74,10 @@ namespace Xamarin.Forms.BehaviorsPack
             get => (string)GetValue(CancelEventArgsPropertyPathProperty);
             set => SetValue(CancelEventArgsPropertyPathProperty, value);
         }
-        #endregion
+		#endregion
 
-        #region Destruction
-        public static readonly BindableProperty DestructionProperty =
+		#region Destruction
+		public static readonly BindableProperty DestructionProperty =
             BindableProperty.Create(nameof(Destruction), typeof(string), typeof(DisplayAlertBehavior));
 
         public string Destruction
@@ -164,22 +164,48 @@ namespace Xamarin.Forms.BehaviorsPack
             var currentPage = AssociatedObject.GetCurrentPage();
             if (currentPage != null)
             {
-                var buttons = ActionSheetButtons.Select(x => x.Message).ToArray();
-                var result = await currentPage.DisplayActionSheet(Title, Cancel, Destruction, buttons);
-                if (result == Cancel)
-                {
-                    CommandExecutor.Execute(CancelCommand, CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
-                }
-                else if (result == Destruction)
-                {
-                    CommandExecutor.Execute(DestructionCommand, DestructionCommandParameter, eventArgs, DestructionEventArgsConverter, DestructionEventArgsConverterParameter, DestructionEventArgsPropertyPath);
-                }
-                else
-                {
-                    var button = ActionSheetButtons.Single(x => x.Message == result);
-                    button.OnClick(sender, eventArgs);
-                }
+	            var requestEventArgs = eventArgs as DisplayActionSheetRequestEventArgs;
+	            var title = requestEventArgs?.Title ?? Title;
+	            var cancelButton = requestEventArgs?.Cancel ?? CreateCancelButton(eventArgs);
+	            var destructionButton = requestEventArgs?.Destruction ?? CreateDestructionButton(eventArgs);
+				var buttons = requestEventArgs?.ActionSheetButtons.Select(x => x.Message).ToArray() ?? ActionSheetButtons.Select(x => x.Message).ToArray();
+
+	            var actionSheetButtons = requestEventArgs?.ActionSheetButtons.ToList() ?? ActionSheetButtons.ToList();
+				actionSheetButtons.Add(cancelButton);
+				actionSheetButtons.Add(destructionButton);
+
+				var result = await currentPage.DisplayActionSheet(title, cancelButton.Message, destructionButton.Message, buttons);
+
+	            var button = actionSheetButtons.Single(x => x.Message == result);
+	            button.OnClick(sender, eventArgs);
             }
-        }
-    }
+		}
+
+	    private IActionSheetButton CreateCancelButton(EventArgs eventArgs)
+	    {
+		    return new ActionSheetButtonAction
+		    {
+			    Message = Cancel,
+			    Action = () =>
+			    {
+				    CommandExecutor.Execute(CancelCommand, CancelCommandParameter, eventArgs, CancelEventArgsConverter,
+					    CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+			    }
+		    };
+		}
+
+	    private IActionSheetButton CreateDestructionButton(EventArgs eventArgs)
+	    {
+		    return new ActionSheetButtonAction
+		    {
+			    Message = Destruction,
+			    Action = () =>
+			    {
+				    CommandExecutor.Execute(DestructionCommand, DestructionCommandParameter, eventArgs,
+					    DestructionEventArgsConverter, DestructionEventArgsConverterParameter,
+					    DestructionEventArgsPropertyPath);
+			    }
+		    };
+		}
+	}
 }

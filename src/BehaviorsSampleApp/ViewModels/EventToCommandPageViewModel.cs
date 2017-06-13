@@ -16,7 +16,7 @@ namespace BehaviorsSampleApp.ViewModels
 		public ICommand TappedItemCommand => new Command<string>(name =>
 		{
 			var fruit = Fruits.Single(x => x.Name == name);
-			NavigateNextPageRequest.Request(this, new SelectedFruitEventArgs {SelectedFruit = fruit});
+			NavigateNextPageRequest.Request(new SelectedFruitEventArgs {SelectedFruit = fruit});
 		});
 
 		public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();

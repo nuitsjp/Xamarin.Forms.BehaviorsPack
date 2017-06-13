@@ -224,6 +224,274 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		}
 
 	    [Fact]
+	    public void WhenSelectedCancelOnDisplayActionSheetRequested()
+	    {
+			var commandExecutorMock = new Mock<ICommandExecutor>();
+
+		    var cancelCommand = new Mock<ICommand>().Object;
+		    var cancelCommandParameter = new object();
+		    var cancelEventArgsConverter = new Mock<IValueConverter>().Object;
+		    var cancelEventArgsConverterParameter = new object();
+		    var cancelEventArgsPropertyPath = "cancelEventArgsPropertyPath";
+
+		    var destructionCommand = new Mock<ICommand>().Object;
+		    var destructionCommandParameter = new object();
+		    var destructionEventArgsConverter = new Mock<IValueConverter>().Object;
+		    var destructionEventArgsConverterParameter = new object();
+		    var destructionEventArgsPropertyPath = "destructionEventArgsPropertyPath";
+
+		    var request = new DisplayActionSheetRequest();
+		    var behavior = new DisplayActionSheetBehavior()
+		    {
+			    CommandExecutor = commandExecutorMock.Object,
+			    EventName = "TestEvent",
+			    NotificationRequest = request,
+			    Title = "WhenSelectedCancelOnDisplayActionSheetRequested",
+			    Cancel = "Cancel",
+			    CancelCommand = cancelCommand,
+			    CancelCommandParameter = cancelCommandParameter,
+			    CancelEventArgsConverter = cancelEventArgsConverter,
+			    CancelEventArgsConverterParameter = cancelEventArgsConverterParameter,
+			    CancelEventArgsPropertyPath = cancelEventArgsPropertyPath,
+			    Destruction = "Destruction",
+			    DestructionCommand = destructionCommand,
+			    DestructionCommandParameter = destructionCommandParameter,
+			    DestructionEventArgsConverter = destructionEventArgsConverter,
+			    DestructionEventArgsConverterParameter = destructionEventArgsConverterParameter,
+			    DestructionEventArgsPropertyPath = destructionEventArgsPropertyPath,
+		    };
+
+		    var actionSheetButtonMockA = new Mock<IActionSheetButton>();
+		    actionSheetButtonMockA.SetupGet(x => x.Message).Returns(() => "actionSheetButtonMockA");
+		    behavior.ActionSheetButtons.Add(actionSheetButtonMockA.Object);
+
+		    var actionSheetButtonMockB = new Mock<IActionSheetButton>();
+		    actionSheetButtonMockB.SetupGet(x => x.Message).Returns(() => "actionSheetButtonMockB");
+		    behavior.ActionSheetButtons.Add(actionSheetButtonMockB.Object);
+
+		    var page = new PageMock();
+		    page.Behaviors.Add(behavior);
+		    MessagingCenter.Subscribe<Page, ActionSheetArguments>(this, Page.ActionSheetSignalName, (page1, arguments) =>
+		    {
+			    if (arguments.Title == "ReplacedWhenSelectedCancelOnDisplayActionSheetRequested")
+			    {
+				    Assert.Equal("ReplacedCancel", arguments.Cancel);
+				    Assert.Equal("ReplacedDestruction", arguments.Destruction);
+				    Assert.Equal(2, arguments.Buttons.Count());
+				    Assert.Equal("actionSheetButtonActionA", arguments.Buttons.ToArray()[0]);
+				    Assert.Equal("actionSheetButtonActionB", arguments.Buttons.ToArray()[1]);
+				    arguments.SetResult(arguments.Destruction);
+			    }
+		    });
+
+		    bool calledActionSheetButtonActionCancel = false;
+		    bool calledActionSheetButtonActionDestruction = false;
+		    bool calledActionSheetButtonActionA = false;
+		    bool calledActionSheetButtonActionB = false;
+		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
+		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
+		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
+		    var actionSheetButtonActionB = new ActionSheetButtonAction { Message = "actionSheetButtonActionB", Action = () => { calledActionSheetButtonActionB = true; } };
+
+		    request.Raise("ReplacedWhenSelectedCancelOnDisplayActionSheetRequested", actionSheetButtonActionCancel, actionSheetButtonActionDestruction, actionSheetButtonActionA, actionSheetButtonActionB);
+
+
+		    commandExecutorMock.Verify(
+			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
+			    Times.Never);
+		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    Assert.False(calledActionSheetButtonActionCancel);
+		    Assert.True(calledActionSheetButtonActionDestruction);
+		    Assert.False(calledActionSheetButtonActionA);
+		    Assert.False(calledActionSheetButtonActionB);
+		}
+
+	    [Fact]
+	    public void WhenSelectedDestructionOnDisplayActionSheetRequested()
+	    {
+		    var commandExecutorMock = new Mock<ICommandExecutor>();
+
+		    var cancelCommand = new Mock<ICommand>().Object;
+		    var cancelCommandParameter = new object();
+		    var cancelEventArgsConverter = new Mock<IValueConverter>().Object;
+		    var cancelEventArgsConverterParameter = new object();
+		    var cancelEventArgsPropertyPath = "cancelEventArgsPropertyPath";
+
+		    var destructionCommand = new Mock<ICommand>().Object;
+		    var destructionCommandParameter = new object();
+		    var destructionEventArgsConverter = new Mock<IValueConverter>().Object;
+		    var destructionEventArgsConverterParameter = new object();
+		    var destructionEventArgsPropertyPath = "destructionEventArgsPropertyPath";
+
+		    var request = new DisplayActionSheetRequest();
+		    var behavior = new DisplayActionSheetBehavior()
+		    {
+			    CommandExecutor = commandExecutorMock.Object,
+			    EventName = "TestEvent",
+				NotificationRequest = request,
+				Title = "WhenSelectedDestructionOnDisplayActionSheetRequested",
+			    Cancel = "Cancel",
+			    CancelCommand = cancelCommand,
+			    CancelCommandParameter = cancelCommandParameter,
+			    CancelEventArgsConverter = cancelEventArgsConverter,
+			    CancelEventArgsConverterParameter = cancelEventArgsConverterParameter,
+			    CancelEventArgsPropertyPath = cancelEventArgsPropertyPath,
+			    Destruction = "Destruction",
+			    DestructionCommand = destructionCommand,
+			    DestructionCommandParameter = destructionCommandParameter,
+			    DestructionEventArgsConverter = destructionEventArgsConverter,
+			    DestructionEventArgsConverterParameter = destructionEventArgsConverterParameter,
+			    DestructionEventArgsPropertyPath = destructionEventArgsPropertyPath,
+		    };
+
+		    var actionSheetButtonMockA = new Mock<IActionSheetButton>();
+		    actionSheetButtonMockA.SetupGet(x => x.Message).Returns(() => "actionSheetButtonMockA");
+		    behavior.ActionSheetButtons.Add(actionSheetButtonMockA.Object);
+
+		    var actionSheetButtonMockB = new Mock<IActionSheetButton>();
+		    actionSheetButtonMockB.SetupGet(x => x.Message).Returns(() => "actionSheetButtonMockB");
+		    behavior.ActionSheetButtons.Add(actionSheetButtonMockB.Object);
+
+		    var page = new PageMock();
+		    page.Behaviors.Add(behavior);
+		    MessagingCenter.Subscribe<Page, ActionSheetArguments>(this, Page.ActionSheetSignalName, (page1, arguments) =>
+		    {
+			    if (arguments.Title == "ReplacedWhenSelectedDestructionOnDisplayActionSheetRequested")
+			    {
+				    Assert.Equal("ReplacedCancel", arguments.Cancel);
+				    Assert.Equal("ReplacedDestruction", arguments.Destruction);
+				    Assert.Equal(2, arguments.Buttons.Count());
+				    Assert.Equal("actionSheetButtonActionA", arguments.Buttons.ToArray()[0]);
+				    Assert.Equal("actionSheetButtonActionB", arguments.Buttons.ToArray()[1]);
+				    arguments.SetResult(arguments.Destruction);
+			    }
+		    });
+
+		    bool calledActionSheetButtonActionCancel = false;
+		    bool calledActionSheetButtonActionDestruction = false;
+		    bool calledActionSheetButtonActionA = false;
+		    bool calledActionSheetButtonActionB = false;
+			string param = null;
+		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
+		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
+		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
+		    var actionSheetButtonActionB = new ActionSheetButtonAction<string> { Message = "actionSheetButtonActionB", Parameter = "Param", Action =
+			    x =>
+			    {
+				    calledActionSheetButtonActionB = true;
+				    param = x;
+			    } };
+
+		    request.Raise("ReplacedWhenSelectedDestructionOnDisplayActionSheetRequested", actionSheetButtonActionCancel, actionSheetButtonActionDestruction, actionSheetButtonActionA, actionSheetButtonActionB);
+
+
+		    commandExecutorMock.Verify(
+			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
+			    Times.Never);
+		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    Assert.False(calledActionSheetButtonActionCancel);
+		    Assert.True(calledActionSheetButtonActionDestruction);
+		    Assert.False(calledActionSheetButtonActionA);
+		    Assert.False(calledActionSheetButtonActionB);
+	    }
+
+		[Fact]
+	    public void WhenSelectedActionSheetButtonOnDisplayActionSheetRequested()
+	    {
+		    var commandExecutorMock = new Mock<ICommandExecutor>();
+
+		    var cancelCommand = new Mock<ICommand>().Object;
+		    var cancelCommandParameter = new object();
+		    var cancelEventArgsConverter = new Mock<IValueConverter>().Object;
+		    var cancelEventArgsConverterParameter = new object();
+		    var cancelEventArgsPropertyPath = "cancelEventArgsPropertyPath";
+
+		    var destructionCommand = new Mock<ICommand>().Object;
+		    var destructionCommandParameter = new object();
+		    var destructionEventArgsConverter = new Mock<IValueConverter>().Object;
+		    var destructionEventArgsConverterParameter = new object();
+		    var destructionEventArgsPropertyPath = "destructionEventArgsPropertyPath";
+
+		    var request = new DisplayActionSheetRequest();
+		    var behavior = new DisplayActionSheetBehavior()
+		    {
+			    CommandExecutor = commandExecutorMock.Object,
+			    NotificationRequest = request,
+			    Title = "WhenSelectedActionSheetButtonOnDisplayActionSheetRequested",
+			    Cancel = "Cancel",
+			    CancelCommand = cancelCommand,
+			    CancelCommandParameter = cancelCommandParameter,
+			    CancelEventArgsConverter = cancelEventArgsConverter,
+			    CancelEventArgsConverterParameter = cancelEventArgsConverterParameter,
+			    CancelEventArgsPropertyPath = cancelEventArgsPropertyPath,
+			    Destruction = "Destruction",
+			    DestructionCommand = destructionCommand,
+			    DestructionCommandParameter = destructionCommandParameter,
+			    DestructionEventArgsConverter = destructionEventArgsConverter,
+			    DestructionEventArgsConverterParameter = destructionEventArgsConverterParameter,
+			    DestructionEventArgsPropertyPath = destructionEventArgsPropertyPath,
+		    };
+
+		    var actionSheetButtonMockA = new Mock<IActionSheetButton>();
+		    actionSheetButtonMockA.SetupGet(x => x.Message).Returns(() => "actionSheetButtonMockA");
+		    behavior.ActionSheetButtons.Add(actionSheetButtonMockA.Object);
+
+		    var actionSheetButtonMockB = new Mock<IActionSheetButton>();
+		    actionSheetButtonMockB.SetupGet(x => x.Message).Returns(() => "actionSheetButtonMockB");
+		    behavior.ActionSheetButtons.Add(actionSheetButtonMockB.Object);
+
+		    var page = new PageMock();
+		    page.Behaviors.Add(behavior);
+		    MessagingCenter.Subscribe<Page, ActionSheetArguments>(this, Page.ActionSheetSignalName, (page1, arguments) =>
+		    {
+			    if (arguments.Title == "ReplacedWhenSelectedActionSheetButtonOnDisplayActionSheetRequested")
+			    {
+				    Assert.Equal("ReplacedCancel", arguments.Cancel);
+				    Assert.Equal("ReplacedDestruction", arguments.Destruction);
+				    Assert.Equal(2, arguments.Buttons.Count());
+				    Assert.Equal("actionSheetButtonActionA", arguments.Buttons.ToArray()[0]);
+				    Assert.Equal("actionSheetButtonActionB", arguments.Buttons.ToArray()[1]);
+				    arguments.SetResult("actionSheetButtonActionB");
+			    }
+		    });
+
+		    bool calledActionSheetButtonActionCancel = false;
+		    bool calledActionSheetButtonActionDestruction = false;
+		    bool calledActionSheetButtonActionA = false;
+		    bool calledActionSheetButtonActionB = false;
+		    string param = null;
+		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
+		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
+		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
+		    var actionSheetButtonActionB = new ActionSheetButtonAction<string>
+		    {
+			    Message = "actionSheetButtonActionB",
+			    Parameter = "Param",
+			    Action =
+				    x =>
+				    {
+					    calledActionSheetButtonActionB = true;
+					    param = x;
+				    }
+		    };
+
+			request.Raise("ReplacedWhenSelectedActionSheetButtonOnDisplayActionSheetRequested", actionSheetButtonActionCancel, actionSheetButtonActionDestruction, actionSheetButtonActionA, actionSheetButtonActionB);
+
+			commandExecutorMock.Verify(
+			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
+			    Times.Never);
+		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    Assert.False(calledActionSheetButtonActionCancel);
+		    Assert.False(calledActionSheetButtonActionDestruction);
+			Assert.False(calledActionSheetButtonActionA);
+		    Assert.True(calledActionSheetButtonActionB);
+			Assert.Equal("Param", param);
+	    }
+
+		[Fact]
 	    public void OnBindingContextChanged()
 	    {
 		    var behavior = new DisplayActionSheetBehavior();
