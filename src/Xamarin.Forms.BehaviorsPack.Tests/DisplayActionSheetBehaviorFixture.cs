@@ -219,8 +219,8 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    commandExecutorMock.Verify(
 			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
 			    Times.Never);
-		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
-		    actionSheetButtonMockB.Verify(x => x.OnClick(this, EventArgs.Empty), Times.Once);
+		    actionSheetButtonMockA.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClicked(this, EventArgs.Empty), Times.Once);
 		}
 
 	    [Fact]
@@ -299,8 +299,8 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    commandExecutorMock.Verify(
 			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
 			    Times.Never);
-		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
-		    actionSheetButtonMockB.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockA.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
 		    Assert.False(calledActionSheetButtonActionCancel);
 		    Assert.True(calledActionSheetButtonActionDestruction);
 		    Assert.False(calledActionSheetButtonActionA);
@@ -372,16 +372,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    bool calledActionSheetButtonActionDestruction = false;
 		    bool calledActionSheetButtonActionA = false;
 		    bool calledActionSheetButtonActionB = false;
-			string param = null;
 		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
 		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
 		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
-		    var actionSheetButtonActionB = new ActionSheetButtonAction<string> { Message = "actionSheetButtonActionB", Parameter = "Param", Action =
-			    x =>
-			    {
-				    calledActionSheetButtonActionB = true;
-				    param = x;
-			    } };
+		    var actionSheetButtonActionB = new ActionSheetButtonAction { Message = "actionSheetButtonActionB", Action = () => { calledActionSheetButtonActionB = true; } };
 
 		    request.Raise("ReplacedWhenSelectedDestructionOnDisplayActionSheetRequested", actionSheetButtonActionCancel, actionSheetButtonActionDestruction, actionSheetButtonActionA, actionSheetButtonActionB);
 
@@ -389,8 +383,8 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    commandExecutorMock.Verify(
 			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
 			    Times.Never);
-		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
-		    actionSheetButtonMockB.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockA.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
 		    Assert.False(calledActionSheetButtonActionCancel);
 		    Assert.True(calledActionSheetButtonActionDestruction);
 		    Assert.False(calledActionSheetButtonActionA);
@@ -482,8 +476,8 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 			commandExecutorMock.Verify(
 			    commandExecutor => commandExecutor.Execute(It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
 			    Times.Never);
-		    actionSheetButtonMockA.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
-		    actionSheetButtonMockB.Verify(x => x.OnClick(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockA.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
+		    actionSheetButtonMockB.Verify(x => x.OnClicked(It.IsAny<object>(), It.IsAny<EventArgs>()), Times.Never);
 		    Assert.False(calledActionSheetButtonActionCancel);
 		    Assert.False(calledActionSheetButtonActionDestruction);
 			Assert.False(calledActionSheetButtonActionA);

@@ -4,7 +4,7 @@ using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-	[Preserve]
+	[Preserve(AllMembers = true)]
     public class ActionSheetButton : BindableObject, IActionSheetButton
 	{
         public static readonly BindableProperty MessageProperty =
@@ -63,7 +63,7 @@ namespace Xamarin.Forms.BehaviorsPack
             set => SetValue(EventArgsPropertyPathProperty, value);
         }
 
-        public void OnClick(object sender, EventArgs eventArgs)
+        public void OnClicked(object sender, EventArgs eventArgs)
         {
             CommandExecutor.Execute(Command, CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
         }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
@@ -8,7 +6,7 @@ namespace Xamarin.Forms.BehaviorsPack
     {
 	    public event EventHandler<EventArgs> Requested;
 
-	    public void Request(string title = null, string message = null, string accept = null, string cancel = null)
+	    public void Raise(string title = null, string message = null, string accept = null, string cancel = null)
 	    {
 		    Requested?.Invoke(this, new DisplayAlertRequestEventArgs
 		    {

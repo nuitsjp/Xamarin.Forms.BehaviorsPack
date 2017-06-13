@@ -4,7 +4,7 @@ using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-	[Preserve]
+	[Preserve(AllMembers = true)]
     public class DisplayAlertBehavior : ReceiveNotificationBehavior<VisualElement, EventArgs>
     {
         public static readonly BindableProperty TitleProperty =

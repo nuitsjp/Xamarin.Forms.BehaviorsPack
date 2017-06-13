@@ -23,21 +23,21 @@ namespace BehaviorsSampleApp.ViewModels
 		{
 			// Execution of input validation etc.
 			// ...
-			ConfirmRequest.Request();
+			ConfirmRequest.Raise();
 		});
 
 		public NotificationRequest ConfirmRequest { get; } = new NotificationRequest();
 
 		public ICommand RegistCommand => new Command(() =>
 		{
-			NotifyRegisteredRequest.Request("Notice", "Registration has been completed.", cancel: "OK");
+			NotifyRegisteredRequest.Raise("Notice", "Registration has been completed.", cancel: "OK");
 		});
 
 		public DisplayAlertRequest NotifyRegisteredRequest { get; } = new DisplayAlertRequest();
 
 		public ICommand GoBackCommand => new Command(() =>
 		{
-			GoBackRequest.Request();
+			GoBackRequest.Raise();
 		});
 
 		public NotificationRequest GoBackRequest { get; } = new NotificationRequest();

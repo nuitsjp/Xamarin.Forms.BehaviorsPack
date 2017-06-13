@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Xamarin.Forms.BehaviorsPack.Tests
@@ -13,7 +11,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    var request = new NotificationRequest();
 		    var behavior = new NotificationBehavior { NotificationRequest = request };
 
-		    var receivedEvent = Assert.Raises<EventArgs>(h => behavior.Received += h, h => behavior.Received -= h, () => request.Request());
+		    var receivedEvent = Assert.Raises<EventArgs>(h => behavior.Received += h, h => behavior.Received -= h, () => request.Raise());
 
 		    Assert.NotNull(receivedEvent);
 		    Assert.Equal(request, receivedEvent.Sender);
@@ -21,7 +19,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 
 		    behavior.NotificationRequest = null;
 
-		    request.Request();
+		    request.Raise();
 		    behavior.Received += (sender, args) =>
 		    {
 			    Assert.True(false);

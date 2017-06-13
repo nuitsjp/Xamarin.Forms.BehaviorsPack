@@ -6,6 +6,6 @@ namespace Xamarin.Forms.BehaviorsPack
 	{
 		string Message { get; set; }
 
-		void OnClick(object sender, EventArgs eventArgs);
+		void OnClicked(object sender, EventArgs eventArgs);
 	}
 }

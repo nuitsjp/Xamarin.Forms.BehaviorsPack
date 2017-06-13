@@ -35,7 +35,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 				    EventArgsConverterParameter = eventArgsConverterParameter,
 				    EventArgsPropertyPath = eventArgsPropertyPath
 			    };
-		    button.OnClick(this, eventArgs);
+		    button.OnClicked(this, eventArgs);
 
 		    commandExecuterMock.Verify(
 			    executer => executer.Execute(command, commandParameter, eventArgs, eventArgsConverter, eventArgsConverterParameter, eventArgsPropertyPath),

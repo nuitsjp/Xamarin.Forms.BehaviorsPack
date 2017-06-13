@@ -24,7 +24,7 @@
             Received="NotificationBehavior_OnReceived"/>
     </ContentPage.Behaviors>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="Center" Margin="10">
             <Label Text="DisplayAlert is displayed according to notification from ViewModel." />
             <Button Text="Please click!" Command="{Binding ConfirmCommand}"/>
         </StackLayout>

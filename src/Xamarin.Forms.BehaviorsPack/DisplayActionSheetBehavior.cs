@@ -7,7 +7,7 @@ using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-	[Preserve]
+	[Preserve(AllMembers = true)]
     [ContentProperty("ActionSheetButtons")]
     public class DisplayActionSheetBehavior : ReceiveNotificationBehavior<VisualElement, EventArgs>
     {
@@ -177,7 +177,7 @@ namespace Xamarin.Forms.BehaviorsPack
 				var result = await currentPage.DisplayActionSheet(title, cancelButton.Message, destructionButton.Message, buttons);
 
 	            var button = actionSheetButtons.Single(x => x.Message == result);
-	            button.OnClick(sender, eventArgs);
+	            button.OnClicked(sender, eventArgs);
             }
 		}
 

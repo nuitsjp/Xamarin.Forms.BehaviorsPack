@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
@@ -8,7 +6,7 @@ namespace Xamarin.Forms.BehaviorsPack
     {
 	    public string Message { get; set; }
 	    public Action Action { get; set; }
-	    public void OnClick(object sender, EventArgs eventArgs)
+	    public void OnClicked(object sender, EventArgs eventArgs)
 	    {
 			Action?.Invoke();
 	    }
@@ -19,7 +17,7 @@ namespace Xamarin.Forms.BehaviorsPack
 		public string Message { get; set; }
 		public Action<T> Action { get; set; }
 		public T Parameter { get; set; }
-		public void OnClick(object sender, EventArgs eventArgs)
+		public void OnClicked(object sender, EventArgs eventArgs)
 		{
 			Action?.Invoke(Parameter);
 		}

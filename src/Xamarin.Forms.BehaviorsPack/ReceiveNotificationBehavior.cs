@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
@@ -12,7 +10,9 @@ namespace Xamarin.Forms.BehaviorsPack
 		where TBindableObject : BindableObject
 		where TEventArgs : EventArgs
 	{
-		public static readonly BindableProperty EventNameProperty =
+	    private static readonly MethodInfo HandlerMethodInfo = typeof(ReceiveNotificationBehavior<TBindableObject, TEventArgs>).GetRuntimeMethods().Single(mi => mi.Name == "OnReceived" && mi.IsPublic == false);
+
+        public static readonly BindableProperty EventNameProperty =
 			BindableProperty.Create(nameof(EventName), typeof(string), typeof(ReceiveNotificationBehavior<TBindableObject, TEventArgs>), propertyChanged: OnEventNameChanged);
 
 		public static readonly BindableProperty NotificationRequestProperty =
@@ -70,20 +70,7 @@ namespace Xamarin.Forms.BehaviorsPack
 				if (_eventInfo == null)
 					throw new NotImplementedException($"{GetType().Name}: Can't implement the '{EventName}' event.");
 
-				var senderParameter = Expression.Parameter(typeof(object));
-				var eventParameter = Expression.Parameter(typeof(TEventArgs));
-				ParameterExpression[] eventParameters = { senderParameter, eventParameter };
-
-
-				var actionInvoke = typeof(Action<object, TEventArgs>).GetRuntimeMethods().First(m => m.Name == "Invoke");
-
-				_eventHandler =
-					Expression.Lambda(
-						_eventInfo.EventHandlerType,
-						Expression.Call(Expression.Constant((Action<object, TEventArgs>)OnReceived), actionInvoke, senderParameter,
-							eventParameter),
-						eventParameters).Compile();
-
+			    _eventHandler = HandlerMethodInfo.CreateDelegate(_eventInfo.EventHandlerType, this);
 				_eventInfo.AddEventHandler(AssociatedObject, _eventHandler);
 			}
 		}

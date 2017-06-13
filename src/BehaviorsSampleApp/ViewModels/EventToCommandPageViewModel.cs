@@ -16,14 +16,14 @@ namespace BehaviorsSampleApp.ViewModels
 		public ICommand TappedItemCommand => new Command<string>(name =>
 		{
 			var fruit = Fruits.Single(x => x.Name == name);
-			NavigateNextPageRequest.Request(new SelectedFruitEventArgs {SelectedFruit = fruit});
+			NavigateNextPageRequest.Raise(new SelectedFruitEventArgs {SelectedFruit = fruit});
 		});
 
 		public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
 
 		public EventToCommandPageViewModel()
 		{
-			Fruits.Add(new Fruit{ Name = "Apple", Color = Color.Red});
+			Fruits.Add(new Fruit { Name = "Apple", Color = Color.Red});
 			Fruits.Add(new Fruit { Name = "Orange", Color = Color.Orange });
 			Fruits.Add(new Fruit { Name = "Pineapple", Color = Color.Yellow });
 			Fruits.Add(new Fruit { Name = "Banana", Color = Color.Yellow });

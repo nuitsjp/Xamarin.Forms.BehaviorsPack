@@ -4,7 +4,7 @@ using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-	[Preserve]
+	[Preserve(AllMembers = true)]
     public class EventToCommandBehavior : ReceiveNotificationBehavior<VisualElement, EventArgs>
     {
         public static readonly BindableProperty CommandProperty =

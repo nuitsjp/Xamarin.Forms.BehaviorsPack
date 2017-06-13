@@ -252,7 +252,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 			    }
 		    });
 
-		    request.Request("ReplacedTitle", "ReplacedMessage", "ReplacedAccept", "ReplacedCancel");
+		    request.Raise("ReplacedTitle", "ReplacedMessage", "ReplacedAccept", "ReplacedCancel");
 
 			Assert.Equal("ReplacedTitle", noticeTitle);
 		    Assert.Equal("ReplacedMessage", noticeMessage);
