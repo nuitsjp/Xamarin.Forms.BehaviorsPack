@@ -16,7 +16,6 @@ Buttonのクリック時にActionSheetを表示する例を下に示します。
             Title="ActionSheet Title"
             Cancel="Cancel"
             CancelCommand="{Binding CancelCommand}"
-            CancelCommandParameter="Selected Cancel button."
             Destruction="Delete"
             DestructionCommand="{Binding DestructionCommand}">
             <behaviorsPack:ActionSheetButton 
@@ -64,7 +63,6 @@ XAML側では、先程はEventNameを指定していましたが、こちらはN
             Title="ActionSheet Title"
             Cancel="Cancel"
             CancelCommand="{Binding CancelCommand}"
-            CancelCommandParameter="Selected Cancel button."
             Destruction="Delete"
             DestructionCommand="{Binding DestructionCommand}">
             <behaviorsPack:ActionSheetButton 
