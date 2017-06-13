@@ -40,5 +40,6 @@ NuGetパッケージマネージャーで次のコードを実行してくださ
 
 各Behaviorの利用方法は以下を参照ください。  
 
-* [EventToCommandBehavior](docs/EventToCommandBehavior.md)
-
+* [EventToCommandBehavior](docs/EventToCommandBehavior-ja.md)  
+* [DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior-ja.md)  
+* [DisplayAlertBehavior](doc/DisplayAlertBehavior-ja.md)

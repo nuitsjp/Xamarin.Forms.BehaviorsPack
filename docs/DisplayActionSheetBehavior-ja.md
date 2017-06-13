@@ -130,3 +130,7 @@ private void Foo()
 
 先ほどのXAMLで定義されたケースと同等のActionSheetが表示されます。  
 動的にActionSheetの表示をコントロールしたい場合は、こちらの方法を利用すると良いでしょう。  
+
+なお、XAML上でも各プロパティが指定されていた場合、DisplayActionSheetRequestの値が優先されてます。  
+DisplayActionSheetRequest側でnullが指定されていて、XAML上で値が指定されている項目についてはXAML側の定義に従います。  
+XAML上で定義されたDisplayActionSheetBehaviorの振る舞いの全て、もしくは一部をDisplayActionSheetRequestで変更することが可能です。  
