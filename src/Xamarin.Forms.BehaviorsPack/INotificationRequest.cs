@@ -6,9 +6,4 @@ namespace Xamarin.Forms.BehaviorsPack
     {
         event EventHandler<TEventArgs> Requested;
     }
-
-    public interface INotificationRequest : INotificationRequest<EventArgs>
-    {
-        
-    }
 }

@@ -5,7 +5,7 @@ using Xamarin.Forms.Internals;
 namespace Xamarin.Forms.BehaviorsPack
 {
 	[Preserve]
-    public class EventToCommandBehavior : NotificationBehavior<VisualElement, EventArgs>
+    public class EventToCommandBehavior : ReceiveNotificationBehavior<VisualElement, EventArgs>
     {
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EventToCommandBehavior));

@@ -9,7 +9,7 @@ namespace Xamarin.Forms.BehaviorsPack
 {
 	[Preserve]
     [ContentProperty("ActionSheetButtons")]
-    public class DisplayActionSheetBehavior : NotificationBehavior<VisualElement, EventArgs>
+    public class DisplayActionSheetBehavior : ReceiveNotificationBehavior<VisualElement, EventArgs>
     {
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(nameof(Title), typeof(string), typeof(DisplayAlertBehavior));

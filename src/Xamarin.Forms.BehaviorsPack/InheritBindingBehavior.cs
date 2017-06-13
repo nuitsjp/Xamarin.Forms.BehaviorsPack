@@ -5,15 +5,9 @@ namespace Xamarin.Forms.BehaviorsPack
     public class InheritBindingBehavior<T> : Behavior<T> where T : BindableObject
     {
         private bool _inheritedBindingContedt;
-        /// <summary>
-        /// Property to which the Behavior is attached.
-        /// </summary>
-        protected T AssociatedObject { get; private set; }
 
-        /// <summary>
-        /// When attached, inherit BindingContext and monitor change events of BindingContext
-        /// </summary>
-        /// <param name="bindableObject">Object to be attached</param>
+		protected T AssociatedObject { get; private set; }
+
         protected override void OnAttachedTo(T bindableObject)
         {
             base.OnAttachedTo(bindableObject);
@@ -38,10 +32,6 @@ namespace Xamarin.Forms.BehaviorsPack
 		    }
 		}
 
-		/// <summary>
-		/// Remove event handler.
-		/// </summary>
-		/// <param name="bindableObject"></param>
 		protected override void OnDetachingFrom(T bindableObject)
         {
             BindingContext = null;

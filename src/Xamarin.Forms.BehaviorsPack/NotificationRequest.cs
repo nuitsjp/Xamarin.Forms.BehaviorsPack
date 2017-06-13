@@ -2,7 +2,7 @@
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-    public class NotificationRequest : INotificationRequest
+    public class NotificationRequest : INotificationRequest<EventArgs>
     {
         public event EventHandler<EventArgs> Requested;
 
