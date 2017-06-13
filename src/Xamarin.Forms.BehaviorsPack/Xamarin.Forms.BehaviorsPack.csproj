@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
@@ -17,9 +17,9 @@
 * DisplayAlertBehavior
 * DisplayActionSheetBehavior
 * etc...</Description>
-    <PackageLicenseUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/nuitsjp/BehaviorsForXamarinForms</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors Xamarin.Forms.BehaviorsPack BehaviorsPack</PackageTags>
     <DebugType>full</DebugType>
