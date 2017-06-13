@@ -20,7 +20,7 @@ namespace BehaviorsSampleApp.ViewModels
 
 		public ICommand AcceptCommand => new Command(() =>
 		{
-			Message = "Selected Accept button.";
+			Message = "Selected OK button.";
 		});
 
 		public Command<string> CancelCommand => new Command<string>(param =>

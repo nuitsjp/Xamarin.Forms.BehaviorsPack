@@ -86,10 +86,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    var page = new PageMock();
 		    page.Behaviors.Add(behavior);
 
-		    request.Request(this);
+		    request.Request();
 
 			Assert.NotNull(behavior.Sender);
-		    Assert.Equal(this, behavior.Sender);
+		    Assert.Equal(request, behavior.Sender);
 		    Assert.NotNull(behavior.EventArgs);
 		    Assert.Equal(EventArgs.Empty, behavior.EventArgs);
 
@@ -97,7 +97,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    behavior.EventArgs = null;
 		    page.Behaviors.Clear();
 
-		    request.Request(this);
+		    request.Request();
 		    Assert.Null(behavior.Sender);
 		    Assert.Null(behavior.EventArgs);
 	    }
@@ -113,14 +113,14 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 			var requestB = new NotificationRequest();
 		    behavior.NotificationRequest = requestB;
 
-			requestA.Request(this);
+			requestA.Request();
 		    Assert.Null(behavior.Sender);
 		    Assert.Null(behavior.EventArgs);
 
-			requestB.Request(this);
+			requestB.Request();
 
 			Assert.NotNull(behavior.Sender);
-		    Assert.Equal(this, behavior.Sender);
+		    Assert.Equal(requestB, behavior.Sender);
 		    Assert.NotNull(behavior.EventArgs);
 		    Assert.Equal(EventArgs.Empty, behavior.EventArgs);
 	    }

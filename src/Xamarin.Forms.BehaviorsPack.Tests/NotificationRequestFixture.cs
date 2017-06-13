@@ -9,10 +9,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		public void Request()
 		{
 			var request = new NotificationRequest();
-			var requestedEvent = Assert.Raises<EventArgs>(h => request.Requested += h, h => request.Requested -= h, () => request.Request(this));
+			var requestedEvent = Assert.Raises<EventArgs>(h => request.Requested += h, h => request.Requested -= h, () => request.Request());
 
 			Assert.NotNull(requestedEvent);
-			Assert.Equal(this, requestedEvent.Sender);
+			Assert.Equal(request, requestedEvent.Sender);
 			Assert.Equal(EventArgs.Empty, requestedEvent.Arguments);
 		}
 
@@ -25,10 +25,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 				Assert.Raises<EventArgsMock>(
 					h => request.Requested += h, 
 					h => request.Requested -= h, 
-					() => request.Request(this, eventArgs));
+					() => request.Request(eventArgs));
 
 		    Assert.NotNull(requestedEvent);
-		    Assert.Equal(this, requestedEvent.Sender);
+		    Assert.Equal(request, requestedEvent.Sender);
 		    Assert.Equal(eventArgs, requestedEvent.Arguments);
 	    }
 

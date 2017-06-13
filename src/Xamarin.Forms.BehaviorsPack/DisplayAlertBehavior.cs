@@ -136,15 +136,21 @@ namespace Xamarin.Forms.BehaviorsPack
             var currentPage = AssociatedObject.GetCurrentPage();
             if (currentPage != null)
             {
-                if (string.IsNullOrEmpty(Accept))
+	            var displayAlertRequestEventArgs = eventArgs as DisplayAlertRequestEventArgs;
+	            var title = displayAlertRequestEventArgs?.Title ?? Title;
+	            var message = displayAlertRequestEventArgs?.Message ?? Message;
+	            var accept = displayAlertRequestEventArgs?.Accept ?? Accept;
+	            var cancel = displayAlertRequestEventArgs?.Cancel ?? Cancel;
+
+				if (string.IsNullOrEmpty(accept))
                 {
-                    await currentPage.DisplayAlert(Title, Message, Cancel);
+                    await currentPage.DisplayAlert(title, message, cancel);
 	                ExecuteCancelCommand(eventArgs);
 
                 }
                 else
                 {
-                    var result = await currentPage.DisplayAlert(Title, Message, Accept, Cancel);
+                    var result = await currentPage.DisplayAlert(title, message, accept, cancel);
                     if (result)
                     {
 						ExecuteAcceptCommand(eventArgs);

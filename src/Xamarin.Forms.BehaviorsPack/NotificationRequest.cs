@@ -6,14 +6,14 @@ namespace Xamarin.Forms.BehaviorsPack
     {
         public event EventHandler<EventArgs> Requested;
 
-        public void Request(object sender)
+        public void Request()
         {
-	        Request(sender, EventArgs.Empty);
+	        Request(EventArgs.Empty);
         }
 
-	    public void Request(object sender, EventArgs eventArgs)
+	    public void Request(EventArgs eventArgs)
 	    {
-		    Requested?.Invoke(sender, eventArgs);
+		    Requested?.Invoke(this, eventArgs);
 	    }
 	}
 
@@ -21,9 +21,9 @@ namespace Xamarin.Forms.BehaviorsPack
 	{
 		public event EventHandler<TEventArgs> Requested;
 
-		public void Request(object sender, TEventArgs eventArgs)
+		public void Request(TEventArgs eventArgs)
 		{
-			Requested?.Invoke(sender, eventArgs);
+			Requested?.Invoke(this, eventArgs);
 		}
 	}
 }

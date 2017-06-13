@@ -23,10 +23,10 @@ namespace BehaviorsSampleApp.ViewModels
 		{
 			// Execution of input validation etc.
 			// ...
-			ConfirmRequest.Request(this);
+			ConfirmRequest.Request(this, new DisplayAlertRequestEventArgs());
 		});
 
-		public NotificationRequest ConfirmRequest { get; } = new NotificationRequest();
+		public DisplayAlertRequest ConfirmRequest { get; } = new DisplayAlertRequest();
 
 		public ICommand RegistCommand => new Command(() =>
 		{
