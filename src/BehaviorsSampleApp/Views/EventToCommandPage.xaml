@@ -19,7 +19,7 @@
                 <ListView.Behaviors>
                     <behaviorsPack:EventToCommandBehavior
                         EventName="ItemTapped"
-                        Command="{Binding TappedItemCommand}"
+                        Command="{Binding SelectedFruitCommand}"
                         EventArgsPropertyPath="Item.Name"/>
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
