@@ -52,7 +52,7 @@ private void Foo()
 }
 ```
 
-このようにNotificationRequestをプロパティとして定義し、必要となった際にRaiseイベントを呼び出してActionSheetを表示します。  
+このようにNotificationRequestをプロパティとして定義し、必要となった際にRaiseイベントを呼び出してAlertを表示します。  
 XAML側では、先程はEventNameを指定していましたが、こちらはNotificationRequestプロパティへ、前で定義されたDisplayRequestをバインドします。  
 こうすることで、DisplayRequest.Raise()の呼び出し時に、XAMLの定義に従ってActionSheetが表示されます。
 
