@@ -198,7 +198,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		}
 
 	    [Fact]
-	    public void WhenDisplayAlertRequest()
+	    public void DisplayAlertRequest_WhenAccept()
 	    {
 		    var commandExecutorMock = new Mock<ICommandExecutor>();
 		    var acceptCommand = new Mock<ICommand>().Object;
@@ -218,7 +218,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    {
 			    CommandExecutor = commandExecutorMock.Object,
 			    NotificationRequest = request,
-			    Title = "WhenDisplayAlertRequest",
+			    Title = "Title",
 			    Message = "Message",
 			    Accept = "Accept",
 			    Cancel = "Cancel",
@@ -246,31 +246,122 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 			    noticeMessage = arguments.Message;
 			    noticeAccept = arguments.Accept;
 			    noticeCancel = arguments.Cancel;
-			    if (arguments.Title == "ReplacedTitle")
+			    if (arguments.Title == "ReplacedTitle_WhenAccept")
 			    {
-				    arguments.SetResult(false);
+				    arguments.SetResult(true);
 			    }
 		    });
 
-		    request.Raise("ReplacedTitle", "ReplacedMessage", "ReplacedAccept", "ReplacedCancel");
+	        var calledAcceptButton = false;
+            var acceptButton = new AlertButton{ Message = "ReplacedAccept", Action = () => calledAcceptButton = true};
+	        var calledCancelButton = false;
+	        var cancelButton = new AlertButton<string> { Message = "ReplacedCancel", Parameter = "param", Action = param =>
+	        {
+	            calledCancelButton = true;
+	        } };
 
-			Assert.Equal("ReplacedTitle", noticeTitle);
+	        request.Raise("ReplacedTitle_WhenAccept", "ReplacedMessage", acceptButton, cancelButton);
+
+			Assert.Equal("ReplacedTitle_WhenAccept", noticeTitle);
 		    Assert.Equal("ReplacedMessage", noticeMessage);
 		    Assert.Equal("ReplacedAccept", noticeAccept);
 		    Assert.Equal("ReplacedCancel", noticeCancel);
 
 			commandExecutorMock.Verify(
 			    commandExecutor => commandExecutor.Execute(
-				    cancelCommand,
-				    cancelCommandParameter,
-				    It.IsAny<EventArgs>(),
-				    cancelEventArgsConverter,
-				    cancelEventArgsConverterParameter,
-				    cancelEventArgsPropertyPath),
-			    Times.Once);
+                    It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
+			    Times.Never);
+            Assert.True(calledAcceptButton);
+	        Assert.False(calledCancelButton);
 	    }
 
-		private class PageMock : ContentPage
+        [Fact]
+        public void DisplayAlertRequest_WhenCancel()
+        {
+            var commandExecutorMock = new Mock<ICommandExecutor>();
+            var acceptCommand = new Mock<ICommand>().Object;
+            var acceptCommandParameter = new object();
+            var acceptEventArgsConverter = new Mock<IValueConverter>().Object;
+            var acceptEventArgsConverterParameter = new object();
+            var acceptEventArgsPropertyPath = "acceptEventArgsPropertyPath";
+
+            var cancelCommand = new Mock<ICommand>().Object;
+            var cancelCommandParameter = new object();
+            var cancelEventArgsConverter = new Mock<IValueConverter>().Object;
+            var cancelEventArgsConverterParameter = new object();
+            var cancelEventArgsPropertyPath = "cancelEventArgsPropertyPath";
+
+            var request = new DisplayAlertRequest();
+            var behavior = new DisplayAlertBehavior
+            {
+                CommandExecutor = commandExecutorMock.Object,
+                NotificationRequest = request,
+                Title = "Title",
+                Message = "Message",
+                Accept = "Accept",
+                Cancel = "Cancel",
+                AcceptCommand = acceptCommand,
+                AcceptCommandParameter = acceptCommandParameter,
+                AcceptEventArgsConverter = acceptEventArgsConverter,
+                AcceptEventArgsConverterParameter = acceptEventArgsConverterParameter,
+                AcceptEventArgsPropertyPath = acceptEventArgsPropertyPath,
+                CancelCommand = cancelCommand,
+                CancelCommandParameter = cancelCommandParameter,
+                CancelEventArgsConverter = cancelEventArgsConverter,
+                CancelEventArgsConverterParameter = cancelEventArgsConverterParameter,
+                CancelEventArgsPropertyPath = cancelEventArgsPropertyPath
+            };
+            var page = new PageMock();
+            page.Behaviors.Add(behavior);
+
+            string noticeTitle = null;
+            string noticeMessage = null;
+            string noticeAccept = null;
+            string noticeCancel = null;
+            MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page1, arguments) =>
+            {
+                noticeTitle = arguments.Title;
+                noticeMessage = arguments.Message;
+                noticeAccept = arguments.Accept;
+                noticeCancel = arguments.Cancel;
+                if (arguments.Title == "ReplacedTitle_WhenCancel")
+                {
+                    arguments.SetResult(false);
+                }
+            });
+
+            var calledAcceptButton = false;
+            var acceptButton = new AlertButton { Message = "ReplacedAccept", Action = () => calledAcceptButton = true };
+            var calledCancelButton = false;
+            object cancelParameter = null;
+            var cancelButton = new AlertButton<string>
+            {
+                Message = "ReplacedCancel",
+                Parameter = "param",
+                Action = param =>
+                {
+                    calledCancelButton = true;
+                    cancelParameter = param;
+                }
+            };
+
+            request.Raise("ReplacedTitle_WhenCancel", "ReplacedMessage", acceptButton, cancelButton);
+
+            Assert.Equal("ReplacedTitle_WhenCancel", noticeTitle);
+            Assert.Equal("ReplacedMessage", noticeMessage);
+            Assert.Equal("ReplacedAccept", noticeAccept);
+            Assert.Equal("ReplacedCancel", noticeCancel);
+
+            commandExecutorMock.Verify(
+                commandExecutor => commandExecutor.Execute(
+                    It.IsAny<ICommand>(), It.IsAny<object>(), It.IsAny<EventArgs>(), It.IsAny<IValueConverter>(), It.IsAny<object>(), It.IsAny<string>()),
+                Times.Never);
+            Assert.False(calledAcceptButton);
+            Assert.True(calledCancelButton);
+            Assert.Equal("param", cancelParameter);
+        }
+
+        private class PageMock : ContentPage
 	    {
 		    // ReSharper disable once EventNeverSubscribedTo.Local
 		    public event EventHandler<EventArgs> TestEvent;

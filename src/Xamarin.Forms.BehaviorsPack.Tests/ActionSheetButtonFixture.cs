@@ -15,7 +15,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 	    }
 
 	    [Fact]
-	    public void OnClick()
+	    public void OnClicked()
 	    {
 		    var commandExecuterMock = new Mock<ICommandExecutor>();
 		    var command = new Mock<ICommand>().Object;
@@ -41,5 +41,27 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 			    executer => executer.Execute(command, commandParameter, eventArgs, eventArgsConverter, eventArgsConverterParameter, eventArgsPropertyPath),
 			    Times.Once);
 	    }
+
+        [Fact]
+        public void OnClicked_WhenInvokeAction()
+        {
+            var called = false;
+            var action = new ActionSheetButton { Action = () => { called = true; } };
+            action.OnClicked(this, EventArgs.Empty);
+
+            Assert.True(called);
+        }
+
+        [Fact]
+        public void OnClicked_WhenInvokeAction_WithParameter()
+        {
+            var actual = "parameter";
+            string expected = null;
+            var action = new ActionSheetButton<string> { Parameter = actual, Action = x => { expected = actual; } };
+            action.OnClicked(this, EventArgs.Empty);
+
+            Assert.Equal(expected, actual);
+        }
+
     }
 }

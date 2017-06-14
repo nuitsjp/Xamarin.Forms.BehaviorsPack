@@ -183,7 +183,7 @@ namespace Xamarin.Forms.BehaviorsPack
 
 	    private IActionSheetButton CreateCancelButton(EventArgs eventArgs)
 	    {
-		    return new ActionSheetButtonAction
+		    return new ActionSheetButton
 		    {
 			    Message = Cancel,
 			    Action = () =>
@@ -196,7 +196,7 @@ namespace Xamarin.Forms.BehaviorsPack
 
 	    private IActionSheetButton CreateDestructionButton(EventArgs eventArgs)
 	    {
-		    return new ActionSheetButtonAction
+		    return new ActionSheetButton
 		    {
 			    Message = Destruction,
 			    Action = () =>

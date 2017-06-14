@@ -63,9 +63,30 @@ namespace Xamarin.Forms.BehaviorsPack
             set => SetValue(EventArgsPropertyPathProperty, value);
         }
 
+	    public Action Action { get; set; }
+
         public void OnClicked(object sender, EventArgs eventArgs)
         {
-            CommandExecutor.Execute(Command, CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
+            if (Command != null)
+            {
+                CommandExecutor.Execute(Command, CommandParameter, eventArgs, EventArgsConverter, EventArgsConverterParameter, EventArgsPropertyPath);
+            }
+            else
+            {
+                Action?.Invoke();
+            }
+        }
+    }
+
+    public class ActionSheetButton<T> : IActionSheetButton
+    {
+        public string Message { get; set; }
+        public T Parameter { get; set; }
+        public Action<T> Action { get; set; }
+
+        public void OnClicked(object sender, EventArgs eventArgs)
+        {
+            Action?.Invoke(Parameter);
         }
     }
 }

@@ -17,8 +17,7 @@
             AcceptCommand="{Binding RegistCommand}"
             Cancel="Cancel"/>
         <behaviorsPack:DisplayAlertBehavior
-            NotificationRequest="{Binding NotifyRegisteredRequest}"
-            CancelCommand="{Binding GoBackCommand}"/>
+            NotificationRequest="{Binding NotifyRegisteredRequest}"/>
         <behaviorsPack:NotificationBehavior
             NotificationRequest="{Binding GoBackRequest}"
             Received="NotificationBehavior_OnReceived"/>

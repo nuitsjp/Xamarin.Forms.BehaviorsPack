@@ -6,7 +6,7 @@ namespace Xamarin.Forms.BehaviorsPack
     {
 	    public string Title { get; set; }
 	    public string Message { get; set; }
-	    public string Accept { get; set; }
-	    public string Cancel { get; set; }
+	    public IAlertButton Accept { get; set; }
+	    public IAlertButton Cancel { get; set; }
     }
 }

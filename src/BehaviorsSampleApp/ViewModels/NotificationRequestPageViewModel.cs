@@ -30,15 +30,14 @@ namespace BehaviorsSampleApp.ViewModels
 
 		public ICommand RegistCommand => new Command(() =>
 		{
-			NotifyRegisteredRequest.Raise("Notice", "Registration has been completed.", cancel: "OK");
+			NotifyRegisteredRequest.Raise("Notice", "Registration has been completed.", cancel: new AlertButton
+			{
+			    Message = "OK",
+                Action = () => GoBackRequest.Raise()
+            });
 		});
 
 		public DisplayAlertRequest NotifyRegisteredRequest { get; } = new DisplayAlertRequest();
-
-		public ICommand GoBackCommand => new Command(() =>
-		{
-			GoBackRequest.Raise();
-		});
 
 		public NotificationRequest GoBackRequest { get; } = new NotificationRequest();
 	}

@@ -288,10 +288,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    bool calledActionSheetButtonActionDestruction = false;
 		    bool calledActionSheetButtonActionA = false;
 		    bool calledActionSheetButtonActionB = false;
-		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
-		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
-		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
-		    var actionSheetButtonActionB = new ActionSheetButtonAction { Message = "actionSheetButtonActionB", Action = () => { calledActionSheetButtonActionB = true; } };
+		    var actionSheetButtonActionCancel = new ActionSheetButton { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
+		    var actionSheetButtonActionDestruction = new ActionSheetButton { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
+		    var actionSheetButtonActionA = new ActionSheetButton { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
+		    var actionSheetButtonActionB = new ActionSheetButton { Message = "actionSheetButtonActionB", Action = () => { calledActionSheetButtonActionB = true; } };
 
 		    request.Raise("ReplacedWhenSelectedCancelOnDisplayActionSheetRequested", actionSheetButtonActionCancel, actionSheetButtonActionDestruction, actionSheetButtonActionA, actionSheetButtonActionB);
 
@@ -372,10 +372,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    bool calledActionSheetButtonActionDestruction = false;
 		    bool calledActionSheetButtonActionA = false;
 		    bool calledActionSheetButtonActionB = false;
-		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
-		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
-		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
-		    var actionSheetButtonActionB = new ActionSheetButtonAction { Message = "actionSheetButtonActionB", Action = () => { calledActionSheetButtonActionB = true; } };
+		    var actionSheetButtonActionCancel = new ActionSheetButton { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
+		    var actionSheetButtonActionDestruction = new ActionSheetButton { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
+		    var actionSheetButtonActionA = new ActionSheetButton { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
+		    var actionSheetButtonActionB = new ActionSheetButton { Message = "actionSheetButtonActionB", Action = () => { calledActionSheetButtonActionB = true; } };
 
 		    request.Raise("ReplacedWhenSelectedDestructionOnDisplayActionSheetRequested", actionSheetButtonActionCancel, actionSheetButtonActionDestruction, actionSheetButtonActionA, actionSheetButtonActionB);
 
@@ -456,10 +456,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 		    bool calledActionSheetButtonActionA = false;
 		    bool calledActionSheetButtonActionB = false;
 		    string param = null;
-		    var actionSheetButtonActionCancel = new ActionSheetButtonAction { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
-		    var actionSheetButtonActionDestruction = new ActionSheetButtonAction { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
-		    var actionSheetButtonActionA = new ActionSheetButtonAction { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
-		    var actionSheetButtonActionB = new ActionSheetButtonAction<string>
+		    var actionSheetButtonActionCancel = new ActionSheetButton { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
+		    var actionSheetButtonActionDestruction = new ActionSheetButton { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
+		    var actionSheetButtonActionA = new ActionSheetButton { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };
+		    var actionSheetButtonActionB = new ActionSheetButton<string>
 		    {
 			    Message = "actionSheetButtonActionB",
 			    Parameter = "Param",

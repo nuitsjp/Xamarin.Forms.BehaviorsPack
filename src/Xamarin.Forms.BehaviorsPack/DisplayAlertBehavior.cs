@@ -139,38 +139,51 @@ namespace Xamarin.Forms.BehaviorsPack
 	            var displayAlertRequestEventArgs = eventArgs as DisplayAlertRequestEventArgs;
 	            var title = displayAlertRequestEventArgs?.Title ?? Title;
 	            var message = displayAlertRequestEventArgs?.Message ?? Message;
-	            var accept = displayAlertRequestEventArgs?.Accept ?? Accept;
-	            var cancel = displayAlertRequestEventArgs?.Cancel ?? Cancel;
+	            var acceptButton = displayAlertRequestEventArgs?.Accept ?? CreateAcceptButton(eventArgs);
+	            var cancelButton = displayAlertRequestEventArgs?.Cancel ?? CreateCancelButton(eventArgs);
 
-				if (string.IsNullOrEmpty(accept))
+				if (string.IsNullOrEmpty(acceptButton.Message))
                 {
-                    await currentPage.DisplayAlert(title, message, cancel);
-	                ExecuteCancelCommand(eventArgs);
-
+                    await currentPage.DisplayAlert(title, message, cancelButton.Message);
+                    cancelButton.OnClicked(sender, eventArgs);
                 }
                 else
                 {
-                    var result = await currentPage.DisplayAlert(title, message, accept, cancel);
+                    var result = await currentPage.DisplayAlert(title, message, acceptButton.Message, cancelButton.Message);
                     if (result)
                     {
-						ExecuteAcceptCommand(eventArgs);
+                        acceptButton.OnClicked(sender, eventArgs);
                     }
                     else
                     {
-	                    ExecuteCancelCommand(eventArgs);
+                        cancelButton.OnClicked(sender, eventArgs);
                     }
-				}
+                }
             }
         }
 
-	    private void ExecuteAcceptCommand(EventArgs eventArgs)
-	    {
-		    CommandExecutor.Execute(AcceptCommand, AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
-	    }
+        private IAlertButton CreateAcceptButton(EventArgs eventArgs)
+        {
+            return new AlertButton
+            {
+                Message = Accept,
+                Action = () =>
+                {
+                    CommandExecutor.Execute(AcceptCommand, AcceptCommandParameter, eventArgs, AcceptEventArgsConverter, AcceptEventArgsConverterParameter, AcceptEventArgsPropertyPath);
+                }
+            };
+        }
 
-		private void ExecuteCancelCommand(EventArgs eventArgs)
-	    {
-		    CommandExecutor.Execute(CancelCommand, CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
-	    }
+        private IAlertButton CreateCancelButton(EventArgs eventArgs)
+        {
+            return new AlertButton
+            {
+                Message = Cancel,
+                Action = () =>
+                {
+                    CommandExecutor.Execute(CancelCommand, CancelCommandParameter, eventArgs, CancelEventArgsConverter, CancelEventArgsConverterParameter, CancelEventArgsPropertyPath);
+                }
+            };
+        }
 	}
 }

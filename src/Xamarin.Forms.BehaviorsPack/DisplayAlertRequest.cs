@@ -6,7 +6,7 @@ namespace Xamarin.Forms.BehaviorsPack
     {
 	    public event EventHandler<EventArgs> Requested;
 
-	    public void Raise(string title = null, string message = null, string accept = null, string cancel = null)
+	    public void Raise(string title = null, string message = null, IAlertButton accept = null, IAlertButton cancel = null)
 	    {
 		    Requested?.Invoke(this, new DisplayAlertRequestEventArgs
 		    {
