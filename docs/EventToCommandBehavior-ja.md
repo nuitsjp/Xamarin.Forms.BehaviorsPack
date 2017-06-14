@@ -1,6 +1,6 @@
 # EventToCommandBehavior  
 
-EventToCommandBehaviorは、UIコントロール側で発生した任意のイベントに応じて、バインドされたCommandを実行します。  
+画面要素で発生した任意のイベントに応じて、対応するCommandを実行します。  
 
 たとえば、ListViewのItemTappedイベントには、Commandをバインドするプロパティは用意されていません。  
 つぎのように実装することで、ItemTappedイベント発生時にバインドされたCommandを実行します。  
@@ -40,9 +40,13 @@ public ICommand SelectedFruitCommand => new Command<Fruit>(fruits =>
 
 上の例では、ListViewにはFruitクラスの集合がバインドされており、Commandの引数では選択されたFruitオブジェクトが受け渡されます。  
 
-詳細なサンプルは以下をご覧ください。  
+コマンド引数についての詳細な仕様は、つぎをご覧ください。  
+
+* [Commandの実行仕様について](CommandExecutionSpecifation-ja.md)  
+
+また、詳細なサンプルは以下をご覧ください。  
 
 [EventToCommandPage.xaml](https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/src/BehaviorsSampleApp/Views/EventToCommandPage.xaml)  
 [EventToCommandPageViewModel.cs](https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/src/BehaviorsSampleApp/ViewModels/EventToCommandPageViewModel.cs)  
 
-NotificationRequestについては、[こちら](NotificationRequest.md)ドキュメントを参照してください。  
+NotificationRequestについては、[こちら](NotificationRequest-ja.md)ドキュメントを参照してください。  
