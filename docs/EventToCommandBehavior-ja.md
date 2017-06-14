@@ -16,8 +16,8 @@
 
 また、Eventのプロパティを指定することで、CommandにEventの任意のプロパティを渡すことができます。  
 ListViewのItemTappedイベント発生時は、[ItemTappedEventArgs](https://developer.xamarin.com/api/type/Xamarin.Forms.ItemTappedEventArgs/)が発行されます。  
-ItemTappedEventArgsには選択されたItemを保持する
-Itemプロパティが存在するため、次のようにしている事でCommandに直接タップされた行にバインドされているオブジェクトを渡すことが可能です。  
+ItemTappedEventArgsには選択されたItemを保持するItemプロパティが存在します。  
+このためEventArgsPropertyPathを指定することで、タップされた行にバインドされているオブジェクトをICommandへ直接渡すことが可能です。
 
 ```xml
 <ListView ItemsSource="{Binding Fruits}">
@@ -48,5 +48,3 @@ public ICommand SelectedFruitCommand => new Command<Fruit>(fruits =>
 
 [EventToCommandPage.xaml](https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/src/BehaviorsSampleApp/Views/EventToCommandPage.xaml)  
 [EventToCommandPageViewModel.cs](https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/src/BehaviorsSampleApp/ViewModels/EventToCommandPageViewModel.cs)  
-
-NotificationRequestについては、[こちら](NotificationRequest-ja.md)ドキュメントを参照してください。  
