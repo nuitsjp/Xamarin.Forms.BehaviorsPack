@@ -43,3 +43,7 @@ NuGetパッケージマネージャーで次のコードを実行してくださ
 * [EventToCommandBehavior](docs/EventToCommandBehavior-ja.md)  
 * [DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior-ja.md)  
 * [DisplayAlertBehavior](doc/DisplayAlertBehavior-ja.md)
+
+また併せてつぎもご覧ください。  
+
+* [Commandの実行仕様について](CommandExecutionSpecifation-ja.md)  

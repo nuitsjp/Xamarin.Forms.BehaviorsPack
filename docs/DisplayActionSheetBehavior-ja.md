@@ -1,9 +1,15 @@
 # DisplayActionSheetBehavior
 
-ActionSheetを表示し、ユーザー操作にもとづき定義されたCommandを実行します。    
-指定したイベントの発生時に表示する方法と、NotificationRequestを利用して（主に）ViewModel側から表示する方法の２種類があります。  
+ActionSheetを表示し、ユーザー操作にもとづき定義されたCommandを実行します。   
+ActionSheetの表示には、表示のトリガーと表示状態（タイトルやメッセージなど）の定義について、つぎのいずれかを選択できます。  
 
-## イベントに応じて表示する  
+1. 画面要素のイベントに応じてXAML上に定義された状態で表示する
+2. コードからの要求に応じて表示する  
+    1. XAML上に定義された状態で表示する  
+    2. 表示状態をコードから詳細に指定する  
+
+
+## 画面要素のイベントに応じてXAML上に定義された状態で表示する  
 
 ユーザーのButtonなどのクリックなどの振る舞いに応じてActionSheetを表示し、ActionSheet上のユーザー操作にもとづきCommandを実行します。  
 Buttonのクリック時にActionSheetを表示する例を下に示します。  
@@ -29,16 +35,18 @@ Buttonのクリック時にActionSheetを表示する例を下に示します。
 </Button>
 ```
 
-Buttonをクリックすると次のように振る舞います。  
+Buttonをクリックすると次のようなActionSheetが表示されます。  
 
-## NotificationRequestに応じて表示する  
+![](images/DisplayActionSheetBehavior.png)
 
-（主に）ViewModel側でのコード実行後にActionSheetを表示するために、NotificationRequestを利用することができます。  
-この時、XAML上で表示状態を全て定義しておく方法と、NotificationRequestの呼び出し時に一部もしくは全てのActionSheetの状態を指定して表示状態をコントロールする、ふたつの選択肢があります。  
+## コードからの要求に応じて表示する  
+
+（主に）ViewModel側でのコードからの要求に応じてActionSheetを表示することができます。  
+このとき表示するAlertの状態（タイトルやメッセージなど）は、XAML上に全て定義する方法と、コード側から全てもしくは一部を指定して表示する方法のいずれかをとれます。
 
 ### XAML上に定義された状態で表示する  
 
-コード側にNotificationRequestを定義し、必要時にリクエストします。  
+コード側にNotificationRequestを定義し、必要時に要求をあげます。  
 まずはコード側を見てみましょう。  
 
 ```cs
@@ -92,24 +100,36 @@ private void Foo()
         new ActionSheetButtonAction 
         { 
             Message = "Cancel", 
-            Action = () => { ... }
+            Action = () => {
+                // Cancelクリック時の処理
+                ...
+            }
         };
 	var destruction = 
         new ActionSheetButtonAction 
         { 
-            Message = "ReplacedDestruction", 
-            Action = () => { ... }
+            Message = "Delete", 
+            Action = () => {
+                // Deleteクリック時の処理
+                ...
+            }
 	var firstActionSheetButton = 
         new ActionSheetButtonAction 
         { 
             Message = "First Action Sheet Item", 
-            Action = () => { ... } 
+            Action = () => {
+                // "First Action Sheet Item"クリック時の処理
+                ...
+            } 
         };
     var seciondActionSheetButton = 
         new ActionSheetButtonAction 
         { 
             Message = "Second Action Sheet Item", 
-            Action = () => { ... } 
+            Action = () => {
+                // "Second Action Sheet Item"クリック時の処理
+                ...
+            } 
         };
 
 	request.Raise(

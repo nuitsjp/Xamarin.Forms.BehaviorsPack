@@ -1,12 +1,17 @@
 # DisplayAlertBehavior
 
-DisplayAlertを表示し、ユーザー操作にもとづき定義されたCommandを実行します。    
-指定したイベントの発生時に表示する方法と、NotificationRequestを利用して（主に）ViewModel側から表示する方法の２種類があります。  
+Alertを表示し、ユーザー操作にもとづき定義されたCommandを実行します。   
+Alertの表示には、表示のトリガーと表示状態（タイトルやメッセージなど）の定義について、つぎのいずれかを選択できます。  
 
-## イベントに応じて表示する  
+1. 画面要素のイベントに応じてXAML上に定義された状態で表示する
+2. コードからの要求に応じて表示する  
+    1. XAML上に定義された状態で表示する  
+    2. 表示状態をコードから詳細に指定する  
 
-ユーザーのButtonなどのクリックなどの振る舞いに応じてDisplayAlertを表示し、DisplayAlert上のユーザー操作にもとづきCommandを実行します。  
-Buttonのクリック時にDisplayAlertを表示する例を下に示します。  
+## 画面要素のイベントに応じてXAML上に定義された状態で表示する  
+
+ユーザーのButtonなどのクリックなどの振る舞いに応じてAlertを表示し、Alert上のユーザー操作にもとづきCommandを実行します。  
+Buttonのクリック時にAlertを表示する例を下に示します。  
 
 ```xml
 <Button Text="Show Display Alert">
@@ -23,16 +28,18 @@ Buttonのクリック時にDisplayAlertを表示する例を下に示します�
 </Button>
 ```
 
-Buttonをクリックすると次のように振る舞います。  
+Buttonをクリックすると次のようなAlertが表示されます。  
 
-## NotificationRequestに応じて表示する  
+![](images/DisplayAlertBehavior.png)
 
-（主に）ViewModel側でのコード実行後にDisplayAlertを表示するために、NotificationRequestを利用することができます。  
-この時、XAML上で表示状態を全て定義しておく方法と、NotificationRequestの呼び出し時に一部もしくは全てのDisplayAlertの状態を指定して表示状態をコントロールする、ふたつの選択肢があります。  
+## コードからの要求に応じて表示する  
+
+（主に）ViewModel側でのコードからの要求に応じてAlertを表示することができます。  
+このとき表示するAlertの状態（タイトルやメッセージなど）は、XAML上に全て定義する方法と、コード側から全てもしくは一部を指定して表示する方法のいずれかをとれます。
 
 ### XAML上に定義された状態で表示する  
 
-コード側にNotificationRequestを定義し、必要時にリクエストします。  
+コード側にNotificationRequestを定義し、必要時に要求をあげます。  
 まずはコード側を見てみましょう。  
 
 ```cs
@@ -79,8 +86,14 @@ private void Foo()
 	request.Raise(
         "Alert Title", 
         "Please select either.", 
-        "OK", 
-        "Cancel");
+        new AlertButton { Message = "OK", Action => () => {
+            // OKクリック時の処理
+            ...
+        } }, 
+        new AlertButton { Message = "Cancel", Action => () => {
+            // Cancelクリック時の処理
+            ...
+        } });
 }
 ```
 
@@ -90,15 +103,13 @@ private void Foo()
 <Button Text="Show Display Alert">
     <Button.Behaviors>
         <behaviorsPack:DisplayAlertBehavior
-            NotificationRequest="DisplayRequest"
-            AcceptCommand="{Binding AcceptCommand}"
-            CancelCommand="{Binding CancelCommand}"/>
+            NotificationRequest="DisplayRequest"/>
     </Button.Behaviors>
 </Button>
 ```
 
-先ほどのXAMLで定義されたケースと同等のDisplayAlertが表示されます。  
-動的にDisplayAlertの表示をコントロールしたい場合は、こちらの方法を利用すると良いでしょう。  
+先ほどのXAMLで定義されたケースと同等のAlertが表示されます。  
+動的にAlertの表示をコントロールしたい場合は、こちらの方法を利用すると良いでしょう。  
 
 なお、XAML上でも各プロパティが指定されていた場合、DisplayAlertRequestの値が優先されてます。  
 DisplayAlertRequest側でnullが指定されていて、XAML上で値が指定されている項目についてはXAML側の定義に従います。  

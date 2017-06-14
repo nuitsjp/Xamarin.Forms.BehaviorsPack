@@ -1,0 +1,13 @@
+# Commandの実行仕様について  
+
+Xamarin.Forms.BehaviorsPackではBehaviorにバインドされたCommandを実行する際に、つぎの優先順位に従いCommandのCanExecute・Executeメソッドの引数決定します。  
+
+1. CommandParameter
+2. Behaviorを実行する要因となったイベントのEventArgs
+
+ただしEventArgsから引数を適用するためには、次のいずれかを必ず指定する必要があります。  
+1. EventArgsCoverter  
+2. EventArgsPropertyPath
+
+いずれも指定されていた場合は、EventArgsCoverterにて指定されたIValueConverterが優先されます。  
+IValueConverterによってEventArgsを変換する際には、EventArgsConverterParameterがConvertのparameterとして渡されます。  
