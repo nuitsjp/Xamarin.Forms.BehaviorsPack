@@ -9,7 +9,7 @@ This library contains the following Behavior implementation.
 |:--|:--|
 |[EventToCommandBehavior](docs/EventToCommandBehavior.md)|Execute ICommand when an event fires in UI Controls.|
 |[DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior.md)|Display ActionSheet and execute ICommand corresponding to user operation.|
-|[DisplayAlertBehavior](doc/DisplayAlertBehavior.md)|Display Alert and execute ICommand corresponding to user operation.|
+|[DisplayAlertBehavior](docs/DisplayAlertBehavior.md)|Display Alert and execute ICommand corresponding to user operation.|
 
 In addition, it contains abstract class that facilitates Behavior implementation.  
 
