@@ -7,7 +7,7 @@ Xamarin.Forms.BehaviorsPackはXamarin.Forms用の汎用的なクラスライブ�
 |:--|:--|
 |[EventToCommandBehavior](docs/EventToCommandBehavior-ja.md)|画面要素で発生した任意のイベントに応じて、対応するCommandを実行します|
 |[DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior-ja.md)|ActionSheetを表示し、ユーザー操作に対応するCommandを実行します|
-|[DisplayAlertBehavior](doc/DisplayAlertBehavior-ja.md)|Alertを表示し、ユーザー操作に対応するCommandを実行します|
+|[DisplayAlertBehavior](docs/DisplayAlertBehavior-ja.md)|Alertを表示し、ユーザー操作に対応するCommandを実行します|
 |NotificationBehavior|コード（主にViewModel）からの要求をイベントとして通知します|
 
 これら以外に、Behavior実装を容易にするいくつかの抽象クラスを含みます。  
