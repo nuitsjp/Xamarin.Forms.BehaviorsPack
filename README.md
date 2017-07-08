@@ -8,6 +8,7 @@ This library contains the following Behavior implementation.
 |Name|Overview|
 |:--|:--|
 |[EventToCommandBehavior](docs/EventToCommandBehavior.md)|Execute ICommand when an event fires in UI Controls.|
+|[SelectedItemBehavior](docs/SelectedItemBehavior.md)|SelectedItemBehavior to execute the command when the SelectedItem event occurs in ListView.|
 |[DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior.md)|Display ActionSheet and execute ICommand corresponding to user operation.|
 |[DisplayAlertBehavior](docs/DisplayAlertBehavior.md)|Display Alert and execute ICommand corresponding to user operation.|
 

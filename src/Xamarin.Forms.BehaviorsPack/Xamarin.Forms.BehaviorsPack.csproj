@@ -12,7 +12,7 @@
     <Company>nuits.jp</Company>
     <Title>Xamarin.Forms.BehaviorsPack</Title>
     <Product>Xamarin.Forms.BehaviorsPack</Product>
-    <Description>Behavior library for Xamarin.Forms. EventToCommandBehavior, DisplayAlertBehavior. DisplayActionSheetBehavior and other.</Description>
+    <Description>Behavior library for Xamarin.Forms. EventToCommandBehavior, SelectedItemBehavior, DisplayAlertBehavior. DisplayActionSheetBehavior and other.</Description>
     <PackageLicenseUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack</RepositoryUrl>
