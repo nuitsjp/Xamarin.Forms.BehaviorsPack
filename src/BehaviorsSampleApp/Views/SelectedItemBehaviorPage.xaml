@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="BehaviorsSampleApp.Views.SelectedItemBehaviorPage">
+    <ContentPage.BindingContext>
+        <viewModels:SelectedItemBehaviorPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <behaviorsPack:NotificationBehavior
+            NotificationRequest="{Binding NavigateNextPageRequest}"
+            Received="OnNavigateNextPageReceived"/>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="ClearSelected" VerticalOptions="Center"/>
+                <Switch x:Name="ClearSelectedSwitch" IsToggled="True" VerticalOptions="Center"/>
+            </StackLayout>
+            <ListView Grid.Row="1" ItemsSource="{Binding Fruits}">
+                <ListView.Behaviors>
+                    <behaviorsPack:SelectedItemBehavior
+                        Command="{Binding SelectedFruitCommand}"
+                        ClearSelected="{Binding Source={x:Reference ClearSelectedSwitch}, Path=IsToggled}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView HeightRequest="10" WidthRequest="10" Color="{Binding Color}"/>
+                                <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

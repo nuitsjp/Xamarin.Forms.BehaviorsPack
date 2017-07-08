@@ -46,6 +46,7 @@
     <Compile Include="ViewModels\Fruit.cs" />
     <Compile Include="ViewModels\NotificationRequestPageViewModel.cs" />
     <Compile Include="ViewModels\SelectedFruitEventArgs.cs" />
+    <Compile Include="ViewModels\SelectedItemBehaviorPageViewModel.cs" />
     <Compile Include="ViewModels\SelectionResultPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\DisplayActionSheetPage.xaml.cs">
@@ -62,6 +63,9 @@
     </Compile>
     <Compile Include="Views\NotificationRequestPage.xaml.cs">
       <DependentUpon>NotificationRequestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectedItemBehaviorPage.xaml.cs">
+      <DependentUpon>SelectedItemBehaviorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectionResultPage.xaml.cs">
       <DependentUpon>SelectionResultPage.xaml</DependentUpon>
@@ -125,6 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\SelectionResultPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SelectedItemBehaviorPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

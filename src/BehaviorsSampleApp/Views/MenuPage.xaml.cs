@@ -36,5 +36,10 @@ namespace BehaviorsSampleApp.Views
 		{
 			Navigation.PushAsync(new EventToCommandPage());
 		}
+
+	    private void SelectedItemBehavior_OnClicked(object sender, EventArgs e)
+	    {
+	        Navigation.PushAsync(new SelectedItemBehaviorPage());
+	    }
 	}
 }

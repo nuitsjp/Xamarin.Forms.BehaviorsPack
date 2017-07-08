@@ -20,7 +20,7 @@ namespace BehaviorsSampleApp.Views
 		private void OnNavigateNextPageReceived(object sender, EventArgs e)
 		{
 			var nextPage = new SelectionResultPage();
-			var nextPageViewModel = nextPage.BindingContext as SelectionResultPageViewModel;
+		    var nextPageViewModel = (SelectionResultPageViewModel)nextPage.BindingContext;
 			nextPageViewModel.Fruit = ((SelectedFruitEventArgs) e).SelectedFruit;
 			Navigation.PushAsync(nextPage);
 		}

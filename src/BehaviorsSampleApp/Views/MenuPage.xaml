@@ -10,6 +10,7 @@
             <Button Text="Display Action Sheet Sample" Clicked="DisplayActionSheetButton_OnClicked"/>
             <Button Text="Notification Request Sample" Clicked="NotificationRequestButton_OnClicked"/>
             <Button Text="Event to Command Sample" Clicked="EventToCommandButton_OnClicked"/>
+            <Button Text="SelectedItemBehavior Sample" Clicked="SelectedItemBehavior_OnClicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
