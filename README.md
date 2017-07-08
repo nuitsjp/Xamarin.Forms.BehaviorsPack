@@ -41,6 +41,6 @@ In the sample code of this library, it is assumed that the library namespace is 
 
 * [EventToCommandBehavior](docs/EventToCommandBehavior.md)  
 * [DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior.md)  
-* [DisplayAlertBehavior](doc/DisplayAlertBehavior.md)
+* [DisplayAlertBehavior](docs/DisplayAlertBehavior.md)
 
-* [ICommand execution common specification](CommandExecutionSpecifation.md)  
+* [ICommand execution common specification](docs/CommandExecutionSpecifation.md)  

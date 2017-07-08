@@ -44,8 +44,8 @@ NuGetからインストールします。
 
 * [EventToCommandBehavior](docs/EventToCommandBehavior-ja.md)  
 * [DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior-ja.md)  
-* [DisplayAlertBehavior](doc/DisplayAlertBehavior-ja.md)
+* [DisplayAlertBehavior](docs/DisplayAlertBehavior-ja.md)
 
 また併せてつぎもご覧ください。  
 
-* [Commandの実行仕様について](CommandExecutionSpecifation-ja.md)  
+* [Commandの実行仕様について](docs/CommandExecutionSpecifation-ja.md)  
