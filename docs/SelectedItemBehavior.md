@@ -22,3 +22,23 @@ public ICommand SelectedFruitCommand => new Command<Fruit>(fruit =>
     ....
 });
 ```
+
+You can also pass the property value of the selected item directly by specifying the PropertyName property.  
+
+XAML Sample.
+```xml
+<ListView ItemsSource="{Binding Fruits}">
+    <ListView.Behaviors>
+        <behaviorsPack:SelectedItemBehavior Command="{Binding SelectedFruitCommand}" PropertyName="Name"/>
+    </ListView.Behaviors>
+```
+
+C#(ViewModel) Sample
+```cs
+public IList<Fruit> Fruits { get; } = new List<Fruit>();
+
+public ICommand SelectedFruitCommand => new Command<string>(fruitName =>
+{
+    ....
+});
+```
