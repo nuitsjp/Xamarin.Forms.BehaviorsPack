@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Windows.Input;
 
@@ -13,6 +14,9 @@ namespace Xamarin.Forms.BehaviorsPack
         public static readonly BindableProperty ClearSelectedProperty =
             BindableProperty.Create(nameof(Command), typeof(bool), typeof(SelectedItemBehavior), true);
 
+        public static readonly BindableProperty PropertyPathProperty =
+            BindableProperty.Create(nameof(PropertyPath), typeof(string), typeof(SelectedItemBehavior));
+
         public ICommand Command
         {
             get => (ICommand)GetValue(CommandProperty);
@@ -23,6 +27,12 @@ namespace Xamarin.Forms.BehaviorsPack
         {
             get => (bool)GetValue(ClearSelectedProperty);
             set => SetValue(ClearSelectedProperty, value);
+        }
+
+        public string PropertyPath
+        {
+            get => (string)GetValue(PropertyPathProperty);
+            set => SetValue(PropertyPathProperty, value);
         }
 
         protected override void OnAttachedTo(ListView bindableObject)
@@ -42,9 +52,30 @@ namespace Xamarin.Forms.BehaviorsPack
             if (Command == null || e.SelectedItem == null)
                 return;
 
-            if (Command.CanExecute(e.SelectedItem))
+            object parameter;
+            if (PropertyPath != null)
             {
-                Command.Execute(e.SelectedItem);
+                var propertyNames = PropertyPath.Split('.');
+                object propertyValue = e.SelectedItem;
+                foreach (var propertyName in propertyNames)
+                {
+                    var propInfo = propertyValue.GetType().GetTypeInfo().GetDeclaredProperty(propertyName);
+                    propertyValue = propInfo.GetValue(propertyValue);
+                    if (propertyValue == null)
+                    {
+                        break;
+                    }
+                }
+                parameter = propertyValue;
+            }
+            else
+            {
+                parameter = e.SelectedItem;
+            }
+
+            if (Command.CanExecute(parameter))
+            {
+                Command.Execute(parameter);
             }
 
             if (ClearSelected)
