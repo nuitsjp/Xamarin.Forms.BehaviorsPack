@@ -7,8 +7,6 @@ ClearSelectedプロパティのデフォルト値はtrueです（つまり選択
 
 以下がサンプルコードとなります。
 
-XAML Sample
-
 XAML Sample.
 ```xml
 <ListView ItemsSource="{Binding Fruits}">
@@ -22,6 +20,26 @@ C#(ViewModel) Sample
 public IList<Fruit> Fruits { get; } = new List<Fruit>();
 
 public ICommand SelectedFruitCommand => new Command<Fruit>(fruit =>
+{
+    ....
+});
+```
+
+また、PropertyNameプロパティを指定することで、選択されたItemのプロパティ値を直接渡すことも可能です。  
+
+XAML Sample.
+```xml
+<ListView ItemsSource="{Binding Fruits}">
+    <ListView.Behaviors>
+        <behaviorsPack:SelectedItemBehavior Command="{Binding SelectedFruitCommand}" PropertyName="Name"/>
+    </ListView.Behaviors>
+```
+
+C#(ViewModel) Sample
+```cs
+public IList<Fruit> Fruits { get; } = new List<Fruit>();
+
+public ICommand SelectedFruitCommand => new Command<string>(fruitName =>
 {
     ....
 });
