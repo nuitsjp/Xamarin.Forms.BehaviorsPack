@@ -29,6 +29,20 @@
                     </behaviorsPack:DisplayActionSheetBehavior>
                 </Button.Behaviors>
             </Button>
+            <Button Text="Show ActionSheet without Cancel and Destruction">
+                <Button.Behaviors>
+                    <behaviorsPack:DisplayActionSheetBehavior
+                        EventName="Clicked"
+                        Title="ActionSheet Title">
+                        <behaviorsPack:ActionSheetButton 
+                            Message="First Action Sheet Item"
+                            Command="{Binding FirstActionSheetCommand}"/>
+                        <behaviorsPack:ActionSheetButton 
+                            Message="Second Action Sheet Item"
+                            Command="{Binding SecondActionSheetCommand}"/>
+                    </behaviorsPack:DisplayActionSheetBehavior>
+                </Button.Behaviors>
+            </Button>
             <Label Text="{Binding Message}" />
         </StackLayout>
     </ContentPage.Content>

@@ -166,23 +166,31 @@ namespace Xamarin.Forms.BehaviorsPack
             {
 	            var requestEventArgs = eventArgs as DisplayActionSheetRequestEventArgs;
 	            var title = requestEventArgs?.Title ?? Title;
-	            var cancelButton = requestEventArgs?.Cancel ?? CreateCancelButton(eventArgs);
-	            var destructionButton = requestEventArgs?.Destruction ?? CreateDestructionButton(eventArgs);
 				var buttons = requestEventArgs?.ActionSheetButtons.Select(x => x.Message).ToArray() ?? ActionSheetButtons.Select(x => x.Message).ToArray();
 
 	            var actionSheetButtons = requestEventArgs?.ActionSheetButtons.ToList() ?? ActionSheetButtons.ToList();
-				actionSheetButtons.Add(cancelButton);
-				actionSheetButtons.Add(destructionButton);
 
-				var result = await currentPage.DisplayActionSheet(title, cancelButton.Message, destructionButton.Message, buttons);
+                var cancelButton = requestEventArgs?.Cancel ?? CreateCancelButton(eventArgs);
+                if (cancelButton != null)
+    				actionSheetButtons.Add(cancelButton);
 
-	            var button = actionSheetButtons.Single(x => x.Message == result);
-	            button.OnClicked(sender, eventArgs);
+                var destructionButton = requestEventArgs?.Destruction ?? CreateDestructionButton(eventArgs);
+                if (destructionButton != null)
+    				actionSheetButtons.Add(destructionButton);
+
+				var result = await currentPage.DisplayActionSheet(title, cancelButton?.Message, destructionButton?.Message, buttons);
+
+                if (result == null) return;
+
+                var button = actionSheetButtons.Single(x => x.Message == result);
+                button.OnClicked(sender, eventArgs);
             }
-		}
+        }
 
 	    private IActionSheetButton CreateCancelButton(EventArgs eventArgs)
 	    {
+	        if (Cancel == null) return null;
+
 		    return new ActionSheetButton
 		    {
 			    Message = Cancel,
@@ -196,7 +204,9 @@ namespace Xamarin.Forms.BehaviorsPack
 
 	    private IActionSheetButton CreateDestructionButton(EventArgs eventArgs)
 	    {
-		    return new ActionSheetButton
+	        if (Destruction == null) return null;
+
+            return new ActionSheetButton
 		    {
 			    Message = Destruction,
 			    Action = () =>
