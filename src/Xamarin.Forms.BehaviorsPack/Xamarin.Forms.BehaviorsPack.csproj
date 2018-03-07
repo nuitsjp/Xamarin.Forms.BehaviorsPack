@@ -28,4 +28,23 @@
     <PackageReference Include="Xamarin.Forms" Version="2.4.0.282" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="EventToCommandAttachedProperties.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EventToCommandAttachedProperties.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="EventToCommandAttachedProperties.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EventToCommandAttachedProperties.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

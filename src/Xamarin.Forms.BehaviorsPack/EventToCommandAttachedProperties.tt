@@ -1,0 +1,12 @@
+﻿<#@ template language="C#" #>
+<html><body>
+<h1>Sales for Previous Month</h2>
+<table>
+    <# for (int i = 1; i <= 10; i++)
+       { #>
+         <tr><td>Test name <#= i #> </td>
+             <td>Test value <#= i * i #> </td> </tr>
+    <# } #>
+ </table>
+This report is Company Confidential.
+</body></html>

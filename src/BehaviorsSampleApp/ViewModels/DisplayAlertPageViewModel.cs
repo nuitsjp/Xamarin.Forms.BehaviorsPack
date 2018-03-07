@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,5 +28,8 @@ namespace BehaviorsSampleApp.ViewModels
 		{
 			Message = param;
 		});
-	}
+
+        public ICommand AppearingCommand => new Command(() => Debug.WriteLine($"{GetType().Name}#AppearingCommand"));
+
+    }
 }
