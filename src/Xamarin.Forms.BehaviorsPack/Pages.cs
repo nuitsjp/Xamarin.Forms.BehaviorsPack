@@ -5,26 +5,34 @@ using System.Windows.Input;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-    public static class Pages
+    public static class PageEvents
     {
-        public static readonly BindableProperty AppearingToCommandProperty =
-            BindableProperty.CreateAttached("AppearingToCommand", typeof(ICommand), typeof(Pages), null, propertyChanged:OnAppearingChanged);
+        public static readonly BindableProperty AppearingToProperty =
+            BindableProperty.CreateAttached("AppearingTo", typeof(ICommand), typeof(PageEvents), null, propertyChanged:OnAppearingChanged);
 
-        public static ICommand GetAppearingToCommand(BindableObject bindableObject)
+        public static ICommand GetAppearingTo(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(AppearingToCommandProperty);
+            return (ICommand)bindableObject.GetValue(AppearingToProperty);
         }
 
         private static void OnAppearingChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var page = (Page) bindable;
-            if (oldValue != null) page.Appearing -= PageOnAppearing;
-            if (newValue != null) page.Appearing += PageOnAppearing;
+            if (bindable is Page page)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    page.Appearing += PageOnAppearing;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    page.Appearing -= PageOnAppearing;
+                }
+            }
         }
 
         private static void PageOnAppearing(object o, EventArgs eventArgs)
         {
-            var command = GetAppearingToCommand((BindableObject)o);
+            var command = GetAppearingTo((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }

@@ -1,12 +1,80 @@
-﻿<#@ template language="C#" #>
-<html><body>
-<h1>Sales for Previous Month</h2>
-<table>
-    <# for (int i = 1; i <= 10; i++)
-       { #>
-         <tr><td>Test name <#= i #> </td>
-             <td>Test value <#= i * i #> </td> </tr>
-    <# } #>
- </table>
-This report is Company Confidential.
-</body></html>
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.ObjectModel.dll" #>
+<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Core.dll" #>
+<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Platform.dll" #>
+<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Xaml.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Xamarin.Forms" #>
+<#@ import namespace="System.Windows.Input" #>
+<#   
+    var assembly = typeof(Page).Assembly;
+    var types = assembly.ExportedTypes
+        .Where(
+            x => !x.IsInterface
+                && !x.IsGenericType
+                && x.IsSubclassOf(typeof(BindableObject)))
+        .OrderBy(x => x.FullName);
+#>
+using System;
+using System.Windows.Input;
+
+namespace Xamarin.Forms.BehaviorsPack {
+<#
+	foreach (var type in types)
+    {
+		var eventInfos = type.GetEvents().Where(x => x.DeclaringType == type).OrderBy(x => x.Name);
+		if(eventInfos.Any())
+        {
+			var typeName = type.Name + "s";
+#>
+	public class <#= typeName #> {
+<#
+			foreach (var eventInfo in eventInfos)
+			{
+				var propertyName = eventInfo.Name + "To";
+				var eventHandlerName = type.Name + "On" + eventInfo.Name;
+#>
+        public static readonly BindableProperty <#= propertyName #>Property =
+            BindableProperty.CreateAttached("<#= propertyName #>", typeof(ICommand), typeof(<#= typeName #>), null, propertyChanged:On<#= propertyName #>Changed);
+
+        public static ICommand Get<#= propertyName #>(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(<#= propertyName #>Property);
+        }
+
+		private static void On<#= propertyName #>Changed(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is <#= type.Name #> target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.<#= eventInfo.Name #> += <#= eventHandlerName #>;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.<#= eventInfo.Name #> -= <#= eventHandlerName #>;
+                }
+            }
+		}
+
+        private static void <#= eventHandlerName #>(object o, EventArgs eventArgs)
+        {
+            var command = Get<#= propertyName #>((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+
+<#
+            }
+#>
+	}
+
+<#
+        }
+#>
+<#
+    }
+#>
+}
