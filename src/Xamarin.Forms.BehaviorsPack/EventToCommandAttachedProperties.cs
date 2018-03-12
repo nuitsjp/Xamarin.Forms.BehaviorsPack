@@ -2,2257 +2,4947 @@
 using System.Windows.Input;
 
 namespace Xamarin.Forms.BehaviorsPack {
-	public class Applications {
-        public static readonly BindableProperty ModalPoppedToProperty =
-            BindableProperty.CreateAttached("ModalPoppedTo", typeof(ICommand), typeof(Applications), null, propertyChanged:OnModalPoppedToChanged);
+	public class ApplicationModalPopped {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPopped), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetModalPoppedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ModalPoppedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnModalPoppedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Application target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ModalPopped += ApplicationOnModalPopped;
+                    target.ModalPopped += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ModalPopped -= ApplicationOnModalPopped;
+                    target.ModalPopped -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ApplicationOnModalPopped(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetModalPoppedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ModalCommandProperty =
+            BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPopped), null, propertyChanged:OnModalCommandChanged);
 
-        public static readonly BindableProperty ModalPoppingToProperty =
-            BindableProperty.CreateAttached("ModalPoppingTo", typeof(ICommand), typeof(Applications), null, propertyChanged:OnModalPoppingToChanged);
-
-        public static ICommand GetModalPoppingTo(BindableObject bindableObject)
+        public static ICommand GetModalCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ModalPoppingToProperty);
+            return (ICommand)bindableObject.GetValue(ModalCommandProperty);
         }
 
-		private static void OnModalPoppingToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnModalCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Application target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ModalPopping += ApplicationOnModalPopping;
+                    target.ModalPopped += OnModalCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ModalPopping -= ApplicationOnModalPopping;
+                    target.ModalPopped -= OnModalCommandChanged;
                 }
             }
 		}
 
-        private static void ApplicationOnModalPopping(object o, EventArgs eventArgs)
+        private static void OnModalCommandChanged(object o, Xamarin.Forms.ModalPoppedEventArgs eventArgs)
         {
-            var command = GetModalPoppingTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetModalCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Modal))
+                command.Execute(eventArgs.Modal);
         }
-
-        public static readonly BindableProperty ModalPushedToProperty =
-            BindableProperty.CreateAttached("ModalPushedTo", typeof(ICommand), typeof(Applications), null, propertyChanged:OnModalPushedToChanged);
-
-        public static ICommand GetModalPushedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ModalPushedToProperty);
-        }
-
-		private static void OnModalPushedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Application target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ModalPushed += ApplicationOnModalPushed;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ModalPushed -= ApplicationOnModalPushed;
-                }
-            }
-		}
-
-        private static void ApplicationOnModalPushed(object o, EventArgs eventArgs)
-        {
-            var command = GetModalPushedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty ModalPushingToProperty =
-            BindableProperty.CreateAttached("ModalPushingTo", typeof(ICommand), typeof(Applications), null, propertyChanged:OnModalPushingToChanged);
-
-        public static ICommand GetModalPushingTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ModalPushingToProperty);
-        }
-
-		private static void OnModalPushingToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Application target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ModalPushing += ApplicationOnModalPushing;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ModalPushing -= ApplicationOnModalPushing;
-                }
-            }
-		}
-
-        private static void ApplicationOnModalPushing(object o, EventArgs eventArgs)
-        {
-            var command = GetModalPushingTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class Buttons {
-        public static readonly BindableProperty ClickedToProperty =
-            BindableProperty.CreateAttached("ClickedTo", typeof(ICommand), typeof(Buttons), null, propertyChanged:OnClickedToChanged);
+	public class ApplicationModalPopping {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPopping), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetClickedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ClickedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnClickedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPopping += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPopping -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty CancelCommandProperty =
+            BindableProperty.CreateAttached("CancelCommand", typeof(ICommand), typeof(ApplicationModalPopping), null, propertyChanged:OnCancelCommandChanged);
+
+        public static ICommand GetCancelCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CancelCommandProperty);
+        }
+
+		private static void OnCancelCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPopping += OnCancelCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPopping -= OnCancelCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCancelCommandChanged(object o, Xamarin.Forms.ModalPoppingEventArgs eventArgs)
+        {
+            var command = GetCancelCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Cancel))
+                command.Execute(eventArgs.Cancel);
+        }
+        public static readonly BindableProperty ModalCommandProperty =
+            BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPopping), null, propertyChanged:OnModalCommandChanged);
+
+        public static ICommand GetModalCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ModalCommandProperty);
+        }
+
+		private static void OnModalCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPopping += OnModalCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPopping -= OnModalCommandChanged;
+                }
+            }
+		}
+
+        private static void OnModalCommandChanged(object o, Xamarin.Forms.ModalPoppingEventArgs eventArgs)
+        {
+            var command = GetModalCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Modal))
+                command.Execute(eventArgs.Modal);
+        }
+	}
+
+	public class ApplicationModalPushed {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPushed), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPushed += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPushed -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ModalCommandProperty =
+            BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPushed), null, propertyChanged:OnModalCommandChanged);
+
+        public static ICommand GetModalCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ModalCommandProperty);
+        }
+
+		private static void OnModalCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPushed += OnModalCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPushed -= OnModalCommandChanged;
+                }
+            }
+		}
+
+        private static void OnModalCommandChanged(object o, Xamarin.Forms.ModalPushedEventArgs eventArgs)
+        {
+            var command = GetModalCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Modal))
+                command.Execute(eventArgs.Modal);
+        }
+	}
+
+	public class ApplicationModalPushing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPushing), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPushing += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPushing -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ModalCommandProperty =
+            BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPushing), null, propertyChanged:OnModalCommandChanged);
+
+        public static ICommand GetModalCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ModalCommandProperty);
+        }
+
+		private static void OnModalCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Application target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ModalPushing += OnModalCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ModalPushing -= OnModalCommandChanged;
+                }
+            }
+		}
+
+        private static void OnModalCommandChanged(object o, Xamarin.Forms.ModalPushingEventArgs eventArgs)
+        {
+            var command = GetModalCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Modal))
+                command.Execute(eventArgs.Modal);
+        }
+	}
+
+	public class ButtonClicked {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ButtonClicked), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Button target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Clicked += ButtonOnClicked;
+                    target.Clicked += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Clicked -= ButtonOnClicked;
+                    target.Clicked -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ButtonOnClicked(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetClickedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty PressedToProperty =
-            BindableProperty.CreateAttached("PressedTo", typeof(ICommand), typeof(Buttons), null, propertyChanged:OnPressedToChanged);
+	public class ButtonPressed {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ButtonPressed), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetPressedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(PressedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnPressedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Button target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Pressed += ButtonOnPressed;
+                    target.Pressed += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Pressed -= ButtonOnPressed;
+                    target.Pressed -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ButtonOnPressed(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetPressedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty ReleasedToProperty =
-            BindableProperty.CreateAttached("ReleasedTo", typeof(ICommand), typeof(Buttons), null, propertyChanged:OnReleasedToChanged);
+	public class ButtonReleased {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ButtonReleased), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetReleasedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ReleasedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnReleasedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Button target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Released += ButtonOnReleased;
+                    target.Released += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Released -= ButtonOnReleased;
+                    target.Released -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ButtonOnReleased(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetReleasedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class Cells {
-        public static readonly BindableProperty AppearingToProperty =
-            BindableProperty.CreateAttached("AppearingTo", typeof(ICommand), typeof(Cells), null, propertyChanged:OnAppearingToChanged);
+	public class CellAppearing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellAppearing), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetAppearingTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(AppearingToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnAppearingToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Cell target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Appearing += CellOnAppearing;
+                    target.Appearing += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Appearing -= CellOnAppearing;
+                    target.Appearing -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void CellOnAppearing(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetAppearingTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
-        public static readonly BindableProperty DisappearingToProperty =
-            BindableProperty.CreateAttached("DisappearingTo", typeof(ICommand), typeof(Cells), null, propertyChanged:OnDisappearingToChanged);
-
-        public static ICommand GetDisappearingTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(DisappearingToProperty);
-        }
-
-		private static void OnDisappearingToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Cell target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Disappearing += CellOnDisappearing;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Disappearing -= CellOnDisappearing;
-                }
-            }
-		}
-
-        private static void CellOnDisappearing(object o, EventArgs eventArgs)
-        {
-            var command = GetDisappearingTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty ForceUpdateSizeRequestedToProperty =
-            BindableProperty.CreateAttached("ForceUpdateSizeRequestedTo", typeof(ICommand), typeof(Cells), null, propertyChanged:OnForceUpdateSizeRequestedToChanged);
-
-        public static ICommand GetForceUpdateSizeRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ForceUpdateSizeRequestedToProperty);
-        }
-
-		private static void OnForceUpdateSizeRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Cell target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ForceUpdateSizeRequested += CellOnForceUpdateSizeRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ForceUpdateSizeRequested -= CellOnForceUpdateSizeRequested;
-                }
-            }
-		}
-
-        private static void CellOnForceUpdateSizeRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetForceUpdateSizeRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty TappedToProperty =
-            BindableProperty.CreateAttached("TappedTo", typeof(ICommand), typeof(Cells), null, propertyChanged:OnTappedToChanged);
-
-        public static ICommand GetTappedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(TappedToProperty);
-        }
-
-		private static void OnTappedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Cell target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Tapped += CellOnTapped;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Tapped -= CellOnTapped;
-                }
-            }
-		}
-
-        private static void CellOnTapped(object o, EventArgs eventArgs)
-        {
-            var command = GetTappedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class ColumnDefinitions {
-        public static readonly BindableProperty SizeChangedToProperty =
-            BindableProperty.CreateAttached("SizeChangedTo", typeof(ICommand), typeof(ColumnDefinitions), null, propertyChanged:OnSizeChangedToChanged);
+	public class CellDisappearing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellDisappearing), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetSizeChangedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(SizeChangedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnSizeChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Cell target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Disappearing += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Disappearing -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class CellForceUpdateSizeRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellForceUpdateSizeRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Cell target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ForceUpdateSizeRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ForceUpdateSizeRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class CellTapped {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellTapped), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Cell target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Tapped += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Tapped -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class ColumnDefinitionSizeChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ColumnDefinitionSizeChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ColumnDefinition target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.SizeChanged += ColumnDefinitionOnSizeChanged;
+                    target.SizeChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.SizeChanged -= ColumnDefinitionOnSizeChanged;
+                    target.SizeChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ColumnDefinitionOnSizeChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetSizeChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class DatePickers {
-        public static readonly BindableProperty DateSelectedToProperty =
-            BindableProperty.CreateAttached("DateSelectedTo", typeof(ICommand), typeof(DatePickers), null, propertyChanged:OnDateSelectedToChanged);
+	public class DatePickerDateSelected {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(DatePickerDateSelected), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetDateSelectedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(DateSelectedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnDateSelectedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is DatePicker target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.DateSelected += DatePickerOnDateSelected;
+                    target.DateSelected += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.DateSelected -= DatePickerOnDateSelected;
+                    target.DateSelected -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void DatePickerOnDateSelected(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetDateSelectedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty NewDateCommandProperty =
+            BindableProperty.CreateAttached("NewDateCommand", typeof(ICommand), typeof(DatePickerDateSelected), null, propertyChanged:OnNewDateCommandChanged);
 
-	}
-
-	public class Editors {
-        public static readonly BindableProperty CompletedToProperty =
-            BindableProperty.CreateAttached("CompletedTo", typeof(ICommand), typeof(Editors), null, propertyChanged:OnCompletedToChanged);
-
-        public static ICommand GetCompletedTo(BindableObject bindableObject)
+        public static ICommand GetNewDateCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(CompletedToProperty);
+            return (ICommand)bindableObject.GetValue(NewDateCommandProperty);
         }
 
-		private static void OnCompletedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnNewDateCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is DatePicker target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DateSelected += OnNewDateCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DateSelected -= OnNewDateCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNewDateCommandChanged(object o, Xamarin.Forms.DateChangedEventArgs eventArgs)
+        {
+            var command = GetNewDateCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NewDate))
+                command.Execute(eventArgs.NewDate);
+        }
+        public static readonly BindableProperty OldDateCommandProperty =
+            BindableProperty.CreateAttached("OldDateCommand", typeof(ICommand), typeof(DatePickerDateSelected), null, propertyChanged:OnOldDateCommandChanged);
+
+        public static ICommand GetOldDateCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OldDateCommandProperty);
+        }
+
+		private static void OnOldDateCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is DatePicker target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DateSelected += OnOldDateCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DateSelected -= OnOldDateCommandChanged;
+                }
+            }
+		}
+
+        private static void OnOldDateCommandChanged(object o, Xamarin.Forms.DateChangedEventArgs eventArgs)
+        {
+            var command = GetOldDateCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.OldDate))
+                command.Execute(eventArgs.OldDate);
+        }
+	}
+
+	public class EditorCompleted {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EditorCompleted), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Editor target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Completed += EditorOnCompleted;
+                    target.Completed += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Completed -= EditorOnCompleted;
+                    target.Completed -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void EditorOnCompleted(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetCompletedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty TextChangedToProperty =
-            BindableProperty.CreateAttached("TextChangedTo", typeof(ICommand), typeof(Editors), null, propertyChanged:OnTextChangedToChanged);
+	public class EditorTextChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EditorTextChanged), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetTextChangedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(TextChangedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnTextChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Editor target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.TextChanged += EditorOnTextChanged;
+                    target.TextChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.TextChanged -= EditorOnTextChanged;
+                    target.TextChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void EditorOnTextChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetTextChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty NewTextValueCommandProperty =
+            BindableProperty.CreateAttached("NewTextValueCommand", typeof(ICommand), typeof(EditorTextChanged), null, propertyChanged:OnNewTextValueCommandChanged);
 
+        public static ICommand GetNewTextValueCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(NewTextValueCommandProperty);
+        }
+
+		private static void OnNewTextValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Editor target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.TextChanged += OnNewTextValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.TextChanged -= OnNewTextValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNewTextValueCommandChanged(object o, Xamarin.Forms.TextChangedEventArgs eventArgs)
+        {
+            var command = GetNewTextValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NewTextValue))
+                command.Execute(eventArgs.NewTextValue);
+        }
+        public static readonly BindableProperty OldTextValueCommandProperty =
+            BindableProperty.CreateAttached("OldTextValueCommand", typeof(ICommand), typeof(EditorTextChanged), null, propertyChanged:OnOldTextValueCommandChanged);
+
+        public static ICommand GetOldTextValueCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OldTextValueCommandProperty);
+        }
+
+		private static void OnOldTextValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Editor target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.TextChanged += OnOldTextValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.TextChanged -= OnOldTextValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnOldTextValueCommandChanged(object o, Xamarin.Forms.TextChangedEventArgs eventArgs)
+        {
+            var command = GetOldTextValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.OldTextValue))
+                command.Execute(eventArgs.OldTextValue);
+        }
 	}
 
-	public class Elements {
-        public static readonly BindableProperty ChildAddedToProperty =
-            BindableProperty.CreateAttached("ChildAddedTo", typeof(ICommand), typeof(Elements), null, propertyChanged:OnChildAddedToChanged);
+	public class ElementChildAdded {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementChildAdded), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetChildAddedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ChildAddedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnChildAddedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Element target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ChildAdded += ElementOnChildAdded;
+                    target.ChildAdded += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ChildAdded -= ElementOnChildAdded;
+                    target.ChildAdded -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ElementOnChildAdded(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetChildAddedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ElementCommandProperty =
+            BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementChildAdded), null, propertyChanged:OnElementCommandChanged);
 
-        public static readonly BindableProperty ChildRemovedToProperty =
-            BindableProperty.CreateAttached("ChildRemovedTo", typeof(ICommand), typeof(Elements), null, propertyChanged:OnChildRemovedToChanged);
-
-        public static ICommand GetChildRemovedTo(BindableObject bindableObject)
+        public static ICommand GetElementCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ChildRemovedToProperty);
+            return (ICommand)bindableObject.GetValue(ElementCommandProperty);
         }
 
-		private static void OnChildRemovedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Element target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ChildRemoved += ElementOnChildRemoved;
+                    target.ChildAdded += OnElementCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ChildRemoved -= ElementOnChildRemoved;
+                    target.ChildAdded -= OnElementCommandChanged;
                 }
             }
 		}
 
-        private static void ElementOnChildRemoved(object o, EventArgs eventArgs)
+        private static void OnElementCommandChanged(object o, Xamarin.Forms.ElementEventArgs eventArgs)
         {
-            var command = GetChildRemovedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Element))
+                command.Execute(eventArgs.Element);
         }
-
-        public static readonly BindableProperty DescendantAddedToProperty =
-            BindableProperty.CreateAttached("DescendantAddedTo", typeof(ICommand), typeof(Elements), null, propertyChanged:OnDescendantAddedToChanged);
-
-        public static ICommand GetDescendantAddedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(DescendantAddedToProperty);
-        }
-
-		private static void OnDescendantAddedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Element target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.DescendantAdded += ElementOnDescendantAdded;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.DescendantAdded -= ElementOnDescendantAdded;
-                }
-            }
-		}
-
-        private static void ElementOnDescendantAdded(object o, EventArgs eventArgs)
-        {
-            var command = GetDescendantAddedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty DescendantRemovedToProperty =
-            BindableProperty.CreateAttached("DescendantRemovedTo", typeof(ICommand), typeof(Elements), null, propertyChanged:OnDescendantRemovedToChanged);
-
-        public static ICommand GetDescendantRemovedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(DescendantRemovedToProperty);
-        }
-
-		private static void OnDescendantRemovedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Element target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.DescendantRemoved += ElementOnDescendantRemoved;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.DescendantRemoved -= ElementOnDescendantRemoved;
-                }
-            }
-		}
-
-        private static void ElementOnDescendantRemoved(object o, EventArgs eventArgs)
-        {
-            var command = GetDescendantRemovedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty PlatformSetToProperty =
-            BindableProperty.CreateAttached("PlatformSetTo", typeof(ICommand), typeof(Elements), null, propertyChanged:OnPlatformSetToChanged);
-
-        public static ICommand GetPlatformSetTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PlatformSetToProperty);
-        }
-
-		private static void OnPlatformSetToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Element target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.PlatformSet += ElementOnPlatformSet;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.PlatformSet -= ElementOnPlatformSet;
-                }
-            }
-		}
-
-        private static void ElementOnPlatformSet(object o, EventArgs eventArgs)
-        {
-            var command = GetPlatformSetTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class Entrys {
-        public static readonly BindableProperty CompletedToProperty =
-            BindableProperty.CreateAttached("CompletedTo", typeof(ICommand), typeof(Entrys), null, propertyChanged:OnCompletedToChanged);
+	public class ElementChildRemoved {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementChildRemoved), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetCompletedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(CompletedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnCompletedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ChildRemoved += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ChildRemoved -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ElementCommandProperty =
+            BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementChildRemoved), null, propertyChanged:OnElementCommandChanged);
+
+        public static ICommand GetElementCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ElementCommandProperty);
+        }
+
+		private static void OnElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ChildRemoved += OnElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ChildRemoved -= OnElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnElementCommandChanged(object o, Xamarin.Forms.ElementEventArgs eventArgs)
+        {
+            var command = GetElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Element))
+                command.Execute(eventArgs.Element);
+        }
+	}
+
+	public class ElementDescendantAdded {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementDescendantAdded), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DescendantAdded += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DescendantAdded -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ElementCommandProperty =
+            BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementDescendantAdded), null, propertyChanged:OnElementCommandChanged);
+
+        public static ICommand GetElementCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ElementCommandProperty);
+        }
+
+		private static void OnElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DescendantAdded += OnElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DescendantAdded -= OnElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnElementCommandChanged(object o, Xamarin.Forms.ElementEventArgs eventArgs)
+        {
+            var command = GetElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Element))
+                command.Execute(eventArgs.Element);
+        }
+	}
+
+	public class ElementDescendantRemoved {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementDescendantRemoved), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DescendantRemoved += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DescendantRemoved -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ElementCommandProperty =
+            BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementDescendantRemoved), null, propertyChanged:OnElementCommandChanged);
+
+        public static ICommand GetElementCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ElementCommandProperty);
+        }
+
+		private static void OnElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DescendantRemoved += OnElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DescendantRemoved -= OnElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnElementCommandChanged(object o, Xamarin.Forms.ElementEventArgs eventArgs)
+        {
+            var command = GetElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Element))
+                command.Execute(eventArgs.Element);
+        }
+	}
+
+	public class ElementPlatformSet {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementPlatformSet), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Element target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PlatformSet += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PlatformSet -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class EntryCompleted {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EntryCompleted), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Entry target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Completed += EntryOnCompleted;
+                    target.Completed += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Completed -= EntryOnCompleted;
+                    target.Completed -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void EntryOnCompleted(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetCompletedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty TextChangedToProperty =
-            BindableProperty.CreateAttached("TextChangedTo", typeof(ICommand), typeof(Entrys), null, propertyChanged:OnTextChangedToChanged);
+	public class EntryTextChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EntryTextChanged), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetTextChangedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(TextChangedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnTextChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Entry target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.TextChanged += EntryOnTextChanged;
+                    target.TextChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.TextChanged -= EntryOnTextChanged;
+                    target.TextChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void EntryOnTextChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetTextChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty NewTextValueCommandProperty =
+            BindableProperty.CreateAttached("NewTextValueCommand", typeof(ICommand), typeof(EntryTextChanged), null, propertyChanged:OnNewTextValueCommandChanged);
 
-	}
-
-	public class EntryCells {
-        public static readonly BindableProperty CompletedToProperty =
-            BindableProperty.CreateAttached("CompletedTo", typeof(ICommand), typeof(EntryCells), null, propertyChanged:OnCompletedToChanged);
-
-        public static ICommand GetCompletedTo(BindableObject bindableObject)
+        public static ICommand GetNewTextValueCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(CompletedToProperty);
+            return (ICommand)bindableObject.GetValue(NewTextValueCommandProperty);
         }
 
-		private static void OnCompletedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnNewTextValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Entry target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.TextChanged += OnNewTextValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.TextChanged -= OnNewTextValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNewTextValueCommandChanged(object o, Xamarin.Forms.TextChangedEventArgs eventArgs)
+        {
+            var command = GetNewTextValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NewTextValue))
+                command.Execute(eventArgs.NewTextValue);
+        }
+        public static readonly BindableProperty OldTextValueCommandProperty =
+            BindableProperty.CreateAttached("OldTextValueCommand", typeof(ICommand), typeof(EntryTextChanged), null, propertyChanged:OnOldTextValueCommandChanged);
+
+        public static ICommand GetOldTextValueCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OldTextValueCommandProperty);
+        }
+
+		private static void OnOldTextValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Entry target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.TextChanged += OnOldTextValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.TextChanged -= OnOldTextValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnOldTextValueCommandChanged(object o, Xamarin.Forms.TextChangedEventArgs eventArgs)
+        {
+            var command = GetOldTextValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.OldTextValue))
+                command.Execute(eventArgs.OldTextValue);
+        }
+	}
+
+	public class EntryCellCompleted {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EntryCellCompleted), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is EntryCell target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Completed += EntryCellOnCompleted;
+                    target.Completed += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Completed -= EntryCellOnCompleted;
+                    target.Completed -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void EntryCellOnCompleted(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetCompletedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class Layouts {
-        public static readonly BindableProperty LayoutChangedToProperty =
-            BindableProperty.CreateAttached("LayoutChangedTo", typeof(ICommand), typeof(Layouts), null, propertyChanged:OnLayoutChangedToChanged);
+	public class LayoutLayoutChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(LayoutLayoutChanged), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetLayoutChangedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(LayoutChangedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnLayoutChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Layout target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.LayoutChanged += LayoutOnLayoutChanged;
+                    target.LayoutChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.LayoutChanged -= LayoutOnLayoutChanged;
+                    target.LayoutChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void LayoutOnLayoutChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetLayoutChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class ListViews {
-        public static readonly BindableProperty ItemAppearingToProperty =
-            BindableProperty.CreateAttached("ItemAppearingTo", typeof(ICommand), typeof(ListViews), null, propertyChanged:OnItemAppearingToChanged);
+	public class ListViewItemAppearing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemAppearing), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetItemAppearingTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ItemAppearingToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnItemAppearingToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ListView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ItemAppearing += ListViewOnItemAppearing;
+                    target.ItemAppearing += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ItemAppearing -= ListViewOnItemAppearing;
+                    target.ItemAppearing -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ListViewOnItemAppearing(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetItemAppearingTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ItemCommandProperty =
+            BindableProperty.CreateAttached("ItemCommand", typeof(ICommand), typeof(ListViewItemAppearing), null, propertyChanged:OnItemCommandChanged);
 
-        public static readonly BindableProperty ItemDisappearingToProperty =
-            BindableProperty.CreateAttached("ItemDisappearingTo", typeof(ICommand), typeof(ListViews), null, propertyChanged:OnItemDisappearingToChanged);
-
-        public static ICommand GetItemDisappearingTo(BindableObject bindableObject)
+        public static ICommand GetItemCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ItemDisappearingToProperty);
+            return (ICommand)bindableObject.GetValue(ItemCommandProperty);
         }
 
-		private static void OnItemDisappearingToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnItemCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ListView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ItemDisappearing += ListViewOnItemDisappearing;
+                    target.ItemAppearing += OnItemCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ItemDisappearing -= ListViewOnItemDisappearing;
+                    target.ItemAppearing -= OnItemCommandChanged;
                 }
             }
 		}
 
-        private static void ListViewOnItemDisappearing(object o, EventArgs eventArgs)
+        private static void OnItemCommandChanged(object o, Xamarin.Forms.ItemVisibilityEventArgs eventArgs)
         {
-            var command = GetItemDisappearingTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetItemCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Item))
+                command.Execute(eventArgs.Item);
         }
-
-        public static readonly BindableProperty ItemSelectedToProperty =
-            BindableProperty.CreateAttached("ItemSelectedTo", typeof(ICommand), typeof(ListViews), null, propertyChanged:OnItemSelectedToChanged);
-
-        public static ICommand GetItemSelectedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ItemSelectedToProperty);
-        }
-
-		private static void OnItemSelectedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is ListView target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ItemSelected += ListViewOnItemSelected;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ItemSelected -= ListViewOnItemSelected;
-                }
-            }
-		}
-
-        private static void ListViewOnItemSelected(object o, EventArgs eventArgs)
-        {
-            var command = GetItemSelectedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty ItemTappedToProperty =
-            BindableProperty.CreateAttached("ItemTappedTo", typeof(ICommand), typeof(ListViews), null, propertyChanged:OnItemTappedToChanged);
-
-        public static ICommand GetItemTappedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ItemTappedToProperty);
-        }
-
-		private static void OnItemTappedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is ListView target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ItemTapped += ListViewOnItemTapped;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ItemTapped -= ListViewOnItemTapped;
-                }
-            }
-		}
-
-        private static void ListViewOnItemTapped(object o, EventArgs eventArgs)
-        {
-            var command = GetItemTappedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty RefreshingToProperty =
-            BindableProperty.CreateAttached("RefreshingTo", typeof(ICommand), typeof(ListViews), null, propertyChanged:OnRefreshingToChanged);
-
-        public static ICommand GetRefreshingTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(RefreshingToProperty);
-        }
-
-		private static void OnRefreshingToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is ListView target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Refreshing += ListViewOnRefreshing;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Refreshing -= ListViewOnRefreshing;
-                }
-            }
-		}
-
-        private static void ListViewOnRefreshing(object o, EventArgs eventArgs)
-        {
-            var command = GetRefreshingTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty ScrollToRequestedToProperty =
-            BindableProperty.CreateAttached("ScrollToRequestedTo", typeof(ICommand), typeof(ListViews), null, propertyChanged:OnScrollToRequestedToChanged);
-
-        public static ICommand GetScrollToRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ScrollToRequestedToProperty);
-        }
-
-		private static void OnScrollToRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is ListView target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ScrollToRequested += ListViewOnScrollToRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ScrollToRequested -= ListViewOnScrollToRequested;
-                }
-            }
-		}
-
-        private static void ListViewOnScrollToRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetScrollToRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class MasterDetailPages {
-        public static readonly BindableProperty BackButtonPressedToProperty =
-            BindableProperty.CreateAttached("BackButtonPressedTo", typeof(ICommand), typeof(MasterDetailPages), null, propertyChanged:OnBackButtonPressedToChanged);
+	public class ListViewItemDisappearing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemDisappearing), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetBackButtonPressedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(BackButtonPressedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnBackButtonPressedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemDisappearing += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemDisappearing -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ItemCommandProperty =
+            BindableProperty.CreateAttached("ItemCommand", typeof(ICommand), typeof(ListViewItemDisappearing), null, propertyChanged:OnItemCommandChanged);
+
+        public static ICommand GetItemCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ItemCommandProperty);
+        }
+
+		private static void OnItemCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemDisappearing += OnItemCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemDisappearing -= OnItemCommandChanged;
+                }
+            }
+		}
+
+        private static void OnItemCommandChanged(object o, Xamarin.Forms.ItemVisibilityEventArgs eventArgs)
+        {
+            var command = GetItemCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Item))
+                command.Execute(eventArgs.Item);
+        }
+	}
+
+	public class ListViewItemSelected {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemSelected += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemSelected -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty SelectedItemCommandProperty =
+            BindableProperty.CreateAttached("SelectedItemCommand", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged:OnSelectedItemCommandChanged);
+
+        public static ICommand GetSelectedItemCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(SelectedItemCommandProperty);
+        }
+
+		private static void OnSelectedItemCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemSelected += OnSelectedItemCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemSelected -= OnSelectedItemCommandChanged;
+                }
+            }
+		}
+
+        private static void OnSelectedItemCommandChanged(object o, Xamarin.Forms.SelectedItemChangedEventArgs eventArgs)
+        {
+            var command = GetSelectedItemCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.SelectedItem))
+                command.Execute(eventArgs.SelectedItem);
+        }
+	}
+
+	public class ListViewItemTapped {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemTapped), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemTapped += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemTapped -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty GroupCommandProperty =
+            BindableProperty.CreateAttached("GroupCommand", typeof(ICommand), typeof(ListViewItemTapped), null, propertyChanged:OnGroupCommandChanged);
+
+        public static ICommand GetGroupCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(GroupCommandProperty);
+        }
+
+		private static void OnGroupCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemTapped += OnGroupCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemTapped -= OnGroupCommandChanged;
+                }
+            }
+		}
+
+        private static void OnGroupCommandChanged(object o, Xamarin.Forms.ItemTappedEventArgs eventArgs)
+        {
+            var command = GetGroupCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Group))
+                command.Execute(eventArgs.Group);
+        }
+        public static readonly BindableProperty ItemCommandProperty =
+            BindableProperty.CreateAttached("ItemCommand", typeof(ICommand), typeof(ListViewItemTapped), null, propertyChanged:OnItemCommandChanged);
+
+        public static ICommand GetItemCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ItemCommandProperty);
+        }
+
+		private static void OnItemCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ItemTapped += OnItemCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ItemTapped -= OnItemCommandChanged;
+                }
+            }
+		}
+
+        private static void OnItemCommandChanged(object o, Xamarin.Forms.ItemTappedEventArgs eventArgs)
+        {
+            var command = GetItemCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Item))
+                command.Execute(eventArgs.Item);
+        }
+	}
+
+	public class ListViewRefreshing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewRefreshing), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Refreshing += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Refreshing -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class ListViewScrollToRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty ElementCommandProperty =
+            BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnElementCommandChanged);
+
+        public static ICommand GetElementCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ElementCommandProperty);
+        }
+
+		private static void OnElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnElementCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Element))
+                command.Execute(eventArgs.Element);
+        }
+        public static readonly BindableProperty ModeCommandProperty =
+            BindableProperty.CreateAttached("ModeCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnModeCommandChanged);
+
+        public static ICommand GetModeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ModeCommandProperty);
+        }
+
+		private static void OnModeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnModeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnModeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnModeCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetModeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Mode))
+                command.Execute(eventArgs.Mode);
+        }
+        public static readonly BindableProperty PositionCommandProperty =
+            BindableProperty.CreateAttached("PositionCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnPositionCommandChanged);
+
+        public static ICommand GetPositionCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PositionCommandProperty);
+        }
+
+		private static void OnPositionCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnPositionCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnPositionCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPositionCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetPositionCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Position))
+                command.Execute(eventArgs.Position);
+        }
+        public static readonly BindableProperty ScrollXCommandProperty =
+            BindableProperty.CreateAttached("ScrollXCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnScrollXCommandChanged);
+
+        public static ICommand GetScrollXCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ScrollXCommandProperty);
+        }
+
+		private static void OnScrollXCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnScrollXCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnScrollXCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScrollXCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetScrollXCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScrollX))
+                command.Execute(eventArgs.ScrollX);
+        }
+        public static readonly BindableProperty ScrollYCommandProperty =
+            BindableProperty.CreateAttached("ScrollYCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnScrollYCommandChanged);
+
+        public static ICommand GetScrollYCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ScrollYCommandProperty);
+        }
+
+		private static void OnScrollYCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnScrollYCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnScrollYCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScrollYCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetScrollYCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScrollY))
+                command.Execute(eventArgs.ScrollY);
+        }
+        public static readonly BindableProperty ShouldAnimateCommandProperty =
+            BindableProperty.CreateAttached("ShouldAnimateCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnShouldAnimateCommandChanged);
+
+        public static ICommand GetShouldAnimateCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ShouldAnimateCommandProperty);
+        }
+
+		private static void OnShouldAnimateCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ListView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnShouldAnimateCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnShouldAnimateCommandChanged;
+                }
+            }
+		}
+
+        private static void OnShouldAnimateCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetShouldAnimateCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ShouldAnimate))
+                command.Execute(eventArgs.ShouldAnimate);
+        }
+	}
+
+	public class MasterDetailPageBackButtonPressed {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(MasterDetailPageBackButtonPressed), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is MasterDetailPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.BackButtonPressed += MasterDetailPageOnBackButtonPressed;
+                    target.BackButtonPressed += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.BackButtonPressed -= MasterDetailPageOnBackButtonPressed;
+                    target.BackButtonPressed -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void MasterDetailPageOnBackButtonPressed(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetBackButtonPressedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty HandledCommandProperty =
+            BindableProperty.CreateAttached("HandledCommand", typeof(ICommand), typeof(MasterDetailPageBackButtonPressed), null, propertyChanged:OnHandledCommandChanged);
 
-        public static readonly BindableProperty IsPresentedChangedToProperty =
-            BindableProperty.CreateAttached("IsPresentedChangedTo", typeof(ICommand), typeof(MasterDetailPages), null, propertyChanged:OnIsPresentedChangedToChanged);
-
-        public static ICommand GetIsPresentedChangedTo(BindableObject bindableObject)
+        public static ICommand GetHandledCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(IsPresentedChangedToProperty);
+            return (ICommand)bindableObject.GetValue(HandledCommandProperty);
         }
 
-		private static void OnIsPresentedChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnHandledCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is MasterDetailPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.IsPresentedChanged += MasterDetailPageOnIsPresentedChanged;
+                    target.BackButtonPressed += OnHandledCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.IsPresentedChanged -= MasterDetailPageOnIsPresentedChanged;
+                    target.BackButtonPressed -= OnHandledCommandChanged;
                 }
             }
 		}
 
-        private static void MasterDetailPageOnIsPresentedChanged(object o, EventArgs eventArgs)
+        private static void OnHandledCommandChanged(object o, Xamarin.Forms.BackButtonPressedEventArgs eventArgs)
         {
-            var command = GetIsPresentedChangedTo((BindableObject)o);
+            var command = GetHandledCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Handled))
+                command.Execute(eventArgs.Handled);
+        }
+	}
+
+	public class MasterDetailPageIsPresentedChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(MasterDetailPageIsPresentedChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is MasterDetailPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.IsPresentedChanged += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.IsPresentedChanged -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class MenuItems {
-        public static readonly BindableProperty ClickedToProperty =
-            BindableProperty.CreateAttached("ClickedTo", typeof(ICommand), typeof(MenuItems), null, propertyChanged:OnClickedToChanged);
+	public class MenuItemClicked {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(MenuItemClicked), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetClickedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ClickedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnClickedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is MenuItem target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Clicked += MenuItemOnClicked;
+                    target.Clicked += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Clicked -= MenuItemOnClicked;
+                    target.Clicked -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void MenuItemOnClicked(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetClickedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class NavigationPages {
-        public static readonly BindableProperty InsertPageBeforeRequestedToProperty =
-            BindableProperty.CreateAttached("InsertPageBeforeRequestedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnInsertPageBeforeRequestedToChanged);
+	public class NavigationPageInsertPageBeforeRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetInsertPageBeforeRequestedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(InsertPageBeforeRequestedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnInsertPageBeforeRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is NavigationPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.InsertPageBeforeRequested += NavigationPageOnInsertPageBeforeRequested;
+                    target.InsertPageBeforeRequested += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.InsertPageBeforeRequested -= NavigationPageOnInsertPageBeforeRequested;
+                    target.InsertPageBeforeRequested -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void NavigationPageOnInsertPageBeforeRequested(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetInsertPageBeforeRequestedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty AnimatedCommandProperty =
+            BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnAnimatedCommandChanged);
 
-        public static readonly BindableProperty PoppedToProperty =
-            BindableProperty.CreateAttached("PoppedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnPoppedToChanged);
-
-        public static ICommand GetPoppedTo(BindableObject bindableObject)
+        public static ICommand GetAnimatedCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(PoppedToProperty);
+            return (ICommand)bindableObject.GetValue(AnimatedCommandProperty);
         }
 
-		private static void OnPoppedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnAnimatedCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is NavigationPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Popped += NavigationPageOnPopped;
+                    target.InsertPageBeforeRequested += OnAnimatedCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Popped -= NavigationPageOnPopped;
+                    target.InsertPageBeforeRequested -= OnAnimatedCommandChanged;
                 }
             }
 		}
 
-        private static void NavigationPageOnPopped(object o, EventArgs eventArgs)
+        private static void OnAnimatedCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
         {
-            var command = GetPoppedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetAnimatedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
+        }
+        public static readonly BindableProperty BeforePageCommandProperty =
+            BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnBeforePageCommandChanged);
+
+        public static ICommand GetBeforePageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(BeforePageCommandProperty);
         }
 
-        public static readonly BindableProperty PoppedToRootToProperty =
-            BindableProperty.CreateAttached("PoppedToRootTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnPoppedToRootToChanged);
-
-        public static ICommand GetPoppedToRootTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PoppedToRootToProperty);
-        }
-
-		private static void OnPoppedToRootToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnBeforePageCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is NavigationPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.PoppedToRoot += NavigationPageOnPoppedToRoot;
+                    target.InsertPageBeforeRequested += OnBeforePageCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.PoppedToRoot -= NavigationPageOnPoppedToRoot;
+                    target.InsertPageBeforeRequested -= OnBeforePageCommandChanged;
                 }
             }
 		}
 
-        private static void NavigationPageOnPoppedToRoot(object o, EventArgs eventArgs)
+        private static void OnBeforePageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
         {
-            var command = GetPoppedToRootTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetBeforePageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.BeforePage))
+                command.Execute(eventArgs.BeforePage);
+        }
+        public static readonly BindableProperty RealizeCommandProperty =
+            BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnRealizeCommandChanged);
+
+        public static ICommand GetRealizeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(RealizeCommandProperty);
         }
 
-        public static readonly BindableProperty PopRequestedToProperty =
-            BindableProperty.CreateAttached("PopRequestedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnPopRequestedToChanged);
-
-        public static ICommand GetPopRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PopRequestedToProperty);
-        }
-
-		private static void OnPopRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnRealizeCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is NavigationPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.PopRequested += NavigationPageOnPopRequested;
+                    target.InsertPageBeforeRequested += OnRealizeCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.PopRequested -= NavigationPageOnPopRequested;
+                    target.InsertPageBeforeRequested -= OnRealizeCommandChanged;
                 }
             }
 		}
 
-        private static void NavigationPageOnPopRequested(object o, EventArgs eventArgs)
+        private static void OnRealizeCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
         {
-            var command = GetPopRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetRealizeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Realize))
+                command.Execute(eventArgs.Realize);
+        }
+        public static readonly BindableProperty TaskCommandProperty =
+            BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnTaskCommandChanged);
+
+        public static ICommand GetTaskCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TaskCommandProperty);
         }
 
-        public static readonly BindableProperty PopToRootRequestedToProperty =
-            BindableProperty.CreateAttached("PopToRootRequestedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnPopToRootRequestedToChanged);
-
-        public static ICommand GetPopToRootRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PopToRootRequestedToProperty);
-        }
-
-		private static void OnPopToRootRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnTaskCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is NavigationPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.PopToRootRequested += NavigationPageOnPopToRootRequested;
+                    target.InsertPageBeforeRequested += OnTaskCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.PopToRootRequested -= NavigationPageOnPopToRootRequested;
+                    target.InsertPageBeforeRequested -= OnTaskCommandChanged;
                 }
             }
 		}
 
-        private static void NavigationPageOnPopToRootRequested(object o, EventArgs eventArgs)
+        private static void OnTaskCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
         {
-            var command = GetPopToRootRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetTaskCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Task))
+                command.Execute(eventArgs.Task);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
         }
 
-        public static readonly BindableProperty PushedToProperty =
-            BindableProperty.CreateAttached("PushedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnPushedToChanged);
-
-        public static ICommand GetPushedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PushedToProperty);
-        }
-
-		private static void OnPushedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is NavigationPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Pushed += NavigationPageOnPushed;
+                    target.InsertPageBeforeRequested += OnPageCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Pushed -= NavigationPageOnPushed;
+                    target.InsertPageBeforeRequested -= OnPageCommandChanged;
                 }
             }
 		}
 
-        private static void NavigationPageOnPushed(object o, EventArgs eventArgs)
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
         {
-            var command = GetPushedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
         }
-
-        public static readonly BindableProperty PushRequestedToProperty =
-            BindableProperty.CreateAttached("PushRequestedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnPushRequestedToChanged);
-
-        public static ICommand GetPushRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PushRequestedToProperty);
-        }
-
-		private static void OnPushRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is NavigationPage target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.PushRequested += NavigationPageOnPushRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.PushRequested -= NavigationPageOnPushRequested;
-                }
-            }
-		}
-
-        private static void NavigationPageOnPushRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetPushRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty RemovePageRequestedToProperty =
-            BindableProperty.CreateAttached("RemovePageRequestedTo", typeof(ICommand), typeof(NavigationPages), null, propertyChanged:OnRemovePageRequestedToChanged);
-
-        public static ICommand GetRemovePageRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(RemovePageRequestedToProperty);
-        }
-
-		private static void OnRemovePageRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is NavigationPage target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.RemovePageRequested += NavigationPageOnRemovePageRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.RemovePageRequested -= NavigationPageOnRemovePageRequested;
-                }
-            }
-		}
-
-        private static void NavigationPageOnRemovePageRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetRemovePageRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class OpenGLViews {
-        public static readonly BindableProperty DisplayRequestedToProperty =
-            BindableProperty.CreateAttached("DisplayRequestedTo", typeof(ICommand), typeof(OpenGLViews), null, propertyChanged:OnDisplayRequestedToChanged);
+	public class NavigationPagePopped {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePopped), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetDisplayRequestedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(DisplayRequestedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnDisplayRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Popped += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Popped -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePopped), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Popped += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Popped -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.NavigationEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class NavigationPagePoppedToRoot {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePoppedToRoot), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PoppedToRoot += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PoppedToRoot -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePoppedToRoot), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PoppedToRoot += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PoppedToRoot -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.NavigationEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class NavigationPagePopRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty AnimatedCommandProperty =
+            BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnAnimatedCommandChanged);
+
+        public static ICommand GetAnimatedCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(AnimatedCommandProperty);
+        }
+
+		private static void OnAnimatedCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopRequested += OnAnimatedCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopRequested -= OnAnimatedCommandChanged;
+                }
+            }
+		}
+
+        private static void OnAnimatedCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetAnimatedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
+        }
+        public static readonly BindableProperty BeforePageCommandProperty =
+            BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnBeforePageCommandChanged);
+
+        public static ICommand GetBeforePageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(BeforePageCommandProperty);
+        }
+
+		private static void OnBeforePageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopRequested += OnBeforePageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopRequested -= OnBeforePageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnBeforePageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetBeforePageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.BeforePage))
+                command.Execute(eventArgs.BeforePage);
+        }
+        public static readonly BindableProperty RealizeCommandProperty =
+            BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnRealizeCommandChanged);
+
+        public static ICommand GetRealizeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(RealizeCommandProperty);
+        }
+
+		private static void OnRealizeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopRequested += OnRealizeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopRequested -= OnRealizeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnRealizeCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetRealizeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Realize))
+                command.Execute(eventArgs.Realize);
+        }
+        public static readonly BindableProperty TaskCommandProperty =
+            BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnTaskCommandChanged);
+
+        public static ICommand GetTaskCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TaskCommandProperty);
+        }
+
+		private static void OnTaskCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopRequested += OnTaskCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopRequested -= OnTaskCommandChanged;
+                }
+            }
+		}
+
+        private static void OnTaskCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetTaskCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Task))
+                command.Execute(eventArgs.Task);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopRequested += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopRequested -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class NavigationPagePopToRootRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopToRootRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopToRootRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty AnimatedCommandProperty =
+            BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnAnimatedCommandChanged);
+
+        public static ICommand GetAnimatedCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(AnimatedCommandProperty);
+        }
+
+		private static void OnAnimatedCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopToRootRequested += OnAnimatedCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopToRootRequested -= OnAnimatedCommandChanged;
+                }
+            }
+		}
+
+        private static void OnAnimatedCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetAnimatedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
+        }
+        public static readonly BindableProperty BeforePageCommandProperty =
+            BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnBeforePageCommandChanged);
+
+        public static ICommand GetBeforePageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(BeforePageCommandProperty);
+        }
+
+		private static void OnBeforePageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopToRootRequested += OnBeforePageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopToRootRequested -= OnBeforePageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnBeforePageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetBeforePageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.BeforePage))
+                command.Execute(eventArgs.BeforePage);
+        }
+        public static readonly BindableProperty RealizeCommandProperty =
+            BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnRealizeCommandChanged);
+
+        public static ICommand GetRealizeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(RealizeCommandProperty);
+        }
+
+		private static void OnRealizeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopToRootRequested += OnRealizeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopToRootRequested -= OnRealizeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnRealizeCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetRealizeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Realize))
+                command.Execute(eventArgs.Realize);
+        }
+        public static readonly BindableProperty TaskCommandProperty =
+            BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnTaskCommandChanged);
+
+        public static ICommand GetTaskCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TaskCommandProperty);
+        }
+
+		private static void OnTaskCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopToRootRequested += OnTaskCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopToRootRequested -= OnTaskCommandChanged;
+                }
+            }
+		}
+
+        private static void OnTaskCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetTaskCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Task))
+                command.Execute(eventArgs.Task);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PopToRootRequested += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PopToRootRequested -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class NavigationPagePushed {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePushed), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Pushed += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Pushed -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePushed), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Pushed += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Pushed -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.NavigationEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class NavigationPagePushRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PushRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PushRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty AnimatedCommandProperty =
+            BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnAnimatedCommandChanged);
+
+        public static ICommand GetAnimatedCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(AnimatedCommandProperty);
+        }
+
+		private static void OnAnimatedCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PushRequested += OnAnimatedCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PushRequested -= OnAnimatedCommandChanged;
+                }
+            }
+		}
+
+        private static void OnAnimatedCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetAnimatedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
+        }
+        public static readonly BindableProperty BeforePageCommandProperty =
+            BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnBeforePageCommandChanged);
+
+        public static ICommand GetBeforePageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(BeforePageCommandProperty);
+        }
+
+		private static void OnBeforePageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PushRequested += OnBeforePageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PushRequested -= OnBeforePageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnBeforePageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetBeforePageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.BeforePage))
+                command.Execute(eventArgs.BeforePage);
+        }
+        public static readonly BindableProperty RealizeCommandProperty =
+            BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnRealizeCommandChanged);
+
+        public static ICommand GetRealizeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(RealizeCommandProperty);
+        }
+
+		private static void OnRealizeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PushRequested += OnRealizeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PushRequested -= OnRealizeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnRealizeCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetRealizeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Realize))
+                command.Execute(eventArgs.Realize);
+        }
+        public static readonly BindableProperty TaskCommandProperty =
+            BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnTaskCommandChanged);
+
+        public static ICommand GetTaskCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TaskCommandProperty);
+        }
+
+		private static void OnTaskCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PushRequested += OnTaskCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PushRequested -= OnTaskCommandChanged;
+                }
+            }
+		}
+
+        private static void OnTaskCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetTaskCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Task))
+                command.Execute(eventArgs.Task);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PushRequested += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PushRequested -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class NavigationPageRemovePageRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.RemovePageRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.RemovePageRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty AnimatedCommandProperty =
+            BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnAnimatedCommandChanged);
+
+        public static ICommand GetAnimatedCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(AnimatedCommandProperty);
+        }
+
+		private static void OnAnimatedCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.RemovePageRequested += OnAnimatedCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.RemovePageRequested -= OnAnimatedCommandChanged;
+                }
+            }
+		}
+
+        private static void OnAnimatedCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetAnimatedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
+        }
+        public static readonly BindableProperty BeforePageCommandProperty =
+            BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnBeforePageCommandChanged);
+
+        public static ICommand GetBeforePageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(BeforePageCommandProperty);
+        }
+
+		private static void OnBeforePageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.RemovePageRequested += OnBeforePageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.RemovePageRequested -= OnBeforePageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnBeforePageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetBeforePageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.BeforePage))
+                command.Execute(eventArgs.BeforePage);
+        }
+        public static readonly BindableProperty RealizeCommandProperty =
+            BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnRealizeCommandChanged);
+
+        public static ICommand GetRealizeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(RealizeCommandProperty);
+        }
+
+		private static void OnRealizeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.RemovePageRequested += OnRealizeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.RemovePageRequested -= OnRealizeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnRealizeCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetRealizeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Realize))
+                command.Execute(eventArgs.Realize);
+        }
+        public static readonly BindableProperty TaskCommandProperty =
+            BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnTaskCommandChanged);
+
+        public static ICommand GetTaskCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TaskCommandProperty);
+        }
+
+		private static void OnTaskCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.RemovePageRequested += OnTaskCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.RemovePageRequested -= OnTaskCommandChanged;
+                }
+            }
+		}
+
+        private static void OnTaskCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetTaskCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Task))
+                command.Execute(eventArgs.Task);
+        }
+        public static readonly BindableProperty PageCommandProperty =
+            BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnPageCommandChanged);
+
+        public static ICommand GetPageCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PageCommandProperty);
+        }
+
+		private static void OnPageCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is NavigationPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.RemovePageRequested += OnPageCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.RemovePageRequested -= OnPageCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPageCommandChanged(object o, Xamarin.Forms.Internals.NavigationRequestedEventArgs eventArgs)
+        {
+            var command = GetPageCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Page))
+                command.Execute(eventArgs.Page);
+        }
+	}
+
+	public class OpenGLViewDisplayRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(OpenGLViewDisplayRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is OpenGLView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.DisplayRequested += OpenGLViewOnDisplayRequested;
+                    target.DisplayRequested += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.DisplayRequested -= OpenGLViewOnDisplayRequested;
+                    target.DisplayRequested -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void OpenGLViewOnDisplayRequested(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetDisplayRequestedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class Pages {
-        public static readonly BindableProperty AppearingToProperty =
-            BindableProperty.CreateAttached("AppearingTo", typeof(ICommand), typeof(Pages), null, propertyChanged:OnAppearingToChanged);
+	public class PageAppearing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PageAppearing), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetAppearingTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(AppearingToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnAppearingToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Page target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Appearing += PageOnAppearing;
+                    target.Appearing += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Appearing -= PageOnAppearing;
+                    target.Appearing -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void PageOnAppearing(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetAppearingTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
-        public static readonly BindableProperty DisappearingToProperty =
-            BindableProperty.CreateAttached("DisappearingTo", typeof(ICommand), typeof(Pages), null, propertyChanged:OnDisappearingToChanged);
-
-        public static ICommand GetDisappearingTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(DisappearingToProperty);
-        }
-
-		private static void OnDisappearingToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Page target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Disappearing += PageOnDisappearing;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Disappearing -= PageOnDisappearing;
-                }
-            }
-		}
-
-        private static void PageOnDisappearing(object o, EventArgs eventArgs)
-        {
-            var command = GetDisappearingTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty LayoutChangedToProperty =
-            BindableProperty.CreateAttached("LayoutChangedTo", typeof(ICommand), typeof(Pages), null, propertyChanged:OnLayoutChangedToChanged);
-
-        public static ICommand GetLayoutChangedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(LayoutChangedToProperty);
-        }
-
-		private static void OnLayoutChangedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Page target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.LayoutChanged += PageOnLayoutChanged;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.LayoutChanged -= PageOnLayoutChanged;
-                }
-            }
-		}
-
-        private static void PageOnLayoutChanged(object o, EventArgs eventArgs)
-        {
-            var command = GetLayoutChangedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class PanGestureRecognizers {
-        public static readonly BindableProperty PanUpdatedToProperty =
-            BindableProperty.CreateAttached("PanUpdatedTo", typeof(ICommand), typeof(PanGestureRecognizers), null, propertyChanged:OnPanUpdatedToChanged);
+	public class PageDisappearing {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PageDisappearing), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetPanUpdatedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(PanUpdatedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnPanUpdatedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Page target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Disappearing += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Disappearing -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class PageLayoutChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PageLayoutChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Page target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.LayoutChanged += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.LayoutChanged -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class PanGestureRecognizerPanUpdated {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is PanGestureRecognizer target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.PanUpdated += PanGestureRecognizerOnPanUpdated;
+                    target.PanUpdated += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.PanUpdated -= PanGestureRecognizerOnPanUpdated;
+                    target.PanUpdated -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void PanGestureRecognizerOnPanUpdated(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetPanUpdatedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty GestureIdCommandProperty =
+            BindableProperty.CreateAttached("GestureIdCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnGestureIdCommandChanged);
 
-	}
-
-	public class Pickers {
-        public static readonly BindableProperty SelectedIndexChangedToProperty =
-            BindableProperty.CreateAttached("SelectedIndexChangedTo", typeof(ICommand), typeof(Pickers), null, propertyChanged:OnSelectedIndexChangedToChanged);
-
-        public static ICommand GetSelectedIndexChangedTo(BindableObject bindableObject)
+        public static ICommand GetGestureIdCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(SelectedIndexChangedToProperty);
+            return (ICommand)bindableObject.GetValue(GestureIdCommandProperty);
         }
 
-		private static void OnSelectedIndexChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnGestureIdCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PanGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PanUpdated += OnGestureIdCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PanUpdated -= OnGestureIdCommandChanged;
+                }
+            }
+		}
+
+        private static void OnGestureIdCommandChanged(object o, Xamarin.Forms.PanUpdatedEventArgs eventArgs)
+        {
+            var command = GetGestureIdCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.GestureId))
+                command.Execute(eventArgs.GestureId);
+        }
+        public static readonly BindableProperty StatusTypeCommandProperty =
+            BindableProperty.CreateAttached("StatusTypeCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnStatusTypeCommandChanged);
+
+        public static ICommand GetStatusTypeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(StatusTypeCommandProperty);
+        }
+
+		private static void OnStatusTypeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PanGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PanUpdated += OnStatusTypeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PanUpdated -= OnStatusTypeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnStatusTypeCommandChanged(object o, Xamarin.Forms.PanUpdatedEventArgs eventArgs)
+        {
+            var command = GetStatusTypeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.StatusType))
+                command.Execute(eventArgs.StatusType);
+        }
+        public static readonly BindableProperty TotalXCommandProperty =
+            BindableProperty.CreateAttached("TotalXCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnTotalXCommandChanged);
+
+        public static ICommand GetTotalXCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TotalXCommandProperty);
+        }
+
+		private static void OnTotalXCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PanGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PanUpdated += OnTotalXCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PanUpdated -= OnTotalXCommandChanged;
+                }
+            }
+		}
+
+        private static void OnTotalXCommandChanged(object o, Xamarin.Forms.PanUpdatedEventArgs eventArgs)
+        {
+            var command = GetTotalXCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.TotalX))
+                command.Execute(eventArgs.TotalX);
+        }
+        public static readonly BindableProperty TotalYCommandProperty =
+            BindableProperty.CreateAttached("TotalYCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnTotalYCommandChanged);
+
+        public static ICommand GetTotalYCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(TotalYCommandProperty);
+        }
+
+		private static void OnTotalYCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PanGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PanUpdated += OnTotalYCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PanUpdated -= OnTotalYCommandChanged;
+                }
+            }
+		}
+
+        private static void OnTotalYCommandChanged(object o, Xamarin.Forms.PanUpdatedEventArgs eventArgs)
+        {
+            var command = GetTotalYCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.TotalY))
+                command.Execute(eventArgs.TotalY);
+        }
+	}
+
+	public class PickerSelectedIndexChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PickerSelectedIndexChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Picker target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.SelectedIndexChanged += PickerOnSelectedIndexChanged;
+                    target.SelectedIndexChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.SelectedIndexChanged -= PickerOnSelectedIndexChanged;
+                    target.SelectedIndexChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void PickerOnSelectedIndexChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetSelectedIndexChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class PinchGestureRecognizers {
-        public static readonly BindableProperty PinchUpdatedToProperty =
-            BindableProperty.CreateAttached("PinchUpdatedTo", typeof(ICommand), typeof(PinchGestureRecognizers), null, propertyChanged:OnPinchUpdatedToChanged);
+	public class PinchGestureRecognizerPinchUpdated {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetPinchUpdatedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(PinchUpdatedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnPinchUpdatedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is PinchGestureRecognizer target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.PinchUpdated += PinchGestureRecognizerOnPinchUpdated;
+                    target.PinchUpdated += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.PinchUpdated -= PinchGestureRecognizerOnPinchUpdated;
+                    target.PinchUpdated -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void PinchGestureRecognizerOnPinchUpdated(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetPinchUpdatedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ScaleCommandProperty =
+            BindableProperty.CreateAttached("ScaleCommand", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnScaleCommandChanged);
 
-	}
-
-	public class RowDefinitions {
-        public static readonly BindableProperty SizeChangedToProperty =
-            BindableProperty.CreateAttached("SizeChangedTo", typeof(ICommand), typeof(RowDefinitions), null, propertyChanged:OnSizeChangedToChanged);
-
-        public static ICommand GetSizeChangedTo(BindableObject bindableObject)
+        public static ICommand GetScaleCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(SizeChangedToProperty);
+            return (ICommand)bindableObject.GetValue(ScaleCommandProperty);
         }
 
-		private static void OnSizeChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnScaleCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PinchGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PinchUpdated += OnScaleCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PinchUpdated -= OnScaleCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScaleCommandChanged(object o, Xamarin.Forms.PinchGestureUpdatedEventArgs eventArgs)
+        {
+            var command = GetScaleCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Scale))
+                command.Execute(eventArgs.Scale);
+        }
+        public static readonly BindableProperty ScaleOriginCommandProperty =
+            BindableProperty.CreateAttached("ScaleOriginCommand", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnScaleOriginCommandChanged);
+
+        public static ICommand GetScaleOriginCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ScaleOriginCommandProperty);
+        }
+
+		private static void OnScaleOriginCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PinchGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PinchUpdated += OnScaleOriginCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PinchUpdated -= OnScaleOriginCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScaleOriginCommandChanged(object o, Xamarin.Forms.PinchGestureUpdatedEventArgs eventArgs)
+        {
+            var command = GetScaleOriginCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScaleOrigin))
+                command.Execute(eventArgs.ScaleOrigin);
+        }
+        public static readonly BindableProperty StatusCommandProperty =
+            BindableProperty.CreateAttached("StatusCommand", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnStatusCommandChanged);
+
+        public static ICommand GetStatusCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(StatusCommandProperty);
+        }
+
+		private static void OnStatusCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is PinchGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.PinchUpdated += OnStatusCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.PinchUpdated -= OnStatusCommandChanged;
+                }
+            }
+		}
+
+        private static void OnStatusCommandChanged(object o, Xamarin.Forms.PinchGestureUpdatedEventArgs eventArgs)
+        {
+            var command = GetStatusCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Status))
+                command.Execute(eventArgs.Status);
+        }
+	}
+
+	public class RowDefinitionSizeChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(RowDefinitionSizeChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is RowDefinition target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.SizeChanged += RowDefinitionOnSizeChanged;
+                    target.SizeChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.SizeChanged -= RowDefinitionOnSizeChanged;
+                    target.SizeChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void RowDefinitionOnSizeChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetSizeChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class ScrollViews {
-        public static readonly BindableProperty ScrolledToProperty =
-            BindableProperty.CreateAttached("ScrolledTo", typeof(ICommand), typeof(ScrollViews), null, propertyChanged:OnScrolledToChanged);
+	public class ScrollViewScrolled {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ScrollViewScrolled), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetScrolledTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ScrolledToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnScrolledToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ScrollView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Scrolled += ScrollViewOnScrolled;
+                    target.Scrolled += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Scrolled -= ScrollViewOnScrolled;
+                    target.Scrolled -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ScrollViewOnScrolled(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetScrolledTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ScrollXCommandProperty =
+            BindableProperty.CreateAttached("ScrollXCommand", typeof(ICommand), typeof(ScrollViewScrolled), null, propertyChanged:OnScrollXCommandChanged);
 
-        public static readonly BindableProperty ScrollToRequestedToProperty =
-            BindableProperty.CreateAttached("ScrollToRequestedTo", typeof(ICommand), typeof(ScrollViews), null, propertyChanged:OnScrollToRequestedToChanged);
-
-        public static ICommand GetScrollToRequestedTo(BindableObject bindableObject)
+        public static ICommand GetScrollXCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ScrollToRequestedToProperty);
+            return (ICommand)bindableObject.GetValue(ScrollXCommandProperty);
         }
 
-		private static void OnScrollToRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnScrollXCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ScrollView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ScrollToRequested += ScrollViewOnScrollToRequested;
+                    target.Scrolled += OnScrollXCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ScrollToRequested -= ScrollViewOnScrollToRequested;
+                    target.Scrolled -= OnScrollXCommandChanged;
                 }
             }
 		}
 
-        private static void ScrollViewOnScrollToRequested(object o, EventArgs eventArgs)
+        private static void OnScrollXCommandChanged(object o, Xamarin.Forms.ScrolledEventArgs eventArgs)
         {
-            var command = GetScrollToRequestedTo((BindableObject)o);
+            var command = GetScrollXCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScrollX))
+                command.Execute(eventArgs.ScrollX);
+        }
+        public static readonly BindableProperty ScrollYCommandProperty =
+            BindableProperty.CreateAttached("ScrollYCommand", typeof(ICommand), typeof(ScrollViewScrolled), null, propertyChanged:OnScrollYCommandChanged);
+
+        public static ICommand GetScrollYCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ScrollYCommandProperty);
+        }
+
+		private static void OnScrollYCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Scrolled += OnScrollYCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Scrolled -= OnScrollYCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScrollYCommandChanged(object o, Xamarin.Forms.ScrolledEventArgs eventArgs)
+        {
+            var command = GetScrollYCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScrollY))
+                command.Execute(eventArgs.ScrollY);
+        }
+	}
+
+	public class ScrollViewScrollToRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ElementCommandProperty =
+            BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnElementCommandChanged);
 
-	}
-
-	public class SearchBars {
-        public static readonly BindableProperty SearchButtonPressedToProperty =
-            BindableProperty.CreateAttached("SearchButtonPressedTo", typeof(ICommand), typeof(SearchBars), null, propertyChanged:OnSearchButtonPressedToChanged);
-
-        public static ICommand GetSearchButtonPressedTo(BindableObject bindableObject)
+        public static ICommand GetElementCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(SearchButtonPressedToProperty);
+            return (ICommand)bindableObject.GetValue(ElementCommandProperty);
         }
 
-		private static void OnSearchButtonPressedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnElementCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Element))
+                command.Execute(eventArgs.Element);
+        }
+        public static readonly BindableProperty ModeCommandProperty =
+            BindableProperty.CreateAttached("ModeCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnModeCommandChanged);
+
+        public static ICommand GetModeCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ModeCommandProperty);
+        }
+
+		private static void OnModeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnModeCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnModeCommandChanged;
+                }
+            }
+		}
+
+        private static void OnModeCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetModeCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Mode))
+                command.Execute(eventArgs.Mode);
+        }
+        public static readonly BindableProperty PositionCommandProperty =
+            BindableProperty.CreateAttached("PositionCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnPositionCommandChanged);
+
+        public static ICommand GetPositionCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(PositionCommandProperty);
+        }
+
+		private static void OnPositionCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnPositionCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnPositionCommandChanged;
+                }
+            }
+		}
+
+        private static void OnPositionCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetPositionCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Position))
+                command.Execute(eventArgs.Position);
+        }
+        public static readonly BindableProperty ScrollXCommandProperty =
+            BindableProperty.CreateAttached("ScrollXCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnScrollXCommandChanged);
+
+        public static ICommand GetScrollXCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ScrollXCommandProperty);
+        }
+
+		private static void OnScrollXCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnScrollXCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnScrollXCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScrollXCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetScrollXCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScrollX))
+                command.Execute(eventArgs.ScrollX);
+        }
+        public static readonly BindableProperty ScrollYCommandProperty =
+            BindableProperty.CreateAttached("ScrollYCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnScrollYCommandChanged);
+
+        public static ICommand GetScrollYCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ScrollYCommandProperty);
+        }
+
+		private static void OnScrollYCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnScrollYCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnScrollYCommandChanged;
+                }
+            }
+		}
+
+        private static void OnScrollYCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetScrollYCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ScrollY))
+                command.Execute(eventArgs.ScrollY);
+        }
+        public static readonly BindableProperty ShouldAnimateCommandProperty =
+            BindableProperty.CreateAttached("ShouldAnimateCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnShouldAnimateCommandChanged);
+
+        public static ICommand GetShouldAnimateCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ShouldAnimateCommandProperty);
+        }
+
+		private static void OnShouldAnimateCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ScrollView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ScrollToRequested += OnShouldAnimateCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ScrollToRequested -= OnShouldAnimateCommandChanged;
+                }
+            }
+		}
+
+        private static void OnShouldAnimateCommandChanged(object o, Xamarin.Forms.ScrollToRequestedEventArgs eventArgs)
+        {
+            var command = GetShouldAnimateCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.ShouldAnimate))
+                command.Execute(eventArgs.ShouldAnimate);
+        }
+	}
+
+	public class SearchBarSearchButtonPressed {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SearchBarSearchButtonPressed), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is SearchBar target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.SearchButtonPressed += SearchBarOnSearchButtonPressed;
+                    target.SearchButtonPressed += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.SearchButtonPressed -= SearchBarOnSearchButtonPressed;
+                    target.SearchButtonPressed -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void SearchBarOnSearchButtonPressed(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetSearchButtonPressedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty TextChangedToProperty =
-            BindableProperty.CreateAttached("TextChangedTo", typeof(ICommand), typeof(SearchBars), null, propertyChanged:OnTextChangedToChanged);
+	public class SearchBarTextChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SearchBarTextChanged), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetTextChangedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(TextChangedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnTextChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is SearchBar target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.TextChanged += SearchBarOnTextChanged;
+                    target.TextChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.TextChanged -= SearchBarOnTextChanged;
+                    target.TextChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void SearchBarOnTextChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetTextChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty NewTextValueCommandProperty =
+            BindableProperty.CreateAttached("NewTextValueCommand", typeof(ICommand), typeof(SearchBarTextChanged), null, propertyChanged:OnNewTextValueCommandChanged);
 
-	}
-
-	public class Sliders {
-        public static readonly BindableProperty ValueChangedToProperty =
-            BindableProperty.CreateAttached("ValueChangedTo", typeof(ICommand), typeof(Sliders), null, propertyChanged:OnValueChangedToChanged);
-
-        public static ICommand GetValueChangedTo(BindableObject bindableObject)
+        public static ICommand GetNewTextValueCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ValueChangedToProperty);
+            return (ICommand)bindableObject.GetValue(NewTextValueCommandProperty);
         }
 
-		private static void OnValueChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnNewTextValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is SearchBar target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.TextChanged += OnNewTextValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.TextChanged -= OnNewTextValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNewTextValueCommandChanged(object o, Xamarin.Forms.TextChangedEventArgs eventArgs)
+        {
+            var command = GetNewTextValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NewTextValue))
+                command.Execute(eventArgs.NewTextValue);
+        }
+        public static readonly BindableProperty OldTextValueCommandProperty =
+            BindableProperty.CreateAttached("OldTextValueCommand", typeof(ICommand), typeof(SearchBarTextChanged), null, propertyChanged:OnOldTextValueCommandChanged);
+
+        public static ICommand GetOldTextValueCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OldTextValueCommandProperty);
+        }
+
+		private static void OnOldTextValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is SearchBar target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.TextChanged += OnOldTextValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.TextChanged -= OnOldTextValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnOldTextValueCommandChanged(object o, Xamarin.Forms.TextChangedEventArgs eventArgs)
+        {
+            var command = GetOldTextValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.OldTextValue))
+                command.Execute(eventArgs.OldTextValue);
+        }
+	}
+
+	public class SliderValueChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SliderValueChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Slider target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ValueChanged += SliderOnValueChanged;
+                    target.ValueChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ValueChanged -= SliderOnValueChanged;
+                    target.ValueChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void SliderOnValueChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetValueChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty NewValueCommandProperty =
+            BindableProperty.CreateAttached("NewValueCommand", typeof(ICommand), typeof(SliderValueChanged), null, propertyChanged:OnNewValueCommandChanged);
 
-	}
-
-	public class Steppers {
-        public static readonly BindableProperty ValueChangedToProperty =
-            BindableProperty.CreateAttached("ValueChangedTo", typeof(ICommand), typeof(Steppers), null, propertyChanged:OnValueChangedToChanged);
-
-        public static ICommand GetValueChangedTo(BindableObject bindableObject)
+        public static ICommand GetNewValueCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ValueChangedToProperty);
+            return (ICommand)bindableObject.GetValue(NewValueCommandProperty);
         }
 
-		private static void OnValueChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnNewValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Slider target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ValueChanged += OnNewValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ValueChanged -= OnNewValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNewValueCommandChanged(object o, Xamarin.Forms.ValueChangedEventArgs eventArgs)
+        {
+            var command = GetNewValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NewValue))
+                command.Execute(eventArgs.NewValue);
+        }
+        public static readonly BindableProperty OldValueCommandProperty =
+            BindableProperty.CreateAttached("OldValueCommand", typeof(ICommand), typeof(SliderValueChanged), null, propertyChanged:OnOldValueCommandChanged);
+
+        public static ICommand GetOldValueCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OldValueCommandProperty);
+        }
+
+		private static void OnOldValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Slider target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ValueChanged += OnOldValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ValueChanged -= OnOldValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnOldValueCommandChanged(object o, Xamarin.Forms.ValueChangedEventArgs eventArgs)
+        {
+            var command = GetOldValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.OldValue))
+                command.Execute(eventArgs.OldValue);
+        }
+	}
+
+	public class StepperValueChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(StepperValueChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Stepper target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ValueChanged += StepperOnValueChanged;
+                    target.ValueChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ValueChanged -= StepperOnValueChanged;
+                    target.ValueChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void StepperOnValueChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetValueChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty NewValueCommandProperty =
+            BindableProperty.CreateAttached("NewValueCommand", typeof(ICommand), typeof(StepperValueChanged), null, propertyChanged:OnNewValueCommandChanged);
 
-	}
-
-	public class Switchs {
-        public static readonly BindableProperty ToggledToProperty =
-            BindableProperty.CreateAttached("ToggledTo", typeof(ICommand), typeof(Switchs), null, propertyChanged:OnToggledToChanged);
-
-        public static ICommand GetToggledTo(BindableObject bindableObject)
+        public static ICommand GetNewValueCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ToggledToProperty);
+            return (ICommand)bindableObject.GetValue(NewValueCommandProperty);
         }
 
-		private static void OnToggledToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnNewValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Stepper target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ValueChanged += OnNewValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ValueChanged -= OnNewValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNewValueCommandChanged(object o, Xamarin.Forms.ValueChangedEventArgs eventArgs)
+        {
+            var command = GetNewValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NewValue))
+                command.Execute(eventArgs.NewValue);
+        }
+        public static readonly BindableProperty OldValueCommandProperty =
+            BindableProperty.CreateAttached("OldValueCommand", typeof(ICommand), typeof(StepperValueChanged), null, propertyChanged:OnOldValueCommandChanged);
+
+        public static ICommand GetOldValueCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OldValueCommandProperty);
+        }
+
+		private static void OnOldValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Stepper target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ValueChanged += OnOldValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ValueChanged -= OnOldValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnOldValueCommandChanged(object o, Xamarin.Forms.ValueChangedEventArgs eventArgs)
+        {
+            var command = GetOldValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.OldValue))
+                command.Execute(eventArgs.OldValue);
+        }
+	}
+
+	public class SwitchToggled {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SwitchToggled), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Switch target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Toggled += SwitchOnToggled;
+                    target.Toggled += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Toggled -= SwitchOnToggled;
+                    target.Toggled -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void SwitchOnToggled(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetToggledTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ValueCommandProperty =
+            BindableProperty.CreateAttached("ValueCommand", typeof(ICommand), typeof(SwitchToggled), null, propertyChanged:OnValueCommandChanged);
 
-	}
-
-	public class SwitchCells {
-        public static readonly BindableProperty OnChangedToProperty =
-            BindableProperty.CreateAttached("OnChangedTo", typeof(ICommand), typeof(SwitchCells), null, propertyChanged:OnOnChangedToChanged);
-
-        public static ICommand GetOnChangedTo(BindableObject bindableObject)
+        public static ICommand GetValueCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(OnChangedToProperty);
+            return (ICommand)bindableObject.GetValue(ValueCommandProperty);
         }
 
-		private static void OnOnChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is Switch target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Toggled += OnValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Toggled -= OnValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnValueCommandChanged(object o, Xamarin.Forms.ToggledEventArgs eventArgs)
+        {
+            var command = GetValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Value))
+                command.Execute(eventArgs.Value);
+        }
+	}
+
+	public class SwitchCellOnChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SwitchCellOnChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is SwitchCell target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.OnChanged += SwitchCellOnOnChanged;
+                    target.OnChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.OnChanged -= SwitchCellOnOnChanged;
+                    target.OnChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void SwitchCellOnOnChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetOnChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ValueCommandProperty =
+            BindableProperty.CreateAttached("ValueCommand", typeof(ICommand), typeof(SwitchCellOnChanged), null, propertyChanged:OnValueCommandChanged);
 
-	}
-
-	public class TableViews {
-        public static readonly BindableProperty ModelChangedToProperty =
-            BindableProperty.CreateAttached("ModelChangedTo", typeof(ICommand), typeof(TableViews), null, propertyChanged:OnModelChangedToChanged);
-
-        public static ICommand GetModelChangedTo(BindableObject bindableObject)
+        public static ICommand GetValueCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ModelChangedToProperty);
+            return (ICommand)bindableObject.GetValue(ValueCommandProperty);
         }
 
-		private static void OnModelChangedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnValueCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is SwitchCell target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.OnChanged += OnValueCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.OnChanged -= OnValueCommandChanged;
+                }
+            }
+		}
+
+        private static void OnValueCommandChanged(object o, Xamarin.Forms.ToggledEventArgs eventArgs)
+        {
+            var command = GetValueCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Value))
+                command.Execute(eventArgs.Value);
+        }
+	}
+
+	public class TableViewModelChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(TableViewModelChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is TableView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ModelChanged += TableViewOnModelChanged;
+                    target.ModelChanged += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ModelChanged -= TableViewOnModelChanged;
+                    target.ModelChanged -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void TableViewOnModelChanged(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetModelChangedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class TapGestureRecognizers {
-        public static readonly BindableProperty TappedToProperty =
-            BindableProperty.CreateAttached("TappedTo", typeof(ICommand), typeof(TapGestureRecognizers), null, propertyChanged:OnTappedToChanged);
+	public class TapGestureRecognizerTapped {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(TapGestureRecognizerTapped), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetTappedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(TappedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnTappedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is TapGestureRecognizer target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Tapped += TapGestureRecognizerOnTapped;
+                    target.Tapped += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Tapped -= TapGestureRecognizerOnTapped;
+                    target.Tapped -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void TapGestureRecognizerOnTapped(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetTappedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class ToolbarItems {
-        public static readonly BindableProperty ActivatedToProperty =
-            BindableProperty.CreateAttached("ActivatedTo", typeof(ICommand), typeof(ToolbarItems), null, propertyChanged:OnActivatedToChanged);
+	public class ToolbarItemActivated {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ToolbarItemActivated), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetActivatedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ActivatedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnActivatedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ToolbarItem target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Activated += ToolbarItemOnActivated;
+                    target.Activated += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Activated -= ToolbarItemOnActivated;
+                    target.Activated -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void ToolbarItemOnActivated(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetActivatedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
 	}
 
-	public class VisualElements {
-        public static readonly BindableProperty BatchCommittedToProperty =
-            BindableProperty.CreateAttached("BatchCommittedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnBatchCommittedToChanged);
+	public class VisualElementBatchCommitted {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementBatchCommitted), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetBatchCommittedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(BatchCommittedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnBatchCommittedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is VisualElement target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.BatchCommitted += VisualElementOnBatchCommitted;
+                    target.BatchCommitted += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.BatchCommitted -= VisualElementOnBatchCommitted;
+                    target.BatchCommitted -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void VisualElementOnBatchCommitted(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetBatchCommittedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-
-        public static readonly BindableProperty ChildrenReorderedToProperty =
-            BindableProperty.CreateAttached("ChildrenReorderedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnChildrenReorderedToChanged);
-
-        public static ICommand GetChildrenReorderedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ChildrenReorderedToProperty);
-        }
-
-		private static void OnChildrenReorderedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is VisualElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.ChildrenReordered += VisualElementOnChildrenReordered;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ChildrenReordered -= VisualElementOnChildrenReordered;
-                }
-            }
-		}
-
-        private static void VisualElementOnChildrenReordered(object o, EventArgs eventArgs)
-        {
-            var command = GetChildrenReorderedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty FocusChangeRequestedToProperty =
-            BindableProperty.CreateAttached("FocusChangeRequestedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnFocusChangeRequestedToChanged);
-
-        public static ICommand GetFocusChangeRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(FocusChangeRequestedToProperty);
-        }
-
-		private static void OnFocusChangeRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is VisualElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.FocusChangeRequested += VisualElementOnFocusChangeRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.FocusChangeRequested -= VisualElementOnFocusChangeRequested;
-                }
-            }
-		}
-
-        private static void VisualElementOnFocusChangeRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetFocusChangeRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty FocusedToProperty =
-            BindableProperty.CreateAttached("FocusedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnFocusedToChanged);
-
-        public static ICommand GetFocusedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(FocusedToProperty);
-        }
-
-		private static void OnFocusedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is VisualElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Focused += VisualElementOnFocused;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Focused -= VisualElementOnFocused;
-                }
-            }
-		}
-
-        private static void VisualElementOnFocused(object o, EventArgs eventArgs)
-        {
-            var command = GetFocusedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty MeasureInvalidatedToProperty =
-            BindableProperty.CreateAttached("MeasureInvalidatedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnMeasureInvalidatedToChanged);
-
-        public static ICommand GetMeasureInvalidatedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(MeasureInvalidatedToProperty);
-        }
-
-		private static void OnMeasureInvalidatedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is VisualElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.MeasureInvalidated += VisualElementOnMeasureInvalidated;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.MeasureInvalidated -= VisualElementOnMeasureInvalidated;
-                }
-            }
-		}
-
-        private static void VisualElementOnMeasureInvalidated(object o, EventArgs eventArgs)
-        {
-            var command = GetMeasureInvalidatedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty SizeChangedToProperty =
-            BindableProperty.CreateAttached("SizeChangedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnSizeChangedToChanged);
-
-        public static ICommand GetSizeChangedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(SizeChangedToProperty);
-        }
-
-		private static void OnSizeChangedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is VisualElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.SizeChanged += VisualElementOnSizeChanged;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.SizeChanged -= VisualElementOnSizeChanged;
-                }
-            }
-		}
-
-        private static void VisualElementOnSizeChanged(object o, EventArgs eventArgs)
-        {
-            var command = GetSizeChangedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
-        public static readonly BindableProperty UnfocusedToProperty =
-            BindableProperty.CreateAttached("UnfocusedTo", typeof(ICommand), typeof(VisualElements), null, propertyChanged:OnUnfocusedToChanged);
-
-        public static ICommand GetUnfocusedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(UnfocusedToProperty);
-        }
-
-		private static void OnUnfocusedToChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is VisualElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Unfocused += VisualElementOnUnfocused;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Unfocused -= VisualElementOnUnfocused;
-                }
-            }
-		}
-
-        private static void VisualElementOnUnfocused(object o, EventArgs eventArgs)
-        {
-            var command = GetUnfocusedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
-
 	}
 
-	public class WebViews {
-        public static readonly BindableProperty EvalRequestedToProperty =
-            BindableProperty.CreateAttached("EvalRequestedTo", typeof(ICommand), typeof(WebViews), null, propertyChanged:OnEvalRequestedToChanged);
+	public class VisualElementChildrenReordered {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementChildrenReordered), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetEvalRequestedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(EvalRequestedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnEvalRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.ChildrenReordered += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.ChildrenReordered -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class VisualElementFocusChangeRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementFocusChangeRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.FocusChangeRequested += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.FocusChangeRequested -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class VisualElementFocused {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementFocused), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Focused += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Focused -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty IsFocusedCommandProperty =
+            BindableProperty.CreateAttached("IsFocusedCommand", typeof(ICommand), typeof(VisualElementFocused), null, propertyChanged:OnIsFocusedCommandChanged);
+
+        public static ICommand GetIsFocusedCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(IsFocusedCommandProperty);
+        }
+
+		private static void OnIsFocusedCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Focused += OnIsFocusedCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Focused -= OnIsFocusedCommandChanged;
+                }
+            }
+		}
+
+        private static void OnIsFocusedCommandChanged(object o, Xamarin.Forms.FocusEventArgs eventArgs)
+        {
+            var command = GetIsFocusedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.IsFocused))
+                command.Execute(eventArgs.IsFocused);
+        }
+        public static readonly BindableProperty VisualElementCommandProperty =
+            BindableProperty.CreateAttached("VisualElementCommand", typeof(ICommand), typeof(VisualElementFocused), null, propertyChanged:OnVisualElementCommandChanged);
+
+        public static ICommand GetVisualElementCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(VisualElementCommandProperty);
+        }
+
+		private static void OnVisualElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Focused += OnVisualElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Focused -= OnVisualElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnVisualElementCommandChanged(object o, Xamarin.Forms.FocusEventArgs eventArgs)
+        {
+            var command = GetVisualElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.VisualElement))
+                command.Execute(eventArgs.VisualElement);
+        }
+	}
+
+	public class VisualElementMeasureInvalidated {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementMeasureInvalidated), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.MeasureInvalidated += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.MeasureInvalidated -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class VisualElementSizeChanged {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementSizeChanged), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.SizeChanged += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.SizeChanged -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+	}
+
+	public class VisualElementUnfocused {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementUnfocused), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Unfocused += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Unfocused -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty IsFocusedCommandProperty =
+            BindableProperty.CreateAttached("IsFocusedCommand", typeof(ICommand), typeof(VisualElementUnfocused), null, propertyChanged:OnIsFocusedCommandChanged);
+
+        public static ICommand GetIsFocusedCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(IsFocusedCommandProperty);
+        }
+
+		private static void OnIsFocusedCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Unfocused += OnIsFocusedCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Unfocused -= OnIsFocusedCommandChanged;
+                }
+            }
+		}
+
+        private static void OnIsFocusedCommandChanged(object o, Xamarin.Forms.FocusEventArgs eventArgs)
+        {
+            var command = GetIsFocusedCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.IsFocused))
+                command.Execute(eventArgs.IsFocused);
+        }
+        public static readonly BindableProperty VisualElementCommandProperty =
+            BindableProperty.CreateAttached("VisualElementCommand", typeof(ICommand), typeof(VisualElementUnfocused), null, propertyChanged:OnVisualElementCommandChanged);
+
+        public static ICommand GetVisualElementCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(VisualElementCommandProperty);
+        }
+
+		private static void OnVisualElementCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Unfocused += OnVisualElementCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Unfocused -= OnVisualElementCommandChanged;
+                }
+            }
+		}
+
+        private static void OnVisualElementCommandChanged(object o, Xamarin.Forms.FocusEventArgs eventArgs)
+        {
+            var command = GetVisualElementCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.VisualElement))
+                command.Execute(eventArgs.VisualElement);
+        }
+	}
+
+	public class WebViewEvalRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewEvalRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is WebView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.EvalRequested += WebViewOnEvalRequested;
+                    target.EvalRequested += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.EvalRequested -= WebViewOnEvalRequested;
+                    target.EvalRequested -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void WebViewOnEvalRequested(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetEvalRequestedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ScriptCommandProperty =
+            BindableProperty.CreateAttached("ScriptCommand", typeof(ICommand), typeof(WebViewEvalRequested), null, propertyChanged:OnScriptCommandChanged);
 
-        public static readonly BindableProperty GoBackRequestedToProperty =
-            BindableProperty.CreateAttached("GoBackRequestedTo", typeof(ICommand), typeof(WebViews), null, propertyChanged:OnGoBackRequestedToChanged);
-
-        public static ICommand GetGoBackRequestedTo(BindableObject bindableObject)
+        public static ICommand GetScriptCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(GoBackRequestedToProperty);
+            return (ICommand)bindableObject.GetValue(ScriptCommandProperty);
         }
 
-		private static void OnGoBackRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnScriptCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is WebView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.GoBackRequested += WebViewOnGoBackRequested;
+                    target.EvalRequested += OnScriptCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.GoBackRequested -= WebViewOnGoBackRequested;
+                    target.EvalRequested -= OnScriptCommandChanged;
                 }
             }
 		}
 
-        private static void WebViewOnGoBackRequested(object o, EventArgs eventArgs)
+        private static void OnScriptCommandChanged(object o, Xamarin.Forms.Internals.EvalRequested eventArgs)
         {
-            var command = GetGoBackRequestedTo((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = GetScriptCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Script))
+                command.Execute(eventArgs.Script);
+        }
+	}
+
+	public class WebViewGoBackRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewGoBackRequested), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-        public static readonly BindableProperty GoForwardRequestedToProperty =
-            BindableProperty.CreateAttached("GoForwardRequestedTo", typeof(ICommand), typeof(WebViews), null, propertyChanged:OnGoForwardRequestedToChanged);
-
-        public static ICommand GetGoForwardRequestedTo(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(GoForwardRequestedToProperty);
-        }
-
-		private static void OnGoForwardRequestedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is WebView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.GoForwardRequested += WebViewOnGoForwardRequested;
+                    target.GoBackRequested += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.GoForwardRequested -= WebViewOnGoForwardRequested;
+                    target.GoBackRequested -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void WebViewOnGoForwardRequested(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetGoForwardRequestedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty NavigatedToProperty =
-            BindableProperty.CreateAttached("NavigatedTo", typeof(ICommand), typeof(WebViews), null, propertyChanged:OnNavigatedToChanged);
+	public class WebViewGoForwardRequested {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewGoForwardRequested), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetNavigatedTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(NavigatedToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnNavigatedToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is WebView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Navigated += WebViewOnNavigated;
+                    target.GoForwardRequested += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Navigated -= WebViewOnNavigated;
+                    target.GoForwardRequested -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void WebViewOnNavigated(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetNavigatedTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+	}
 
-        public static readonly BindableProperty NavigatingToProperty =
-            BindableProperty.CreateAttached("NavigatingTo", typeof(ICommand), typeof(WebViews), null, propertyChanged:OnNavigatingToChanged);
+	public class WebViewNavigated {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnCommandChanged);
 
-        public static ICommand GetNavigatingTo(BindableObject bindableObject)
+        public static ICommand GetCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(NavigatingToProperty);
+            return (ICommand)bindableObject.GetValue(CommandProperty);
         }
 
-		private static void OnNavigatingToChanged(BindableObject bindable, object oldValue, object newValue)
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is WebView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Navigating += WebViewOnNavigating;
+                    target.Navigated += OnCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Navigating -= WebViewOnNavigating;
+                    target.Navigated -= OnCommandChanged;
                 }
             }
 		}
 
-        private static void WebViewOnNavigating(object o, EventArgs eventArgs)
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
         {
-            var command = GetNavigatingTo((BindableObject)o);
+            var command = GetCommand((BindableObject)o);
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+        public static readonly BindableProperty ResultCommandProperty =
+            BindableProperty.CreateAttached("ResultCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnResultCommandChanged);
 
+        public static ICommand GetResultCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ResultCommandProperty);
+        }
+
+		private static void OnResultCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigated += OnResultCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigated -= OnResultCommandChanged;
+                }
+            }
+		}
+
+        private static void OnResultCommandChanged(object o, Xamarin.Forms.WebNavigatedEventArgs eventArgs)
+        {
+            var command = GetResultCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Result))
+                command.Execute(eventArgs.Result);
+        }
+        public static readonly BindableProperty NavigationEventCommandProperty =
+            BindableProperty.CreateAttached("NavigationEventCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnNavigationEventCommandChanged);
+
+        public static ICommand GetNavigationEventCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(NavigationEventCommandProperty);
+        }
+
+		private static void OnNavigationEventCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigated += OnNavigationEventCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigated -= OnNavigationEventCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNavigationEventCommandChanged(object o, Xamarin.Forms.WebNavigatedEventArgs eventArgs)
+        {
+            var command = GetNavigationEventCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NavigationEvent))
+                command.Execute(eventArgs.NavigationEvent);
+        }
+        public static readonly BindableProperty SourceCommandProperty =
+            BindableProperty.CreateAttached("SourceCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnSourceCommandChanged);
+
+        public static ICommand GetSourceCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(SourceCommandProperty);
+        }
+
+		private static void OnSourceCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigated += OnSourceCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigated -= OnSourceCommandChanged;
+                }
+            }
+		}
+
+        private static void OnSourceCommandChanged(object o, Xamarin.Forms.WebNavigatedEventArgs eventArgs)
+        {
+            var command = GetSourceCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Source))
+                command.Execute(eventArgs.Source);
+        }
+        public static readonly BindableProperty UrlCommandProperty =
+            BindableProperty.CreateAttached("UrlCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnUrlCommandChanged);
+
+        public static ICommand GetUrlCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(UrlCommandProperty);
+        }
+
+		private static void OnUrlCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigated += OnUrlCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigated -= OnUrlCommandChanged;
+                }
+            }
+		}
+
+        private static void OnUrlCommandChanged(object o, Xamarin.Forms.WebNavigatedEventArgs eventArgs)
+        {
+            var command = GetUrlCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Url))
+                command.Execute(eventArgs.Url);
+        }
+	}
+
+	public class WebViewNavigating {
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnCommandChanged);
+
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigating += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigating -= OnCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+        public static readonly BindableProperty CancelCommandProperty =
+            BindableProperty.CreateAttached("CancelCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnCancelCommandChanged);
+
+        public static ICommand GetCancelCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CancelCommandProperty);
+        }
+
+		private static void OnCancelCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigating += OnCancelCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigating -= OnCancelCommandChanged;
+                }
+            }
+		}
+
+        private static void OnCancelCommandChanged(object o, Xamarin.Forms.WebNavigatingEventArgs eventArgs)
+        {
+            var command = GetCancelCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Cancel))
+                command.Execute(eventArgs.Cancel);
+        }
+        public static readonly BindableProperty NavigationEventCommandProperty =
+            BindableProperty.CreateAttached("NavigationEventCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnNavigationEventCommandChanged);
+
+        public static ICommand GetNavigationEventCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(NavigationEventCommandProperty);
+        }
+
+		private static void OnNavigationEventCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigating += OnNavigationEventCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigating -= OnNavigationEventCommandChanged;
+                }
+            }
+		}
+
+        private static void OnNavigationEventCommandChanged(object o, Xamarin.Forms.WebNavigatingEventArgs eventArgs)
+        {
+            var command = GetNavigationEventCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.NavigationEvent))
+                command.Execute(eventArgs.NavigationEvent);
+        }
+        public static readonly BindableProperty SourceCommandProperty =
+            BindableProperty.CreateAttached("SourceCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnSourceCommandChanged);
+
+        public static ICommand GetSourceCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(SourceCommandProperty);
+        }
+
+		private static void OnSourceCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigating += OnSourceCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigating -= OnSourceCommandChanged;
+                }
+            }
+		}
+
+        private static void OnSourceCommandChanged(object o, Xamarin.Forms.WebNavigatingEventArgs eventArgs)
+        {
+            var command = GetSourceCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Source))
+                command.Execute(eventArgs.Source);
+        }
+        public static readonly BindableProperty UrlCommandProperty =
+            BindableProperty.CreateAttached("UrlCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnUrlCommandChanged);
+
+        public static ICommand GetUrlCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(UrlCommandProperty);
+        }
+
+		private static void OnUrlCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is WebView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Navigating += OnUrlCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Navigating -= OnUrlCommandChanged;
+                }
+            }
+		}
+
+        private static void OnUrlCommandChanged(object o, Xamarin.Forms.WebNavigatingEventArgs eventArgs)
+        {
+            var command = GetUrlCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Url))
+                command.Execute(eventArgs.Url);
+        }
 	}
 
 }

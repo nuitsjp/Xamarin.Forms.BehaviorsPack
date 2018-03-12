@@ -30,6 +30,7 @@ namespace BehaviorsSampleApp.ViewModels
 		});
 
         public ICommand AppearingCommand => new Command(() => Debug.WriteLine($"{GetType().Name}#AppearingCommand"));
+	    public ICommand DisappearingCommand => new Command(() => Debug.WriteLine($"{GetType().Name}#DisappearingCommand"));
 
     }
 }

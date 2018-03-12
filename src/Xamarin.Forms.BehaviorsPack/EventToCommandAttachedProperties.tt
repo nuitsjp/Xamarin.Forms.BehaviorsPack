@@ -6,6 +6,7 @@
 <#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Platform.dll" #>
 <#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Xaml.dll" #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Xamarin.Forms" #>
 <#@ import namespace="System.Windows.Input" #>
 <#   
@@ -16,6 +17,13 @@
                 && !x.IsGenericType
                 && x.IsSubclassOf(typeof(BindableObject)))
         .OrderBy(x => x.FullName);
+	var excludeInfos = new List<ExcludeInfo>
+	{
+		new ExcludeInfo { Type = typeof(VisualElement), EventName = "BatchCommitted", EventPropertyName = "Data"  },
+		new ExcludeInfo { Type = typeof(VisualElement), EventName = "FocusChangeRequested", EventPropertyName = "Focus"  },
+		new ExcludeInfo { Type = typeof(VisualElement), EventName = "FocusChangeRequested", EventPropertyName = "Result"  },
+	};
+
 #>
 using System;
 using System.Windows.Input;
@@ -27,54 +35,91 @@ namespace Xamarin.Forms.BehaviorsPack {
 		var eventInfos = type.GetEvents().Where(x => x.DeclaringType == type).OrderBy(x => x.Name);
 		if(eventInfos.Any())
         {
-			var typeName = type.Name + "s";
+			foreach (var eventInfo in eventInfos)
+			{
+				var typeName = $"{type.Name}{eventInfo.Name}";
+				var propertyInfos = new List<BindablePropertyInfo>();
+				propertyInfos.Add(new BindablePropertyInfo {
+					PropertyName = "Command",
+					EventArgsTypeName = "EventArgs",
+					CommandParameter = "eventArgs"
+				});
+                if (eventInfo.EventHandlerType.IsGenericType)
+                {
+                    var eventArgType = eventInfo.EventHandlerType.GenericTypeArguments.First();
+					foreach (var propertyInfo in eventArgType.GetProperties())
+					{
+						if (excludeInfos.Any(x => x.Type == type && x.EventName == eventInfo.Name && x.EventPropertyName == propertyInfo.Name))
+							continue;
+
+						propertyInfos.Add(new BindablePropertyInfo {
+							PropertyName = $"{propertyInfo.Name}Command",
+							EventArgsTypeName = eventArgType.FullName,
+							CommandParameter = $"eventArgs.{propertyInfo.Name}"
+						});
+					}
+                }
 #>
 	public class <#= typeName #> {
 <#
-			foreach (var eventInfo in eventInfos)
-			{
-				var propertyName = eventInfo.Name + "To";
-				var eventHandlerName = type.Name + "On" + eventInfo.Name;
+				foreach (var bindablePropertyInfo in propertyInfos)
+				{
 #>
-        public static readonly BindableProperty <#= propertyName #>Property =
-            BindableProperty.CreateAttached("<#= propertyName #>", typeof(ICommand), typeof(<#= typeName #>), null, propertyChanged:On<#= propertyName #>Changed);
+        public static readonly BindableProperty <#= bindablePropertyInfo.PropertyName #>Property =
+            BindableProperty.CreateAttached("<#= bindablePropertyInfo.PropertyName #>", typeof(ICommand), typeof(<#= typeName #>), null, propertyChanged:On<#= bindablePropertyInfo.PropertyName #>Changed);
 
-        public static ICommand Get<#= propertyName #>(BindableObject bindableObject)
+        public static ICommand Get<#= bindablePropertyInfo.PropertyName #>(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(<#= propertyName #>Property);
+            return (ICommand)bindableObject.GetValue(<#= bindablePropertyInfo.PropertyName #>Property);
         }
 
-		private static void On<#= propertyName #>Changed(BindableObject bindable, object oldValue, object newValue)
+		private static void On<#= bindablePropertyInfo.PropertyName #>Changed(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is <#= type.Name #> target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.<#= eventInfo.Name #> += <#= eventHandlerName #>;
+                    target.<#= eventInfo.Name #> += <#= bindablePropertyInfo.EventHandlerName #>;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.<#= eventInfo.Name #> -= <#= eventHandlerName #>;
+                    target.<#= eventInfo.Name #> -= <#= bindablePropertyInfo.EventHandlerName #>;
                 }
             }
 		}
 
-        private static void <#= eventHandlerName #>(object o, EventArgs eventArgs)
+        private static void <#= bindablePropertyInfo.EventHandlerName #>(object o, <#= bindablePropertyInfo.EventArgsTypeName #> eventArgs)
         {
-            var command = Get<#= propertyName #>((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
+            var command = Get<#= bindablePropertyInfo.PropertyName #>((BindableObject)o);
+            if (command.CanExecute(<#= bindablePropertyInfo.CommandParameter #>))
+                command.Execute(<#= bindablePropertyInfo.CommandParameter #>);
         }
-
 <#
-            }
+				}
 #>
 	}
 
 <#
+            }
         }
 #>
 <#
     }
 #>
 }
+<#+
+	public class BindablePropertyInfo
+	{
+		public string PropertyName { get; set; }
+		public string EventHandlerName => $"On{PropertyName}Changed";
+		public string EventArgsTypeName { get; set; }
+		public string CommandParameter { get; set; }
+	}
+
+	public class ExcludeInfo
+	{
+		public Type Type { get; set; }
+		public string EventName { get; set; }
+		public string EventPropertyName { get; set; }
+	}
+#>
