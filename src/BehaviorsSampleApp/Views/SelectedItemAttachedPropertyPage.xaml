@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
+             xmlns:bp="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="BehaviorsSampleApp.Views.SelectedItemAttachedPropertyPage"
+             bp:PageAppearing.Command="{Binding AppearingCommand}"
+             bp:PageDisappearing.Command="{Binding DisappearingCommand}">
+    <ContentPage.BindingContext>
+        <viewModels:SelectedItemAttachedPropertyPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <bp:NotificationBehavior
+            NotificationRequest="{Binding NavigateNextPageRequest}"
+            Received="OnNavigateNextPageReceived"/>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Fruits}"
+                  bp:ListViewItemSelected.SelectedItemCommand="{Binding SelectedFruitCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <BoxView HeightRequest="10" WidthRequest="10" Color="{Binding Color}"/>
+                            <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

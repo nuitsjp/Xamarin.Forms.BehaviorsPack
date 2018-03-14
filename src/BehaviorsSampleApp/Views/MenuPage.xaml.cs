@@ -41,5 +41,10 @@ namespace BehaviorsSampleApp.Views
 	    {
 	        Navigation.PushAsync(new SelectedItemBehaviorPage());
 	    }
-	}
+
+	    private void SelectedItemAttachedProperty_OnClicked(object sender, EventArgs e)
+	    {
+	        Navigation.PushAsync(new SelectedItemAttachedPropertyPage());
+	    }
+    }
 }

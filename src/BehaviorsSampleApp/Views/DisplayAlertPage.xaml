@@ -4,9 +4,7 @@
              xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
              xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              x:Class="BehaviorsSampleApp.Views.DisplayAlertPage"
-             Title="DisplayAlertBehavior Sample"
-             behaviorsPack:PageAppearing.Command="{Binding AppearingCommand}"
-             behaviorsPack:PageDisappearing.Command="{Binding DisappearingCommand}">
+             Title="DisplayAlertBehavior Sample">
     <ContentPage.BindingContext>
         <viewModels:DisplayAlertPageViewModel/>
     </ContentPage.BindingContext>
