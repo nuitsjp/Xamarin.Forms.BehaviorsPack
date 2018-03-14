@@ -19,25 +19,30 @@
         .OrderBy(x => x.FullName);
 	var excludeInfos = new List<ExcludeInfo>
 	{
-		new ExcludeInfo { Type = typeof(VisualElement), EventName = "BatchCommitted", EventPropertyName = "Data"  },
-		new ExcludeInfo { Type = typeof(VisualElement), EventName = "FocusChangeRequested", EventPropertyName = "Focus"  },
-		new ExcludeInfo { Type = typeof(VisualElement), EventName = "FocusChangeRequested", EventPropertyName = "Result"  },
+		new ExcludeInfo { Type = typeof(ToolbarItem), EventName = "Activated", EventPropertyName = null  },
 	};
 
 #>
 using System;
 using System.Windows.Input;
+using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack {
 <#
 	foreach (var type in types)
     {
-		var eventInfos = type.GetEvents().Where(x => x.DeclaringType == type).OrderBy(x => x.Name);
+		var eventInfos = 
+			type.GetEvents()
+				.Where(x => x.DeclaringType == type)
+				.OrderBy(x => x.Name);
 		if(eventInfos.Any())
         {
 			foreach (var eventInfo in eventInfos)
 			{
-				var typeName = $"{type.Name}{eventInfo.Name}";
+				if (excludeInfos.Any(x => x.Type == type && x.EventName == eventInfo.Name && x.EventPropertyName == null))
+					continue;
+
+				var typeName = type.Name + eventInfo.Name;
 				var propertyInfos = new List<BindablePropertyInfo>();
 				propertyInfos.Add(new BindablePropertyInfo {
 					PropertyName = "Command",
@@ -52,10 +57,25 @@ namespace Xamarin.Forms.BehaviorsPack {
 						if (excludeInfos.Any(x => x.Type == type && x.EventName == eventInfo.Name && x.EventPropertyName == propertyInfo.Name))
 							continue;
 
+						string eventArgsTypeName;
+						if(eventArgType.IsGenericType)
+                        {
+							var typeArgs = string.Join(", ", eventArgType.GenericTypeArguments.Select(x => x.FullName));
+							eventArgsTypeName =
+								eventArgType.FullName.Substring(0, eventArgType.FullName.IndexOf("`", StringComparison.Ordinal))
+								+ "<" + typeArgs + ">";
+                        }
+						else
+                        {
+							eventArgsTypeName = eventArgType.FullName;
+                        }
+						eventArgsTypeName = eventArgsTypeName.Replace("+", ".");
+						
+
 						propertyInfos.Add(new BindablePropertyInfo {
-							PropertyName = $"{propertyInfo.Name}Command",
-							EventArgsTypeName = eventArgType.FullName,
-							CommandParameter = $"eventArgs.{propertyInfo.Name}"
+							PropertyName = propertyInfo.Name + "Command",
+							EventArgsTypeName = eventArgsTypeName,
+							CommandParameter = "eventArgs." + propertyInfo.Name
 						});
 					}
                 }
@@ -65,6 +85,8 @@ namespace Xamarin.Forms.BehaviorsPack {
 				foreach (var bindablePropertyInfo in propertyInfos)
 				{
 #>
+
+		#region <#= bindablePropertyInfo.PropertyName #>
         public static readonly BindableProperty <#= bindablePropertyInfo.PropertyName #>Property =
             BindableProperty.CreateAttached("<#= bindablePropertyInfo.PropertyName #>", typeof(ICommand), typeof(<#= typeName #>), null, propertyChanged:On<#= bindablePropertyInfo.PropertyName #>Changed);
 
@@ -94,6 +116,7 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(<#= bindablePropertyInfo.CommandParameter #>))
                 command.Execute(<#= bindablePropertyInfo.CommandParameter #>);
         }
+		#endregion
 <#
 				}
 #>
@@ -111,7 +134,13 @@ namespace Xamarin.Forms.BehaviorsPack {
 	public class BindablePropertyInfo
 	{
 		public string PropertyName { get; set; }
-		public string EventHandlerName => $"On{PropertyName}Changed";
+		public string EventHandlerName 
+		{ 
+			get 
+			{ 
+				return  "On" + PropertyName + "Changed"; 
+			} 
+		}
 		public string EventArgsTypeName { get; set; }
 		public string CommandParameter { get; set; }
 	}

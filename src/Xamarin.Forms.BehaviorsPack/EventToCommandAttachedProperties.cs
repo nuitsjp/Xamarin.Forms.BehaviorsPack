@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows.Input;
+using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack {
 	public class ApplicationModalPopped {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPopped), null, propertyChanged:OnCommandChanged);
 
@@ -32,6 +35,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ModalCommand
         public static readonly BindableProperty ModalCommandProperty =
             BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPopped), null, propertyChanged:OnModalCommandChanged);
 
@@ -61,9 +67,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Modal))
                 command.Execute(eventArgs.Modal);
         }
+		#endregion
 	}
 
 	public class ApplicationModalPopping {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPopping), null, propertyChanged:OnCommandChanged);
 
@@ -93,6 +102,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region CancelCommand
         public static readonly BindableProperty CancelCommandProperty =
             BindableProperty.CreateAttached("CancelCommand", typeof(ICommand), typeof(ApplicationModalPopping), null, propertyChanged:OnCancelCommandChanged);
 
@@ -122,6 +134,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Cancel))
                 command.Execute(eventArgs.Cancel);
         }
+		#endregion
+
+		#region ModalCommand
         public static readonly BindableProperty ModalCommandProperty =
             BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPopping), null, propertyChanged:OnModalCommandChanged);
 
@@ -151,9 +166,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Modal))
                 command.Execute(eventArgs.Modal);
         }
+		#endregion
 	}
 
 	public class ApplicationModalPushed {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPushed), null, propertyChanged:OnCommandChanged);
 
@@ -183,6 +201,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ModalCommand
         public static readonly BindableProperty ModalCommandProperty =
             BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPushed), null, propertyChanged:OnModalCommandChanged);
 
@@ -212,9 +233,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Modal))
                 command.Execute(eventArgs.Modal);
         }
+		#endregion
 	}
 
 	public class ApplicationModalPushing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ApplicationModalPushing), null, propertyChanged:OnCommandChanged);
 
@@ -244,6 +268,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ModalCommand
         public static readonly BindableProperty ModalCommandProperty =
             BindableProperty.CreateAttached("ModalCommand", typeof(ICommand), typeof(ApplicationModalPushing), null, propertyChanged:OnModalCommandChanged);
 
@@ -273,9 +300,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Modal))
                 command.Execute(eventArgs.Modal);
         }
+		#endregion
 	}
 
 	public class ButtonClicked {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ButtonClicked), null, propertyChanged:OnCommandChanged);
 
@@ -305,9 +335,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class ButtonPressed {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ButtonPressed), null, propertyChanged:OnCommandChanged);
 
@@ -337,9 +370,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class ButtonReleased {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ButtonReleased), null, propertyChanged:OnCommandChanged);
 
@@ -369,9 +405,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class CellAppearing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellAppearing), null, propertyChanged:OnCommandChanged);
 
@@ -401,9 +440,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class CellDisappearing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellDisappearing), null, propertyChanged:OnCommandChanged);
 
@@ -433,9 +475,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class CellForceUpdateSizeRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellForceUpdateSizeRequested), null, propertyChanged:OnCommandChanged);
 
@@ -465,9 +510,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class CellTapped {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(CellTapped), null, propertyChanged:OnCommandChanged);
 
@@ -497,9 +545,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class ColumnDefinitionSizeChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ColumnDefinitionSizeChanged), null, propertyChanged:OnCommandChanged);
 
@@ -529,9 +580,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class DatePickerDateSelected {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(DatePickerDateSelected), null, propertyChanged:OnCommandChanged);
 
@@ -561,6 +615,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region NewDateCommand
         public static readonly BindableProperty NewDateCommandProperty =
             BindableProperty.CreateAttached("NewDateCommand", typeof(ICommand), typeof(DatePickerDateSelected), null, propertyChanged:OnNewDateCommandChanged);
 
@@ -590,6 +647,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NewDate))
                 command.Execute(eventArgs.NewDate);
         }
+		#endregion
+
+		#region OldDateCommand
         public static readonly BindableProperty OldDateCommandProperty =
             BindableProperty.CreateAttached("OldDateCommand", typeof(ICommand), typeof(DatePickerDateSelected), null, propertyChanged:OnOldDateCommandChanged);
 
@@ -619,9 +679,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.OldDate))
                 command.Execute(eventArgs.OldDate);
         }
+		#endregion
 	}
 
 	public class EditorCompleted {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EditorCompleted), null, propertyChanged:OnCommandChanged);
 
@@ -651,9 +714,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class EditorTextChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EditorTextChanged), null, propertyChanged:OnCommandChanged);
 
@@ -683,6 +749,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region NewTextValueCommand
         public static readonly BindableProperty NewTextValueCommandProperty =
             BindableProperty.CreateAttached("NewTextValueCommand", typeof(ICommand), typeof(EditorTextChanged), null, propertyChanged:OnNewTextValueCommandChanged);
 
@@ -712,6 +781,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NewTextValue))
                 command.Execute(eventArgs.NewTextValue);
         }
+		#endregion
+
+		#region OldTextValueCommand
         public static readonly BindableProperty OldTextValueCommandProperty =
             BindableProperty.CreateAttached("OldTextValueCommand", typeof(ICommand), typeof(EditorTextChanged), null, propertyChanged:OnOldTextValueCommandChanged);
 
@@ -741,9 +813,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.OldTextValue))
                 command.Execute(eventArgs.OldTextValue);
         }
+		#endregion
 	}
 
 	public class ElementChildAdded {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementChildAdded), null, propertyChanged:OnCommandChanged);
 
@@ -773,6 +848,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ElementCommand
         public static readonly BindableProperty ElementCommandProperty =
             BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementChildAdded), null, propertyChanged:OnElementCommandChanged);
 
@@ -802,9 +880,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Element))
                 command.Execute(eventArgs.Element);
         }
+		#endregion
 	}
 
 	public class ElementChildRemoved {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementChildRemoved), null, propertyChanged:OnCommandChanged);
 
@@ -834,6 +915,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ElementCommand
         public static readonly BindableProperty ElementCommandProperty =
             BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementChildRemoved), null, propertyChanged:OnElementCommandChanged);
 
@@ -863,9 +947,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Element))
                 command.Execute(eventArgs.Element);
         }
+		#endregion
 	}
 
 	public class ElementDescendantAdded {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementDescendantAdded), null, propertyChanged:OnCommandChanged);
 
@@ -895,6 +982,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ElementCommand
         public static readonly BindableProperty ElementCommandProperty =
             BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementDescendantAdded), null, propertyChanged:OnElementCommandChanged);
 
@@ -924,9 +1014,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Element))
                 command.Execute(eventArgs.Element);
         }
+		#endregion
 	}
 
 	public class ElementDescendantRemoved {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementDescendantRemoved), null, propertyChanged:OnCommandChanged);
 
@@ -956,6 +1049,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ElementCommand
         public static readonly BindableProperty ElementCommandProperty =
             BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ElementDescendantRemoved), null, propertyChanged:OnElementCommandChanged);
 
@@ -985,9 +1081,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Element))
                 command.Execute(eventArgs.Element);
         }
+		#endregion
 	}
 
 	public class ElementPlatformSet {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ElementPlatformSet), null, propertyChanged:OnCommandChanged);
 
@@ -1017,9 +1116,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class EntryCompleted {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EntryCompleted), null, propertyChanged:OnCommandChanged);
 
@@ -1049,9 +1151,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class EntryTextChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EntryTextChanged), null, propertyChanged:OnCommandChanged);
 
@@ -1081,6 +1186,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region NewTextValueCommand
         public static readonly BindableProperty NewTextValueCommandProperty =
             BindableProperty.CreateAttached("NewTextValueCommand", typeof(ICommand), typeof(EntryTextChanged), null, propertyChanged:OnNewTextValueCommandChanged);
 
@@ -1110,6 +1218,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NewTextValue))
                 command.Execute(eventArgs.NewTextValue);
         }
+		#endregion
+
+		#region OldTextValueCommand
         public static readonly BindableProperty OldTextValueCommandProperty =
             BindableProperty.CreateAttached("OldTextValueCommand", typeof(ICommand), typeof(EntryTextChanged), null, propertyChanged:OnOldTextValueCommandChanged);
 
@@ -1139,9 +1250,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.OldTextValue))
                 command.Execute(eventArgs.OldTextValue);
         }
+		#endregion
 	}
 
 	public class EntryCellCompleted {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(EntryCellCompleted), null, propertyChanged:OnCommandChanged);
 
@@ -1171,9 +1285,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class LayoutLayoutChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(LayoutLayoutChanged), null, propertyChanged:OnCommandChanged);
 
@@ -1203,9 +1320,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class ListViewItemAppearing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemAppearing), null, propertyChanged:OnCommandChanged);
 
@@ -1235,6 +1355,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ItemCommand
         public static readonly BindableProperty ItemCommandProperty =
             BindableProperty.CreateAttached("ItemCommand", typeof(ICommand), typeof(ListViewItemAppearing), null, propertyChanged:OnItemCommandChanged);
 
@@ -1264,9 +1387,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Item))
                 command.Execute(eventArgs.Item);
         }
+		#endregion
 	}
 
 	public class ListViewItemDisappearing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemDisappearing), null, propertyChanged:OnCommandChanged);
 
@@ -1296,6 +1422,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ItemCommand
         public static readonly BindableProperty ItemCommandProperty =
             BindableProperty.CreateAttached("ItemCommand", typeof(ICommand), typeof(ListViewItemDisappearing), null, propertyChanged:OnItemCommandChanged);
 
@@ -1325,9 +1454,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Item))
                 command.Execute(eventArgs.Item);
         }
+		#endregion
 	}
 
 	public class ListViewItemSelected {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged:OnCommandChanged);
 
@@ -1357,6 +1489,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region SelectedItemCommand
         public static readonly BindableProperty SelectedItemCommandProperty =
             BindableProperty.CreateAttached("SelectedItemCommand", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged:OnSelectedItemCommandChanged);
 
@@ -1386,9 +1521,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.SelectedItem))
                 command.Execute(eventArgs.SelectedItem);
         }
+		#endregion
 	}
 
 	public class ListViewItemTapped {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewItemTapped), null, propertyChanged:OnCommandChanged);
 
@@ -1418,6 +1556,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region GroupCommand
         public static readonly BindableProperty GroupCommandProperty =
             BindableProperty.CreateAttached("GroupCommand", typeof(ICommand), typeof(ListViewItemTapped), null, propertyChanged:OnGroupCommandChanged);
 
@@ -1447,6 +1588,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Group))
                 command.Execute(eventArgs.Group);
         }
+		#endregion
+
+		#region ItemCommand
         public static readonly BindableProperty ItemCommandProperty =
             BindableProperty.CreateAttached("ItemCommand", typeof(ICommand), typeof(ListViewItemTapped), null, propertyChanged:OnItemCommandChanged);
 
@@ -1476,9 +1620,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Item))
                 command.Execute(eventArgs.Item);
         }
+		#endregion
 	}
 
 	public class ListViewRefreshing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewRefreshing), null, propertyChanged:OnCommandChanged);
 
@@ -1508,9 +1655,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class ListViewScrollToRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnCommandChanged);
 
@@ -1540,6 +1690,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ElementCommand
         public static readonly BindableProperty ElementCommandProperty =
             BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnElementCommandChanged);
 
@@ -1569,6 +1722,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Element))
                 command.Execute(eventArgs.Element);
         }
+		#endregion
+
+		#region ModeCommand
         public static readonly BindableProperty ModeCommandProperty =
             BindableProperty.CreateAttached("ModeCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnModeCommandChanged);
 
@@ -1598,6 +1754,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Mode))
                 command.Execute(eventArgs.Mode);
         }
+		#endregion
+
+		#region PositionCommand
         public static readonly BindableProperty PositionCommandProperty =
             BindableProperty.CreateAttached("PositionCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnPositionCommandChanged);
 
@@ -1627,6 +1786,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Position))
                 command.Execute(eventArgs.Position);
         }
+		#endregion
+
+		#region ScrollXCommand
         public static readonly BindableProperty ScrollXCommandProperty =
             BindableProperty.CreateAttached("ScrollXCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnScrollXCommandChanged);
 
@@ -1656,6 +1818,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScrollX))
                 command.Execute(eventArgs.ScrollX);
         }
+		#endregion
+
+		#region ScrollYCommand
         public static readonly BindableProperty ScrollYCommandProperty =
             BindableProperty.CreateAttached("ScrollYCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnScrollYCommandChanged);
 
@@ -1685,6 +1850,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScrollY))
                 command.Execute(eventArgs.ScrollY);
         }
+		#endregion
+
+		#region ShouldAnimateCommand
         public static readonly BindableProperty ShouldAnimateCommandProperty =
             BindableProperty.CreateAttached("ShouldAnimateCommand", typeof(ICommand), typeof(ListViewScrollToRequested), null, propertyChanged:OnShouldAnimateCommandChanged);
 
@@ -1714,9 +1882,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ShouldAnimate))
                 command.Execute(eventArgs.ShouldAnimate);
         }
+		#endregion
 	}
 
 	public class MasterDetailPageBackButtonPressed {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(MasterDetailPageBackButtonPressed), null, propertyChanged:OnCommandChanged);
 
@@ -1746,6 +1917,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region HandledCommand
         public static readonly BindableProperty HandledCommandProperty =
             BindableProperty.CreateAttached("HandledCommand", typeof(ICommand), typeof(MasterDetailPageBackButtonPressed), null, propertyChanged:OnHandledCommandChanged);
 
@@ -1775,9 +1949,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Handled))
                 command.Execute(eventArgs.Handled);
         }
+		#endregion
 	}
 
 	public class MasterDetailPageIsPresentedChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(MasterDetailPageIsPresentedChanged), null, propertyChanged:OnCommandChanged);
 
@@ -1807,9 +1984,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class MenuItemClicked {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(MenuItemClicked), null, propertyChanged:OnCommandChanged);
 
@@ -1839,9 +2019,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class NavigationPageInsertPageBeforeRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnCommandChanged);
 
@@ -1871,6 +2054,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region AnimatedCommand
         public static readonly BindableProperty AnimatedCommandProperty =
             BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnAnimatedCommandChanged);
 
@@ -1900,6 +2086,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Animated))
                 command.Execute(eventArgs.Animated);
         }
+		#endregion
+
+		#region BeforePageCommand
         public static readonly BindableProperty BeforePageCommandProperty =
             BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnBeforePageCommandChanged);
 
@@ -1929,6 +2118,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.BeforePage))
                 command.Execute(eventArgs.BeforePage);
         }
+		#endregion
+
+		#region RealizeCommand
         public static readonly BindableProperty RealizeCommandProperty =
             BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnRealizeCommandChanged);
 
@@ -1958,6 +2150,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Realize))
                 command.Execute(eventArgs.Realize);
         }
+		#endregion
+
+		#region TaskCommand
         public static readonly BindableProperty TaskCommandProperty =
             BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnTaskCommandChanged);
 
@@ -1987,6 +2182,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Task))
                 command.Execute(eventArgs.Task);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPageInsertPageBeforeRequested), null, propertyChanged:OnPageCommandChanged);
 
@@ -2016,9 +2214,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPagePopped {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePopped), null, propertyChanged:OnCommandChanged);
 
@@ -2048,6 +2249,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePopped), null, propertyChanged:OnPageCommandChanged);
 
@@ -2077,9 +2281,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPagePoppedToRoot {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePoppedToRoot), null, propertyChanged:OnCommandChanged);
 
@@ -2109,6 +2316,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePoppedToRoot), null, propertyChanged:OnPageCommandChanged);
 
@@ -2138,9 +2348,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPagePopRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnCommandChanged);
 
@@ -2170,6 +2383,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region AnimatedCommand
         public static readonly BindableProperty AnimatedCommandProperty =
             BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnAnimatedCommandChanged);
 
@@ -2199,6 +2415,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Animated))
                 command.Execute(eventArgs.Animated);
         }
+		#endregion
+
+		#region BeforePageCommand
         public static readonly BindableProperty BeforePageCommandProperty =
             BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnBeforePageCommandChanged);
 
@@ -2228,6 +2447,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.BeforePage))
                 command.Execute(eventArgs.BeforePage);
         }
+		#endregion
+
+		#region RealizeCommand
         public static readonly BindableProperty RealizeCommandProperty =
             BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnRealizeCommandChanged);
 
@@ -2257,6 +2479,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Realize))
                 command.Execute(eventArgs.Realize);
         }
+		#endregion
+
+		#region TaskCommand
         public static readonly BindableProperty TaskCommandProperty =
             BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnTaskCommandChanged);
 
@@ -2286,6 +2511,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Task))
                 command.Execute(eventArgs.Task);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePopRequested), null, propertyChanged:OnPageCommandChanged);
 
@@ -2315,9 +2543,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPagePopToRootRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnCommandChanged);
 
@@ -2347,6 +2578,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region AnimatedCommand
         public static readonly BindableProperty AnimatedCommandProperty =
             BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnAnimatedCommandChanged);
 
@@ -2376,6 +2610,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Animated))
                 command.Execute(eventArgs.Animated);
         }
+		#endregion
+
+		#region BeforePageCommand
         public static readonly BindableProperty BeforePageCommandProperty =
             BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnBeforePageCommandChanged);
 
@@ -2405,6 +2642,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.BeforePage))
                 command.Execute(eventArgs.BeforePage);
         }
+		#endregion
+
+		#region RealizeCommand
         public static readonly BindableProperty RealizeCommandProperty =
             BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnRealizeCommandChanged);
 
@@ -2434,6 +2674,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Realize))
                 command.Execute(eventArgs.Realize);
         }
+		#endregion
+
+		#region TaskCommand
         public static readonly BindableProperty TaskCommandProperty =
             BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnTaskCommandChanged);
 
@@ -2463,6 +2706,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Task))
                 command.Execute(eventArgs.Task);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePopToRootRequested), null, propertyChanged:OnPageCommandChanged);
 
@@ -2492,9 +2738,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPagePushed {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePushed), null, propertyChanged:OnCommandChanged);
 
@@ -2524,6 +2773,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePushed), null, propertyChanged:OnPageCommandChanged);
 
@@ -2553,9 +2805,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPagePushRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnCommandChanged);
 
@@ -2585,6 +2840,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region AnimatedCommand
         public static readonly BindableProperty AnimatedCommandProperty =
             BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnAnimatedCommandChanged);
 
@@ -2614,6 +2872,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Animated))
                 command.Execute(eventArgs.Animated);
         }
+		#endregion
+
+		#region BeforePageCommand
         public static readonly BindableProperty BeforePageCommandProperty =
             BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnBeforePageCommandChanged);
 
@@ -2643,6 +2904,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.BeforePage))
                 command.Execute(eventArgs.BeforePage);
         }
+		#endregion
+
+		#region RealizeCommand
         public static readonly BindableProperty RealizeCommandProperty =
             BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnRealizeCommandChanged);
 
@@ -2672,6 +2936,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Realize))
                 command.Execute(eventArgs.Realize);
         }
+		#endregion
+
+		#region TaskCommand
         public static readonly BindableProperty TaskCommandProperty =
             BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnTaskCommandChanged);
 
@@ -2701,6 +2968,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Task))
                 command.Execute(eventArgs.Task);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPagePushRequested), null, propertyChanged:OnPageCommandChanged);
 
@@ -2730,9 +3000,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class NavigationPageRemovePageRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnCommandChanged);
 
@@ -2762,6 +3035,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region AnimatedCommand
         public static readonly BindableProperty AnimatedCommandProperty =
             BindableProperty.CreateAttached("AnimatedCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnAnimatedCommandChanged);
 
@@ -2791,6 +3067,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Animated))
                 command.Execute(eventArgs.Animated);
         }
+		#endregion
+
+		#region BeforePageCommand
         public static readonly BindableProperty BeforePageCommandProperty =
             BindableProperty.CreateAttached("BeforePageCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnBeforePageCommandChanged);
 
@@ -2820,6 +3099,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.BeforePage))
                 command.Execute(eventArgs.BeforePage);
         }
+		#endregion
+
+		#region RealizeCommand
         public static readonly BindableProperty RealizeCommandProperty =
             BindableProperty.CreateAttached("RealizeCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnRealizeCommandChanged);
 
@@ -2849,6 +3131,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Realize))
                 command.Execute(eventArgs.Realize);
         }
+		#endregion
+
+		#region TaskCommand
         public static readonly BindableProperty TaskCommandProperty =
             BindableProperty.CreateAttached("TaskCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnTaskCommandChanged);
 
@@ -2878,6 +3163,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Task))
                 command.Execute(eventArgs.Task);
         }
+		#endregion
+
+		#region PageCommand
         public static readonly BindableProperty PageCommandProperty =
             BindableProperty.CreateAttached("PageCommand", typeof(ICommand), typeof(NavigationPageRemovePageRequested), null, propertyChanged:OnPageCommandChanged);
 
@@ -2907,9 +3195,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Page))
                 command.Execute(eventArgs.Page);
         }
+		#endregion
 	}
 
 	public class OpenGLViewDisplayRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(OpenGLViewDisplayRequested), null, propertyChanged:OnCommandChanged);
 
@@ -2939,9 +3230,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class PageAppearing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PageAppearing), null, propertyChanged:OnCommandChanged);
 
@@ -2971,9 +3265,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class PageDisappearing {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PageDisappearing), null, propertyChanged:OnCommandChanged);
 
@@ -3003,9 +3300,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class PageLayoutChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PageLayoutChanged), null, propertyChanged:OnCommandChanged);
 
@@ -3035,9 +3335,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class PanGestureRecognizerPanUpdated {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnCommandChanged);
 
@@ -3067,6 +3370,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region GestureIdCommand
         public static readonly BindableProperty GestureIdCommandProperty =
             BindableProperty.CreateAttached("GestureIdCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnGestureIdCommandChanged);
 
@@ -3096,6 +3402,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.GestureId))
                 command.Execute(eventArgs.GestureId);
         }
+		#endregion
+
+		#region StatusTypeCommand
         public static readonly BindableProperty StatusTypeCommandProperty =
             BindableProperty.CreateAttached("StatusTypeCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnStatusTypeCommandChanged);
 
@@ -3125,6 +3434,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.StatusType))
                 command.Execute(eventArgs.StatusType);
         }
+		#endregion
+
+		#region TotalXCommand
         public static readonly BindableProperty TotalXCommandProperty =
             BindableProperty.CreateAttached("TotalXCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnTotalXCommandChanged);
 
@@ -3154,6 +3466,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.TotalX))
                 command.Execute(eventArgs.TotalX);
         }
+		#endregion
+
+		#region TotalYCommand
         public static readonly BindableProperty TotalYCommandProperty =
             BindableProperty.CreateAttached("TotalYCommand", typeof(ICommand), typeof(PanGestureRecognizerPanUpdated), null, propertyChanged:OnTotalYCommandChanged);
 
@@ -3183,9 +3498,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.TotalY))
                 command.Execute(eventArgs.TotalY);
         }
+		#endregion
 	}
 
 	public class PickerSelectedIndexChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PickerSelectedIndexChanged), null, propertyChanged:OnCommandChanged);
 
@@ -3215,9 +3533,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class PinchGestureRecognizerPinchUpdated {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnCommandChanged);
 
@@ -3247,6 +3568,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ScaleCommand
         public static readonly BindableProperty ScaleCommandProperty =
             BindableProperty.CreateAttached("ScaleCommand", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnScaleCommandChanged);
 
@@ -3276,6 +3600,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Scale))
                 command.Execute(eventArgs.Scale);
         }
+		#endregion
+
+		#region ScaleOriginCommand
         public static readonly BindableProperty ScaleOriginCommandProperty =
             BindableProperty.CreateAttached("ScaleOriginCommand", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnScaleOriginCommandChanged);
 
@@ -3305,6 +3632,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScaleOrigin))
                 command.Execute(eventArgs.ScaleOrigin);
         }
+		#endregion
+
+		#region StatusCommand
         public static readonly BindableProperty StatusCommandProperty =
             BindableProperty.CreateAttached("StatusCommand", typeof(ICommand), typeof(PinchGestureRecognizerPinchUpdated), null, propertyChanged:OnStatusCommandChanged);
 
@@ -3334,9 +3664,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Status))
                 command.Execute(eventArgs.Status);
         }
+		#endregion
 	}
 
 	public class RowDefinitionSizeChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(RowDefinitionSizeChanged), null, propertyChanged:OnCommandChanged);
 
@@ -3366,9 +3699,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class ScrollViewScrolled {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ScrollViewScrolled), null, propertyChanged:OnCommandChanged);
 
@@ -3398,6 +3734,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ScrollXCommand
         public static readonly BindableProperty ScrollXCommandProperty =
             BindableProperty.CreateAttached("ScrollXCommand", typeof(ICommand), typeof(ScrollViewScrolled), null, propertyChanged:OnScrollXCommandChanged);
 
@@ -3427,6 +3766,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScrollX))
                 command.Execute(eventArgs.ScrollX);
         }
+		#endregion
+
+		#region ScrollYCommand
         public static readonly BindableProperty ScrollYCommandProperty =
             BindableProperty.CreateAttached("ScrollYCommand", typeof(ICommand), typeof(ScrollViewScrolled), null, propertyChanged:OnScrollYCommandChanged);
 
@@ -3456,9 +3798,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScrollY))
                 command.Execute(eventArgs.ScrollY);
         }
+		#endregion
 	}
 
 	public class ScrollViewScrollToRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnCommandChanged);
 
@@ -3488,6 +3833,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ElementCommand
         public static readonly BindableProperty ElementCommandProperty =
             BindableProperty.CreateAttached("ElementCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnElementCommandChanged);
 
@@ -3517,6 +3865,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Element))
                 command.Execute(eventArgs.Element);
         }
+		#endregion
+
+		#region ModeCommand
         public static readonly BindableProperty ModeCommandProperty =
             BindableProperty.CreateAttached("ModeCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnModeCommandChanged);
 
@@ -3546,6 +3897,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Mode))
                 command.Execute(eventArgs.Mode);
         }
+		#endregion
+
+		#region PositionCommand
         public static readonly BindableProperty PositionCommandProperty =
             BindableProperty.CreateAttached("PositionCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnPositionCommandChanged);
 
@@ -3575,6 +3929,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Position))
                 command.Execute(eventArgs.Position);
         }
+		#endregion
+
+		#region ScrollXCommand
         public static readonly BindableProperty ScrollXCommandProperty =
             BindableProperty.CreateAttached("ScrollXCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnScrollXCommandChanged);
 
@@ -3604,6 +3961,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScrollX))
                 command.Execute(eventArgs.ScrollX);
         }
+		#endregion
+
+		#region ScrollYCommand
         public static readonly BindableProperty ScrollYCommandProperty =
             BindableProperty.CreateAttached("ScrollYCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnScrollYCommandChanged);
 
@@ -3633,6 +3993,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ScrollY))
                 command.Execute(eventArgs.ScrollY);
         }
+		#endregion
+
+		#region ShouldAnimateCommand
         public static readonly BindableProperty ShouldAnimateCommandProperty =
             BindableProperty.CreateAttached("ShouldAnimateCommand", typeof(ICommand), typeof(ScrollViewScrollToRequested), null, propertyChanged:OnShouldAnimateCommandChanged);
 
@@ -3662,9 +4025,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.ShouldAnimate))
                 command.Execute(eventArgs.ShouldAnimate);
         }
+		#endregion
 	}
 
 	public class SearchBarSearchButtonPressed {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SearchBarSearchButtonPressed), null, propertyChanged:OnCommandChanged);
 
@@ -3694,9 +4060,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class SearchBarTextChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SearchBarTextChanged), null, propertyChanged:OnCommandChanged);
 
@@ -3726,6 +4095,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region NewTextValueCommand
         public static readonly BindableProperty NewTextValueCommandProperty =
             BindableProperty.CreateAttached("NewTextValueCommand", typeof(ICommand), typeof(SearchBarTextChanged), null, propertyChanged:OnNewTextValueCommandChanged);
 
@@ -3755,6 +4127,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NewTextValue))
                 command.Execute(eventArgs.NewTextValue);
         }
+		#endregion
+
+		#region OldTextValueCommand
         public static readonly BindableProperty OldTextValueCommandProperty =
             BindableProperty.CreateAttached("OldTextValueCommand", typeof(ICommand), typeof(SearchBarTextChanged), null, propertyChanged:OnOldTextValueCommandChanged);
 
@@ -3784,9 +4159,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.OldTextValue))
                 command.Execute(eventArgs.OldTextValue);
         }
+		#endregion
 	}
 
 	public class SliderValueChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SliderValueChanged), null, propertyChanged:OnCommandChanged);
 
@@ -3816,6 +4194,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region NewValueCommand
         public static readonly BindableProperty NewValueCommandProperty =
             BindableProperty.CreateAttached("NewValueCommand", typeof(ICommand), typeof(SliderValueChanged), null, propertyChanged:OnNewValueCommandChanged);
 
@@ -3845,6 +4226,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NewValue))
                 command.Execute(eventArgs.NewValue);
         }
+		#endregion
+
+		#region OldValueCommand
         public static readonly BindableProperty OldValueCommandProperty =
             BindableProperty.CreateAttached("OldValueCommand", typeof(ICommand), typeof(SliderValueChanged), null, propertyChanged:OnOldValueCommandChanged);
 
@@ -3874,9 +4258,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.OldValue))
                 command.Execute(eventArgs.OldValue);
         }
+		#endregion
 	}
 
 	public class StepperValueChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(StepperValueChanged), null, propertyChanged:OnCommandChanged);
 
@@ -3906,6 +4293,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region NewValueCommand
         public static readonly BindableProperty NewValueCommandProperty =
             BindableProperty.CreateAttached("NewValueCommand", typeof(ICommand), typeof(StepperValueChanged), null, propertyChanged:OnNewValueCommandChanged);
 
@@ -3935,6 +4325,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NewValue))
                 command.Execute(eventArgs.NewValue);
         }
+		#endregion
+
+		#region OldValueCommand
         public static readonly BindableProperty OldValueCommandProperty =
             BindableProperty.CreateAttached("OldValueCommand", typeof(ICommand), typeof(StepperValueChanged), null, propertyChanged:OnOldValueCommandChanged);
 
@@ -3964,9 +4357,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.OldValue))
                 command.Execute(eventArgs.OldValue);
         }
+		#endregion
 	}
 
 	public class SwitchToggled {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SwitchToggled), null, propertyChanged:OnCommandChanged);
 
@@ -3996,6 +4392,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ValueCommand
         public static readonly BindableProperty ValueCommandProperty =
             BindableProperty.CreateAttached("ValueCommand", typeof(ICommand), typeof(SwitchToggled), null, propertyChanged:OnValueCommandChanged);
 
@@ -4025,9 +4424,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Value))
                 command.Execute(eventArgs.Value);
         }
+		#endregion
 	}
 
 	public class SwitchCellOnChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(SwitchCellOnChanged), null, propertyChanged:OnCommandChanged);
 
@@ -4057,6 +4459,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ValueCommand
         public static readonly BindableProperty ValueCommandProperty =
             BindableProperty.CreateAttached("ValueCommand", typeof(ICommand), typeof(SwitchCellOnChanged), null, propertyChanged:OnValueCommandChanged);
 
@@ -4086,9 +4491,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Value))
                 command.Execute(eventArgs.Value);
         }
+		#endregion
 	}
 
 	public class TableViewModelChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(TableViewModelChanged), null, propertyChanged:OnCommandChanged);
 
@@ -4118,9 +4526,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class TapGestureRecognizerTapped {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(TapGestureRecognizerTapped), null, propertyChanged:OnCommandChanged);
 
@@ -4150,41 +4561,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
-	}
-
-	public class ToolbarItemActivated {
-        public static readonly BindableProperty CommandProperty =
-            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ToolbarItemActivated), null, propertyChanged:OnCommandChanged);
-
-        public static ICommand GetCommand(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(CommandProperty);
-        }
-
-		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is ToolbarItem target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.Activated += OnCommandChanged;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.Activated -= OnCommandChanged;
-                }
-            }
-		}
-
-        private static void OnCommandChanged(object o, EventArgs eventArgs)
-        {
-            var command = GetCommand((BindableObject)o);
-            if (command.CanExecute(eventArgs))
-                command.Execute(eventArgs);
-        }
+		#endregion
 	}
 
 	public class VisualElementBatchCommitted {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementBatchCommitted), null, propertyChanged:OnCommandChanged);
 
@@ -4214,9 +4596,44 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region DataCommand
+        public static readonly BindableProperty DataCommandProperty =
+            BindableProperty.CreateAttached("DataCommand", typeof(ICommand), typeof(VisualElementBatchCommitted), null, propertyChanged:OnDataCommandChanged);
+
+        public static ICommand GetDataCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(DataCommandProperty);
+        }
+
+		private static void OnDataCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.BatchCommitted += OnDataCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.BatchCommitted -= OnDataCommandChanged;
+                }
+            }
+		}
+
+        private static void OnDataCommandChanged(object o, Xamarin.Forms.Internals.EventArg<Xamarin.Forms.VisualElement> eventArgs)
+        {
+            var command = GetDataCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Data))
+                command.Execute(eventArgs.Data);
+        }
+		#endregion
 	}
 
 	public class VisualElementChildrenReordered {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementChildrenReordered), null, propertyChanged:OnCommandChanged);
 
@@ -4246,9 +4663,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class VisualElementFocusChangeRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementFocusChangeRequested), null, propertyChanged:OnCommandChanged);
 
@@ -4278,9 +4698,76 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region FocusCommand
+        public static readonly BindableProperty FocusCommandProperty =
+            BindableProperty.CreateAttached("FocusCommand", typeof(ICommand), typeof(VisualElementFocusChangeRequested), null, propertyChanged:OnFocusCommandChanged);
+
+        public static ICommand GetFocusCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(FocusCommandProperty);
+        }
+
+		private static void OnFocusCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.FocusChangeRequested += OnFocusCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.FocusChangeRequested -= OnFocusCommandChanged;
+                }
+            }
+		}
+
+        private static void OnFocusCommandChanged(object o, Xamarin.Forms.VisualElement.FocusRequestArgs eventArgs)
+        {
+            var command = GetFocusCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Focus))
+                command.Execute(eventArgs.Focus);
+        }
+		#endregion
+
+		#region ResultCommand
+        public static readonly BindableProperty ResultCommandProperty =
+            BindableProperty.CreateAttached("ResultCommand", typeof(ICommand), typeof(VisualElementFocusChangeRequested), null, propertyChanged:OnResultCommandChanged);
+
+        public static ICommand GetResultCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(ResultCommandProperty);
+        }
+
+		private static void OnResultCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is VisualElement target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.FocusChangeRequested += OnResultCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.FocusChangeRequested -= OnResultCommandChanged;
+                }
+            }
+		}
+
+        private static void OnResultCommandChanged(object o, Xamarin.Forms.VisualElement.FocusRequestArgs eventArgs)
+        {
+            var command = GetResultCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs.Result))
+                command.Execute(eventArgs.Result);
+        }
+		#endregion
 	}
 
 	public class VisualElementFocused {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementFocused), null, propertyChanged:OnCommandChanged);
 
@@ -4310,6 +4797,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region IsFocusedCommand
         public static readonly BindableProperty IsFocusedCommandProperty =
             BindableProperty.CreateAttached("IsFocusedCommand", typeof(ICommand), typeof(VisualElementFocused), null, propertyChanged:OnIsFocusedCommandChanged);
 
@@ -4339,6 +4829,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.IsFocused))
                 command.Execute(eventArgs.IsFocused);
         }
+		#endregion
+
+		#region VisualElementCommand
         public static readonly BindableProperty VisualElementCommandProperty =
             BindableProperty.CreateAttached("VisualElementCommand", typeof(ICommand), typeof(VisualElementFocused), null, propertyChanged:OnVisualElementCommandChanged);
 
@@ -4368,9 +4861,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.VisualElement))
                 command.Execute(eventArgs.VisualElement);
         }
+		#endregion
 	}
 
 	public class VisualElementMeasureInvalidated {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementMeasureInvalidated), null, propertyChanged:OnCommandChanged);
 
@@ -4400,9 +4896,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class VisualElementSizeChanged {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementSizeChanged), null, propertyChanged:OnCommandChanged);
 
@@ -4432,9 +4931,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class VisualElementUnfocused {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(VisualElementUnfocused), null, propertyChanged:OnCommandChanged);
 
@@ -4464,6 +4966,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region IsFocusedCommand
         public static readonly BindableProperty IsFocusedCommandProperty =
             BindableProperty.CreateAttached("IsFocusedCommand", typeof(ICommand), typeof(VisualElementUnfocused), null, propertyChanged:OnIsFocusedCommandChanged);
 
@@ -4493,6 +4998,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.IsFocused))
                 command.Execute(eventArgs.IsFocused);
         }
+		#endregion
+
+		#region VisualElementCommand
         public static readonly BindableProperty VisualElementCommandProperty =
             BindableProperty.CreateAttached("VisualElementCommand", typeof(ICommand), typeof(VisualElementUnfocused), null, propertyChanged:OnVisualElementCommandChanged);
 
@@ -4522,9 +5030,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.VisualElement))
                 command.Execute(eventArgs.VisualElement);
         }
+		#endregion
 	}
 
 	public class WebViewEvalRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewEvalRequested), null, propertyChanged:OnCommandChanged);
 
@@ -4554,6 +5065,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ScriptCommand
         public static readonly BindableProperty ScriptCommandProperty =
             BindableProperty.CreateAttached("ScriptCommand", typeof(ICommand), typeof(WebViewEvalRequested), null, propertyChanged:OnScriptCommandChanged);
 
@@ -4583,9 +5097,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Script))
                 command.Execute(eventArgs.Script);
         }
+		#endregion
 	}
 
 	public class WebViewGoBackRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewGoBackRequested), null, propertyChanged:OnCommandChanged);
 
@@ -4615,9 +5132,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class WebViewGoForwardRequested {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewGoForwardRequested), null, propertyChanged:OnCommandChanged);
 
@@ -4647,9 +5167,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
 	}
 
 	public class WebViewNavigated {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnCommandChanged);
 
@@ -4679,6 +5202,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region ResultCommand
         public static readonly BindableProperty ResultCommandProperty =
             BindableProperty.CreateAttached("ResultCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnResultCommandChanged);
 
@@ -4708,6 +5234,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Result))
                 command.Execute(eventArgs.Result);
         }
+		#endregion
+
+		#region NavigationEventCommand
         public static readonly BindableProperty NavigationEventCommandProperty =
             BindableProperty.CreateAttached("NavigationEventCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnNavigationEventCommandChanged);
 
@@ -4737,6 +5266,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NavigationEvent))
                 command.Execute(eventArgs.NavigationEvent);
         }
+		#endregion
+
+		#region SourceCommand
         public static readonly BindableProperty SourceCommandProperty =
             BindableProperty.CreateAttached("SourceCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnSourceCommandChanged);
 
@@ -4766,6 +5298,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Source))
                 command.Execute(eventArgs.Source);
         }
+		#endregion
+
+		#region UrlCommand
         public static readonly BindableProperty UrlCommandProperty =
             BindableProperty.CreateAttached("UrlCommand", typeof(ICommand), typeof(WebViewNavigated), null, propertyChanged:OnUrlCommandChanged);
 
@@ -4795,9 +5330,12 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Url))
                 command.Execute(eventArgs.Url);
         }
+		#endregion
 	}
 
 	public class WebViewNavigating {
+
+		#region Command
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnCommandChanged);
 
@@ -4827,6 +5365,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs))
                 command.Execute(eventArgs);
         }
+		#endregion
+
+		#region CancelCommand
         public static readonly BindableProperty CancelCommandProperty =
             BindableProperty.CreateAttached("CancelCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnCancelCommandChanged);
 
@@ -4856,6 +5397,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Cancel))
                 command.Execute(eventArgs.Cancel);
         }
+		#endregion
+
+		#region NavigationEventCommand
         public static readonly BindableProperty NavigationEventCommandProperty =
             BindableProperty.CreateAttached("NavigationEventCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnNavigationEventCommandChanged);
 
@@ -4885,6 +5429,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.NavigationEvent))
                 command.Execute(eventArgs.NavigationEvent);
         }
+		#endregion
+
+		#region SourceCommand
         public static readonly BindableProperty SourceCommandProperty =
             BindableProperty.CreateAttached("SourceCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnSourceCommandChanged);
 
@@ -4914,6 +5461,9 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Source))
                 command.Execute(eventArgs.Source);
         }
+		#endregion
+
+		#region UrlCommand
         public static readonly BindableProperty UrlCommandProperty =
             BindableProperty.CreateAttached("UrlCommand", typeof(ICommand), typeof(WebViewNavigating), null, propertyChanged:OnUrlCommandChanged);
 
@@ -4943,6 +5493,7 @@ namespace Xamarin.Forms.BehaviorsPack {
             if (command.CanExecute(eventArgs.Url))
                 command.Execute(eventArgs.Url);
         }
+		#endregion
 	}
 
 }

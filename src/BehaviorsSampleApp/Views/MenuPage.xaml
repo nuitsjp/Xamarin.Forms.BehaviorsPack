@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BehaviorsSampleApp.Views.MenuPage"
              Title="Menu">
-    <ContentPage.Content>
+    <ScrollView>
         <StackLayout VerticalOptions="Center" Margin="10">
             <Label Text="Please select one." />
             <Button Text="Display Alert Sample" Clicked="DisplayAlertButton_OnClicked"/>
@@ -12,5 +12,5 @@
             <Button Text="Event to Command Sample" Clicked="EventToCommandButton_OnClicked"/>
             <Button Text="SelectedItemBehavior Sample" Clicked="SelectedItemBehavior_OnClicked"/>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>
