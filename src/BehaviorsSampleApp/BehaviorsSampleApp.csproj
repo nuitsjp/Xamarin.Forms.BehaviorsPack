@@ -46,6 +46,7 @@
     <Compile Include="ViewModels\Fruit.cs" />
     <Compile Include="ViewModels\NotificationRequestPageViewModel.cs" />
     <Compile Include="ViewModels\SelectedFruitEventArgs.cs" />
+    <Compile Include="ViewModels\SelectedItemAttachedPropertyPageViewModel.cs" />
     <Compile Include="ViewModels\SelectedItemBehaviorPageViewModel.cs" />
     <Compile Include="ViewModels\SelectionResultPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -63,6 +64,9 @@
     </Compile>
     <Compile Include="Views\NotificationRequestPage.xaml.cs">
       <DependentUpon>NotificationRequestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectedItemAttachedPropertyPage.xaml.cs">
+      <DependentUpon>SelectedItemAttachedPropertyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectedItemBehaviorPage.xaml.cs">
       <DependentUpon>SelectedItemBehaviorPage.xaml</DependentUpon>
@@ -138,6 +142,12 @@
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SelectedItemAttachedPropertyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
