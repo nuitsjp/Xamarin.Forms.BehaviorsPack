@@ -5,9 +5,9 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Version>1.4.0</Version>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <FileVersion>1.4.0.0</FileVersion>
+    <Version>1.5.0</Version>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
     <Authors>Atsushi Nakamura</Authors>
     <Company>Atsushi Nakamura</Company>
     <Title>Xamarin.Forms.BehaviorsPack</Title>
@@ -20,8 +20,14 @@
     <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors Xamarin.Forms.BehaviorsPack BehaviorsPack</PackageTags>
     <DebugType>full</DebugType>
     <Copyright>Copyright 2017 nuits.jp</Copyright>
-    <PackageReleaseNotes>Release-1.3.1
-・Fix Issue #3</PackageReleaseNotes>
+    <PackageReleaseNotes>Release-1.5.0
+- Added attached property to clear selected item after notifying Item selected in ListView.
+
+Release-1.4.0
+- Created attachment properties that bind commands to events, for all events.
+
+Release-1.3.1
+- Fix Issue #3</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
