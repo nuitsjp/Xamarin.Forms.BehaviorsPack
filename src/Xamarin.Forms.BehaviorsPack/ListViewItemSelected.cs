@@ -7,7 +7,7 @@ namespace Xamarin.Forms.BehaviorsPack
 {
     public partial class ListViewItemSelected
     {
-        #region SelectedItemCommand
+        #region ClearAfterExecuteCommand
         public static readonly BindableProperty ClearAfterExecuteCommandProperty =
             BindableProperty.CreateAttached("ClearAfterExecuteCommand", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged: OnClearAfterExecuteCommandChanged);
 
