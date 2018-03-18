@@ -53,13 +53,13 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
         }
 
         [Fact]
-        public void ClearAfterExecuteCommand()
+        public void ClearSelectedItemCommand()
         {
             var listView = new ListView();
             var command = new Mock<ICommand>();
             command.Setup(x => x.CanExecute(It.IsAny<string>())).Returns(true);
 
-            listView.SetValue(ListViewItemSelected.ClearAfterExecuteCommandProperty, command.Object);
+            listView.SetValue(ListViewItemSelected.ClearSelectedItemCommandProperty, command.Object);
 
 
             listView.SelectedItem = "One";

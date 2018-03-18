@@ -8,34 +8,34 @@ namespace Xamarin.Forms.BehaviorsPack
     public partial class ListViewItemSelected
     {
         #region ClearAfterExecuteCommand
-        public static readonly BindableProperty ClearAfterExecuteCommandProperty =
-            BindableProperty.CreateAttached("ClearAfterExecuteCommand", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged: OnClearAfterExecuteCommandChanged);
+        public static readonly BindableProperty ClearSelectedItemCommandProperty =
+            BindableProperty.CreateAttached("ClearSelectedItemCommand", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged: OnClearSelectedItemCommandChanged);
 
-        public static ICommand GetClearAfterExecuteCommand(BindableObject bindableObject)
+        public static ICommand GetClearSelectedItemCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ClearAfterExecuteCommandProperty);
+            return (ICommand)bindableObject.GetValue(ClearSelectedItemCommandProperty);
         }
 
-        private static void OnClearAfterExecuteCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnClearSelectedItemCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ListView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ItemSelected += OnClearAfterExecuteCommandChanged;
+                    target.ItemSelected += OnClearSelectedItemCommandChanged;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ItemSelected -= OnClearAfterExecuteCommandChanged;
+                    target.ItemSelected -= OnClearSelectedItemCommandChanged;
                 }
             }
         }
 
-        private static void OnClearAfterExecuteCommandChanged(object o, SelectedItemChangedEventArgs eventArgs)
+        private static void OnClearSelectedItemCommandChanged(object o, SelectedItemChangedEventArgs eventArgs)
         {
             if (o is ListView listView)
             {
-                var command = GetClearAfterExecuteCommand(listView);
+                var command = GetClearSelectedItemCommand(listView);
                 if (command.CanExecute(eventArgs.SelectedItem))
                 {
                     command.Execute(eventArgs.SelectedItem);
