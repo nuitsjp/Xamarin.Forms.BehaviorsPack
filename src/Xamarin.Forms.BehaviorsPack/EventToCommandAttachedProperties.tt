@@ -80,7 +80,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 					}
                 }
 #>
-	public class <#= typeName #> {
+	public partial class <#= typeName #> {
 <#
 				foreach (var bindablePropertyInfo in propertyInfos)
 				{

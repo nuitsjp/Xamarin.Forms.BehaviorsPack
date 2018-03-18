@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms.BehaviorsPack {
-	public class ApplicationModalPopped {
+	public partial class ApplicationModalPopped {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -70,7 +70,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ApplicationModalPopping {
+	public partial class ApplicationModalPopping {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -169,7 +169,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ApplicationModalPushed {
+	public partial class ApplicationModalPushed {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -236,7 +236,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ApplicationModalPushing {
+	public partial class ApplicationModalPushing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -303,7 +303,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ButtonClicked {
+	public partial class ButtonClicked {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -338,7 +338,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ButtonPressed {
+	public partial class ButtonPressed {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -373,7 +373,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ButtonReleased {
+	public partial class ButtonReleased {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -408,7 +408,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class CellAppearing {
+	public partial class CellAppearing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -443,7 +443,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class CellDisappearing {
+	public partial class CellDisappearing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -478,7 +478,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class CellForceUpdateSizeRequested {
+	public partial class CellForceUpdateSizeRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -513,7 +513,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class CellTapped {
+	public partial class CellTapped {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -548,7 +548,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ColumnDefinitionSizeChanged {
+	public partial class ColumnDefinitionSizeChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -583,7 +583,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class DatePickerDateSelected {
+	public partial class DatePickerDateSelected {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -682,7 +682,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class EditorCompleted {
+	public partial class EditorCompleted {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -717,7 +717,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class EditorTextChanged {
+	public partial class EditorTextChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -816,7 +816,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ElementChildAdded {
+	public partial class ElementChildAdded {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -883,7 +883,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ElementChildRemoved {
+	public partial class ElementChildRemoved {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -950,7 +950,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ElementDescendantAdded {
+	public partial class ElementDescendantAdded {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1017,7 +1017,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ElementDescendantRemoved {
+	public partial class ElementDescendantRemoved {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1084,7 +1084,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ElementPlatformSet {
+	public partial class ElementPlatformSet {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1119,7 +1119,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class EntryCompleted {
+	public partial class EntryCompleted {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1154,7 +1154,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class EntryTextChanged {
+	public partial class EntryTextChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1253,7 +1253,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class EntryCellCompleted {
+	public partial class EntryCellCompleted {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1288,7 +1288,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class LayoutLayoutChanged {
+	public partial class LayoutLayoutChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1323,7 +1323,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ListViewItemAppearing {
+	public partial class ListViewItemAppearing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1390,7 +1390,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ListViewItemDisappearing {
+	public partial class ListViewItemDisappearing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1457,7 +1457,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ListViewItemSelected {
+	public partial class ListViewItemSelected {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1524,7 +1524,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ListViewItemTapped {
+	public partial class ListViewItemTapped {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1623,7 +1623,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ListViewRefreshing {
+	public partial class ListViewRefreshing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1658,7 +1658,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ListViewScrollToRequested {
+	public partial class ListViewScrollToRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1885,7 +1885,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class MasterDetailPageBackButtonPressed {
+	public partial class MasterDetailPageBackButtonPressed {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1952,7 +1952,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class MasterDetailPageIsPresentedChanged {
+	public partial class MasterDetailPageIsPresentedChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -1987,7 +1987,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class MenuItemClicked {
+	public partial class MenuItemClicked {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2022,7 +2022,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPageInsertPageBeforeRequested {
+	public partial class NavigationPageInsertPageBeforeRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2217,7 +2217,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPagePopped {
+	public partial class NavigationPagePopped {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2284,7 +2284,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPagePoppedToRoot {
+	public partial class NavigationPagePoppedToRoot {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2351,7 +2351,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPagePopRequested {
+	public partial class NavigationPagePopRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2546,7 +2546,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPagePopToRootRequested {
+	public partial class NavigationPagePopToRootRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2741,7 +2741,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPagePushed {
+	public partial class NavigationPagePushed {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -2808,7 +2808,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPagePushRequested {
+	public partial class NavigationPagePushRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3003,7 +3003,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class NavigationPageRemovePageRequested {
+	public partial class NavigationPageRemovePageRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3198,7 +3198,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class OpenGLViewDisplayRequested {
+	public partial class OpenGLViewDisplayRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3233,7 +3233,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class PageAppearing {
+	public partial class PageAppearing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3268,7 +3268,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class PageDisappearing {
+	public partial class PageDisappearing {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3303,7 +3303,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class PageLayoutChanged {
+	public partial class PageLayoutChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3338,7 +3338,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class PanGestureRecognizerPanUpdated {
+	public partial class PanGestureRecognizerPanUpdated {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3501,7 +3501,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class PickerSelectedIndexChanged {
+	public partial class PickerSelectedIndexChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3536,7 +3536,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class PinchGestureRecognizerPinchUpdated {
+	public partial class PinchGestureRecognizerPinchUpdated {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3667,7 +3667,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class RowDefinitionSizeChanged {
+	public partial class RowDefinitionSizeChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3702,7 +3702,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ScrollViewScrolled {
+	public partial class ScrollViewScrolled {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -3801,7 +3801,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class ScrollViewScrollToRequested {
+	public partial class ScrollViewScrollToRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4028,7 +4028,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class SearchBarSearchButtonPressed {
+	public partial class SearchBarSearchButtonPressed {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4063,7 +4063,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class SearchBarTextChanged {
+	public partial class SearchBarTextChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4162,7 +4162,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class SliderValueChanged {
+	public partial class SliderValueChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4261,7 +4261,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class StepperValueChanged {
+	public partial class StepperValueChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4360,7 +4360,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class SwitchToggled {
+	public partial class SwitchToggled {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4427,7 +4427,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class SwitchCellOnChanged {
+	public partial class SwitchCellOnChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4494,7 +4494,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class TableViewModelChanged {
+	public partial class TableViewModelChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4529,7 +4529,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class TapGestureRecognizerTapped {
+	public partial class TapGestureRecognizerTapped {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4564,7 +4564,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementBatchCommitted {
+	public partial class VisualElementBatchCommitted {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4631,7 +4631,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementChildrenReordered {
+	public partial class VisualElementChildrenReordered {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4666,7 +4666,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementFocusChangeRequested {
+	public partial class VisualElementFocusChangeRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4765,7 +4765,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementFocused {
+	public partial class VisualElementFocused {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4864,7 +4864,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementMeasureInvalidated {
+	public partial class VisualElementMeasureInvalidated {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4899,7 +4899,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementSizeChanged {
+	public partial class VisualElementSizeChanged {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -4934,7 +4934,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class VisualElementUnfocused {
+	public partial class VisualElementUnfocused {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -5033,7 +5033,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class WebViewEvalRequested {
+	public partial class WebViewEvalRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -5100,7 +5100,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class WebViewGoBackRequested {
+	public partial class WebViewGoBackRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -5135,7 +5135,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class WebViewGoForwardRequested {
+	public partial class WebViewGoForwardRequested {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -5170,7 +5170,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class WebViewNavigated {
+	public partial class WebViewNavigated {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
@@ -5333,7 +5333,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 		#endregion
 	}
 
-	public class WebViewNavigating {
+	public partial class WebViewNavigating {
 
 		#region Command
         public static readonly BindableProperty CommandProperty =
