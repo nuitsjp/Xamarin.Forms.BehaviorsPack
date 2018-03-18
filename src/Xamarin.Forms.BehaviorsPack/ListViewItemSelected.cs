@@ -33,7 +33,7 @@ namespace Xamarin.Forms.BehaviorsPack
 
         private static void OnClearSelectedItemCommandChanged(object o, SelectedItemChangedEventArgs eventArgs)
         {
-            if (o is ListView listView)
+            if (o is ListView listView && eventArgs.SelectedItem != null)
             {
                 var command = GetClearSelectedItemCommand(listView);
                 if (command.CanExecute(eventArgs.SelectedItem))

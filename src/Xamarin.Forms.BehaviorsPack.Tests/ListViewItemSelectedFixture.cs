@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Moq;
@@ -36,6 +37,17 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
         }
 
         [Fact]
+        public void CommandIsNull()
+        {
+            var listView = new ListView();
+            listView.SetValue(ListViewItemSelected.CommandProperty, null);
+
+            listView.SelectedItem = "One";
+
+            Assert.NotNull(listView.SelectedItem);
+        }
+
+        [Fact]
         public void SelectedItemCommand()
         {
             var listView = new ListView();
@@ -65,9 +77,28 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             listView.SelectedItem = "One";
 
             command.Verify(x => x.CanExecute("One"), Times.Once);
+            command.Verify(x => x.CanExecute(It.IsAny<object>()), Times.Once);
             command.Verify(x => x.Execute("One"), Times.Once);
+            command.Verify(x => x.Execute(It.IsAny<object>()), Times.Once);
             Assert.Null(listView.SelectedItem);
         }
 
+        [Fact]
+        public void ClearSelectedItemCommandWhenSelectedItemIsNull()
+        {
+            var listView = new ListView {SelectedItem = "One"};
+
+            var command = new Mock<ICommand>();
+            command.Setup(x => x.CanExecute(It.IsAny<object>())).Returns(true);
+
+            listView.SetValue(ListViewItemSelected.ClearSelectedItemCommandProperty, command.Object);
+
+
+            listView.SelectedItem = null;
+
+            command.Verify(x => x.CanExecute(It.IsAny<object>()), Times.Never);
+            command.Verify(x => x.Execute(It.IsAny<object>()), Times.Never);
+            Assert.Null(listView.SelectedItem);
+        }
     }
 }

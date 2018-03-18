@@ -12,6 +12,7 @@
             <Button Text="Event to Command Sample" Clicked="EventToCommandButton_OnClicked"/>
             <Button Text="SelectedItemBehavior Sample" Clicked="SelectedItemBehavior_OnClicked"/>
             <Button Text="SelectedItemAttachedProperty Sample" Clicked="SelectedItemAttachedProperty_OnClicked"/>
+            <Button Text="ClearSelectedItemAttachedProperty Sample" Clicked="ClearSelectedItemAttachedProperty_OnClicked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

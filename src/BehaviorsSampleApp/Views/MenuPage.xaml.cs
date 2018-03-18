@@ -46,5 +46,10 @@ namespace BehaviorsSampleApp.Views
 	    {
 	        Navigation.PushAsync(new SelectedItemAttachedPropertyPage());
 	    }
+
+	    private void ClearSelectedItemAttachedProperty_OnClicked(object sender, EventArgs e)
+	    {
+	        Navigation.PushAsync(new ClearSelectedItemAttachedPropertyPage());
+	    }
     }
 }
