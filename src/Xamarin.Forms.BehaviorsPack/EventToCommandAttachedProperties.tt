@@ -37,15 +37,27 @@ namespace Xamarin.Forms.BehaviorsPack {
 				.OrderBy(x => x.Name);
 		if(eventInfos.Any())
         {
+			string typeName;
+			if(type.Name.EndsWith("ry"))
+            {
+				typeName = type.Name.Substring(0, type.Name.Length - 1) + "ies";
+            }
+			else
+            {
+				typeName = type.Name + "s";
+            }
+#>
+	public partial class <#= typeName #> {
+<#
 			foreach (var eventInfo in eventInfos)
 			{
 				if (excludeInfos.Any(x => x.Type == type && x.EventName == eventInfo.Name && x.EventPropertyName == null))
 					continue;
 
-				var typeName = type.Name + eventInfo.Name;
 				var propertyInfos = new List<BindablePropertyInfo>();
 				propertyInfos.Add(new BindablePropertyInfo {
-					PropertyName = "Command",
+					PropertyName = eventInfo.Name,
+					EventHandlerName = "On" + eventInfo.Name,
 					EventArgsTypeName = "EventArgs",
 					CommandParameter = "eventArgs"
 				});
@@ -73,14 +85,14 @@ namespace Xamarin.Forms.BehaviorsPack {
 						
 
 						propertyInfos.Add(new BindablePropertyInfo {
-							PropertyName = propertyInfo.Name + "Command",
+							PropertyName = "Notify" + propertyInfo.Name + "When" + eventInfo.Name,
+							EventHandlerName = "On" + eventInfo.Name + "Notify" + propertyInfo.Name,
 							EventArgsTypeName = eventArgsTypeName,
 							CommandParameter = "eventArgs." + propertyInfo.Name
 						});
 					}
                 }
 #>
-	public partial class <#= typeName #> {
 <#
 				foreach (var bindablePropertyInfo in propertyInfos)
 				{
@@ -120,10 +132,12 @@ namespace Xamarin.Forms.BehaviorsPack {
 <#
 				}
 #>
-	}
 
 <#
             }
+#>
+	}
+<#
         }
 #>
 <#
@@ -134,13 +148,7 @@ namespace Xamarin.Forms.BehaviorsPack {
 	public class BindablePropertyInfo
 	{
 		public string PropertyName { get; set; }
-		public string EventHandlerName 
-		{ 
-			get 
-			{ 
-				return  "On" + PropertyName + "Changed"; 
-			} 
-		}
+		public string EventHandlerName { get; set; }
 		public string EventArgsTypeName { get; set; }
 		public string CommandParameter { get; set; }
 	}

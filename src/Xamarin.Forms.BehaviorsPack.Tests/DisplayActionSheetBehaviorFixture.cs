@@ -668,7 +668,6 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             bool calledActionSheetButtonActionDestruction = false;
             bool calledActionSheetButtonActionA = false;
             bool calledActionSheetButtonActionB = false;
-            string param = null;
             var actionSheetButtonActionCancel = new ActionSheetButton { Message = "ReplacedCancel", Action = () => { calledActionSheetButtonActionCancel = true; } };
             var actionSheetButtonActionDestruction = new ActionSheetButton { Message = "ReplacedDestruction", Action = () => { calledActionSheetButtonActionDestruction = true; } };
             var actionSheetButtonActionA = new ActionSheetButton { Message = "actionSheetButtonActionA", Action = () => { calledActionSheetButtonActionA = true; } };

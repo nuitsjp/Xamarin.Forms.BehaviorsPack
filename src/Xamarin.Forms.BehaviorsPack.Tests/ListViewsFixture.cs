@@ -10,10 +10,10 @@ using Xunit;
 
 namespace Xamarin.Forms.BehaviorsPack.Tests
 {
-    public class ListViewItemSelectedFixture
+    public class ItemSelected
     {
         [Fact]
-        public void Command()
+        public void ItemSelectedProperty()
         {
             var listView = new ListView();
             var command = new Mock<ICommand>();
@@ -26,7 +26,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
                 })
                 .Returns(true);
 
-            listView.SetValue(ListViewItemSelected.CommandProperty, command.Object);
+            listView.SetValue(ListViews.ItemSelectedProperty, command.Object);
 
 
             listView.SelectedItem = "One";
@@ -37,10 +37,10 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
         }
 
         [Fact]
-        public void CommandIsNull()
+        public void ItemSelectedPropertyWhenCommandIsNull()
         {
             var listView = new ListView();
-            listView.SetValue(ListViewItemSelected.CommandProperty, null);
+            listView.SetValue(ListViews.ItemSelectedProperty, null);
 
             listView.SelectedItem = "One";
 
@@ -48,13 +48,13 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
         }
 
         [Fact]
-        public void SelectedItemCommand()
+        public void NotifySelectedItemWhenItemSelectedProperty()
         {
             var listView = new ListView();
             var command = new Mock<ICommand>();
             command.Setup(x => x.CanExecute(It.IsAny<string>())).Returns(true);
 
-            listView.SetValue(ListViewItemSelected.SelectedItemCommandProperty, command.Object);
+            listView.SetValue(ListViews.NotifySelectedItemWhenItemSelectedProperty, command.Object);
 
 
             listView.SelectedItem = "One";
@@ -71,7 +71,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             var command = new Mock<ICommand>();
             command.Setup(x => x.CanExecute(It.IsAny<string>())).Returns(true);
 
-            listView.SetValue(ListViewItemSelected.ClearSelectedItemCommandProperty, command.Object);
+            listView.SetValue(BehaviorsPack.ListViews.ClearSelectedItemWhenItemSelectedProperty, command.Object);
 
 
             listView.SelectedItem = "One";
@@ -91,7 +91,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             var command = new Mock<ICommand>();
             command.Setup(x => x.CanExecute(It.IsAny<object>())).Returns(true);
 
-            listView.SetValue(ListViewItemSelected.ClearSelectedItemCommandProperty, command.Object);
+            listView.SetValue(BehaviorsPack.ListViews.ClearSelectedItemWhenItemSelectedProperty, command.Object);
 
 
             listView.SelectedItem = null;

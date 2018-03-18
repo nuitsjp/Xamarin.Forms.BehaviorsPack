@@ -87,7 +87,7 @@
     <Compile Include="ElementExtensionsFixture.cs" />
     <Compile Include="EventToCommandBehaviorFixture.cs" />
     <Compile Include="InheritBindingBehaviorFixture.cs" />
-    <Compile Include="ListViewItemSelectedFixture.cs" />
+    <Compile Include="ListViewsFixture.cs" />
     <Compile Include="NotificationBehaviorFixture.cs" />
     <Compile Include="NotificationRequestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

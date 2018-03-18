@@ -5,33 +5,33 @@ using System.Windows.Input;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-    public partial class ListViewItemSelected
+    public partial class ListViews
     {
         #region ClearAfterExecuteCommand
-        public static readonly BindableProperty ClearSelectedItemCommandProperty =
-            BindableProperty.CreateAttached("ClearSelectedItemCommand", typeof(ICommand), typeof(ListViewItemSelected), null, propertyChanged: OnClearSelectedItemCommandChanged);
+        public static readonly BindableProperty ClearSelectedItemWhenItemSelectedProperty =
+            BindableProperty.CreateAttached("ClearSelectedItemWhenItemSelected", typeof(ICommand), typeof(ListViews), null, propertyChanged: OnClearSelectedItemWhenItemSelectedChanged);
 
         public static ICommand GetClearSelectedItemCommand(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(ClearSelectedItemCommandProperty);
+            return (ICommand)bindableObject.GetValue(ClearSelectedItemWhenItemSelectedProperty);
         }
 
-        private static void OnClearSelectedItemCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnClearSelectedItemWhenItemSelectedChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is ListView target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.ItemSelected += OnClearSelectedItemCommandChanged;
+                    target.ItemSelected += OnItemSelectedClearSelectedItem;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.ItemSelected -= OnClearSelectedItemCommandChanged;
+                    target.ItemSelected -= OnItemSelectedClearSelectedItem;
                 }
             }
         }
 
-        private static void OnClearSelectedItemCommandChanged(object o, SelectedItemChangedEventArgs eventArgs)
+        private static void OnItemSelectedClearSelectedItem(object o, SelectedItemChangedEventArgs eventArgs)
         {
             if (o is ListView listView && eventArgs.SelectedItem != null)
             {
