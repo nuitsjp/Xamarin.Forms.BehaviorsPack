@@ -71,7 +71,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             var command = new Mock<ICommand>();
             command.Setup(x => x.CanExecute(It.IsAny<string>())).Returns(true);
 
-            listView.SetValue(ListViews.ItemSelected.ClearSelectedItemWhenItemSelectedProperty, command.Object);
+            listView.SetValue(ListViews.ItemSelected.ClearSelectedItemProperty, command.Object);
 
 
             listView.SelectedItem = "One";
@@ -91,7 +91,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             var command = new Mock<ICommand>();
             command.Setup(x => x.CanExecute(It.IsAny<object>())).Returns(true);
 
-            listView.SetValue(ListViews.ItemSelected.ClearSelectedItemWhenItemSelectedProperty, command.Object);
+            listView.SetValue(ListViews.ItemSelected.ClearSelectedItemProperty, command.Object);
 
 
             listView.SelectedItem = null;

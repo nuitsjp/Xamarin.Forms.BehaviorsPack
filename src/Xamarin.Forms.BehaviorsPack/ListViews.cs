@@ -11,15 +11,15 @@ namespace Xamarin.Forms.BehaviorsPack
         {
             #region ClearAfterExecuteCommand
 
-            public static readonly BindableProperty ClearSelectedItemWhenItemSelectedProperty =
-                BindableProperty.CreateAttached("SelectedItem", typeof(ICommand), typeof(ItemSelected), null, propertyChanged: OnClearSelectedItemWhenItemSelectedChanged);
+            public static readonly BindableProperty ClearSelectedItemProperty =
+                BindableProperty.CreateAttached("ClearSelectedItem", typeof(ICommand), typeof(ItemSelected), null, propertyChanged: OnClearSelectedItemChanged);
 
-            public static ICommand GetClearSelectedItemCommand(BindableObject bindableObject)
+            public static ICommand GetClearSelectedItem(BindableObject bindableObject)
             {
-                return (ICommand)bindableObject.GetValue(ClearSelectedItemWhenItemSelectedProperty);
+                return (ICommand)bindableObject.GetValue(ClearSelectedItemProperty);
             }
 
-            private static void OnClearSelectedItemWhenItemSelectedChanged(BindableObject bindable, object oldValue, object newValue)
+            private static void OnClearSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
             {
                 if (bindable is ListView target)
                 {
@@ -38,7 +38,7 @@ namespace Xamarin.Forms.BehaviorsPack
             {
                 if (o is ListView listView && eventArgs.SelectedItem != null)
                 {
-                    var command = GetClearSelectedItemCommand(listView);
+                    var command = GetClearSelectedItem(listView);
                     if (command.CanExecute(eventArgs.SelectedItem))
                     {
                         command.Execute(eventArgs.SelectedItem);
