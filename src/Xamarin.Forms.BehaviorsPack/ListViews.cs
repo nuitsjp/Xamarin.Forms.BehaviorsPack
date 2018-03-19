@@ -5,44 +5,49 @@ using System.Windows.Input;
 
 namespace Xamarin.Forms.BehaviorsPack
 {
-    public partial class ListViews
+    public static partial class ListViews
     {
-        #region ClearAfterExecuteCommand
-        public static readonly BindableProperty ClearSelectedItemWhenItemSelectedProperty =
-            BindableProperty.CreateAttached("ClearSelectedItemWhenItemSelected", typeof(ICommand), typeof(ListViews), null, propertyChanged: OnClearSelectedItemWhenItemSelectedChanged);
-
-        public static ICommand GetClearSelectedItemCommand(BindableObject bindableObject)
+        public static partial class ItemSelected
         {
-            return (ICommand)bindableObject.GetValue(ClearSelectedItemWhenItemSelectedProperty);
-        }
+            #region ClearAfterExecuteCommand
 
-        private static void OnClearSelectedItemWhenItemSelectedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is ListView target)
+            public static readonly BindableProperty ClearSelectedItemWhenItemSelectedProperty =
+                BindableProperty.CreateAttached("SelectedItem", typeof(ICommand), typeof(ItemSelected), null, propertyChanged: OnClearSelectedItemWhenItemSelectedChanged);
+
+            public static ICommand GetClearSelectedItemCommand(BindableObject bindableObject)
             {
-                if (oldValue == null && newValue != null)
+                return (ICommand)bindableObject.GetValue(ClearSelectedItemWhenItemSelectedProperty);
+            }
+
+            private static void OnClearSelectedItemWhenItemSelectedChanged(BindableObject bindable, object oldValue, object newValue)
+            {
+                if (bindable is ListView target)
                 {
-                    target.ItemSelected += OnItemSelectedClearSelectedItem;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.ItemSelected -= OnItemSelectedClearSelectedItem;
+                    if (oldValue == null && newValue != null)
+                    {
+                        target.ItemSelected += OnItemSelectedClearSelectedItem;
+                    }
+                    else if (oldValue != null && newValue == null)
+                    {
+                        target.ItemSelected -= OnItemSelectedClearSelectedItem;
+                    }
                 }
             }
-        }
 
-        private static void OnItemSelectedClearSelectedItem(object o, SelectedItemChangedEventArgs eventArgs)
-        {
-            if (o is ListView listView && eventArgs.SelectedItem != null)
+            private static void OnItemSelectedClearSelectedItem(object o, SelectedItemChangedEventArgs eventArgs)
             {
-                var command = GetClearSelectedItemCommand(listView);
-                if (command.CanExecute(eventArgs.SelectedItem))
+                if (o is ListView listView && eventArgs.SelectedItem != null)
                 {
-                    command.Execute(eventArgs.SelectedItem);
-                    listView.SelectedItem = null;
+                    var command = GetClearSelectedItemCommand(listView);
+                    if (command.CanExecute(eventArgs.SelectedItem))
+                    {
+                        command.Execute(eventArgs.SelectedItem);
+                        listView.SelectedItem = null;
+                    }
                 }
             }
+
+            #endregion
         }
-        #endregion
     }
 }

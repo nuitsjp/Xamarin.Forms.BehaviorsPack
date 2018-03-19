@@ -1,0 +1,160 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.ObjectModel.dll" #>
+<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Core.dll" #>
+<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Platform.dll" #>
+<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.2.4.0.282\lib\netstandard1.0\Xamarin.Forms.Xaml.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Xamarin.Forms" #>
+<#@ import namespace="System.Windows.Input" #>
+<#   
+    var assembly = typeof(Page).Assembly;
+    var types = assembly.ExportedTypes
+        .Where(
+            x => !x.IsInterface
+                && !x.IsGenericType
+                && x.IsSubclassOf(typeof(BindableObject)))
+        .OrderBy(x => x.FullName);
+	var excludeInfos = new List<ExcludeInfo>
+	{
+		new ExcludeInfo { Type = typeof(ToolbarItem), EventName = "Activated", EventPropertyName = null  },
+	};
+
+#>
+using System;
+using System.Windows.Input;
+using Xamarin.Forms.Internals;
+
+namespace Xamarin.Forms.BehaviorsPack {
+
+<#
+	foreach (var type in types)
+    {
+		var eventInfos = 
+			type.GetEvents()
+				.Where(x => x.DeclaringType == type)
+				.OrderBy(x => x.Name);
+		if(eventInfos.Any())
+        {
+			foreach (var eventInfo in eventInfos)
+			{
+				if (excludeInfos.Any(x => x.Type == type && x.EventName == eventInfo.Name && x.EventPropertyName == null))
+					continue;
+
+				var typeName = type.Name + eventInfo.Name;
+				var propertyInfos = new List<BindablePropertyInfo>();
+				propertyInfos.Add(new BindablePropertyInfo {
+					PropertyName = "Command",
+					EventArgsTypeName = "EventArgs",
+					CommandParameter = "eventArgs"
+				});
+                if (eventInfo.EventHandlerType.IsGenericType)
+                {
+                    var eventArgType = eventInfo.EventHandlerType.GenericTypeArguments.First();
+					foreach (var propertyInfo in eventArgType.GetProperties())
+					{
+						if (excludeInfos.Any(x => x.Type == type && x.EventName == eventInfo.Name && x.EventPropertyName == propertyInfo.Name))
+							continue;
+
+						string eventArgsTypeName;
+						if(eventArgType.IsGenericType)
+                        {
+							var typeArgs = string.Join(", ", eventArgType.GenericTypeArguments.Select(x => x.FullName));
+							eventArgsTypeName =
+								eventArgType.FullName.Substring(0, eventArgType.FullName.IndexOf("`", StringComparison.Ordinal))
+								+ "<" + typeArgs + ">";
+                        }
+						else
+                        {
+							eventArgsTypeName = eventArgType.FullName;
+                        }
+						eventArgsTypeName = eventArgsTypeName.Replace("+", ".");
+						
+
+						propertyInfos.Add(new BindablePropertyInfo {
+							PropertyName = propertyInfo.Name + "Command",
+							EventArgsTypeName = eventArgsTypeName,
+							CommandParameter = "eventArgs." + propertyInfo.Name
+						});
+					}
+                }
+#>
+	[Obsolete]
+	public class <#= typeName #> {
+<#
+				foreach (var bindablePropertyInfo in propertyInfos)
+				{
+#>
+
+		#region <#= bindablePropertyInfo.PropertyName #>
+		[Obsolete]
+        public static readonly BindableProperty <#= bindablePropertyInfo.PropertyName #>Property =
+            BindableProperty.CreateAttached("<#= bindablePropertyInfo.PropertyName #>", typeof(ICommand), typeof(<#= typeName #>), null, propertyChanged:On<#= bindablePropertyInfo.PropertyName #>Changed);
+
+		[Obsolete]
+        public static ICommand Get<#= bindablePropertyInfo.PropertyName #>(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(<#= bindablePropertyInfo.PropertyName #>Property);
+        }
+
+		[Obsolete]
+		private static void On<#= bindablePropertyInfo.PropertyName #>Changed(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is <#= type.Name #> target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.<#= eventInfo.Name #> += <#= bindablePropertyInfo.EventHandlerName #>;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.<#= eventInfo.Name #> -= <#= bindablePropertyInfo.EventHandlerName #>;
+                }
+            }
+		}
+
+		[Obsolete]
+        private static void <#= bindablePropertyInfo.EventHandlerName #>(object o, <#= bindablePropertyInfo.EventArgsTypeName #> eventArgs)
+        {
+            var command = Get<#= bindablePropertyInfo.PropertyName #>((BindableObject)o);
+            if (command.CanExecute(<#= bindablePropertyInfo.CommandParameter #>))
+                command.Execute(<#= bindablePropertyInfo.CommandParameter #>);
+        }
+		#endregion
+<#
+				}
+#>
+	}
+
+<#
+            }
+        }
+#>
+<#
+    }
+#>
+}
+<#+
+	public class BindablePropertyInfo
+	{
+		public string PropertyName { get; set; }
+		public string EventHandlerName 
+		{ 
+			get 
+			{ 
+				return  "On" + PropertyName + "Changed"; 
+			} 
+		}
+		public string EventArgsTypeName { get; set; }
+		public string CommandParameter { get; set; }
+	}
+
+	public class ExcludeInfo
+	{
+		public Type Type { get; set; }
+		public string EventName { get; set; }
+		public string EventPropertyName { get; set; }
+	}
+#>
