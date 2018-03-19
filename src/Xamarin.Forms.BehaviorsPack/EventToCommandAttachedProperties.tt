@@ -67,8 +67,6 @@ namespace Xamarin.Forms.BehaviorsPack {
 					"EventArgs", 
 					"eventArgs", 
 					"        ");
-#>
-<#
                 if (eventInfo.EventHandlerType.IsGenericType)
                 {
                     var eventArgType = eventInfo.EventHandlerType.GenericTypeArguments.First();
@@ -78,11 +76,6 @@ namespace Xamarin.Forms.BehaviorsPack {
 					});
 					if(properties.Any())
 					{
-#>
-
-		#region <#= eventInfo.Name #> Properties
-		public static partial class <#= eventInfo.Name #> {
-<#
 						foreach (var propertyInfo in properties)
 						{
 							string eventArgsTypeName;
@@ -103,17 +96,13 @@ namespace Xamarin.Forms.BehaviorsPack {
 							WriteProperty(
 								type, 
 								eventInfo.Name, 
-								eventInfo.Name, 
-								propertyInfo.Name, 
+								typeName, 
+								eventInfo.Name + "Notify" + propertyInfo.Name, 
 								"On" + eventInfo.Name + "Notify" + propertyInfo.Name, 
 								eventArgsTypeName, 
 								"eventArgs." + propertyInfo.Name, 
-								"            ");
+								"        ");
 						}
-#>
-		}
-		#endregion
-<#
 					}
 				}
             }

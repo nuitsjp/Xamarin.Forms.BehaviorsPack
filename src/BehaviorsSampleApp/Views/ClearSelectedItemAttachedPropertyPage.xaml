@@ -2,19 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
-             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             xmlns:bp="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              x:Class="BehaviorsSampleApp.Views.ClearSelectedItemAttachedPropertyPage">
     <ContentPage.BindingContext>
         <viewModels:ClearSelectedItemAttachedPropertyPageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Behaviors>
-        <behaviorsPack:NotificationBehavior
+        <bp:NotificationBehavior
             NotificationRequest="{Binding NavigateNextPageRequest}"
             Received="OnNavigateNextPageReceived"/>
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Fruits}"
-                  behaviorsPack:ListViewItemSelected.ClearSelectedItemCommand="{Binding SelectedFruitCommand}">
+                  bp:ListViews.ItemSelectedNotifySelectedItem="{Binding SelectedFruitCommand}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
