@@ -40,6 +40,7 @@ In the sample code of this library, it is assumed that the library namespace is 
 ## How to Use  
 
 * [EventToCommandBehavior](docs/EventToCommandBehavior.md)  
+* [SelectedItemBehavior](docs/SelectedItemBehavior.md)  
 * [DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior.md)  
 * [DisplayAlertBehavior](docs/DisplayAlertBehavior.md)
 
