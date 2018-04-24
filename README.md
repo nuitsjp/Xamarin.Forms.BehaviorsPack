@@ -51,5 +51,3 @@ In the sample code of this library, it is assumed that the library namespace is 
 A sample project applying this library is published to the following path of this repository.
 
 > src/BehaviorsSampleApp.sln
-
-© 2017 [nuitsjp](https://github.com/nuitsjp) All rights reserved.
