@@ -43,6 +43,7 @@ NuGetからインストールします。
 各Behaviorの利用方法は以下を参照ください。  
 
 * [EventToCommandBehavior](docs/EventToCommandBehavior-ja.md)  
+* [SelectedItemBehavior](docs/SelectedItemBehavior-ja.md)  
 * [DisplayActionSheetBehavior](docs/DisplayActionSheetBehavior-ja.md)  
 * [DisplayAlertBehavior](docs/DisplayAlertBehavior-ja.md)
 
