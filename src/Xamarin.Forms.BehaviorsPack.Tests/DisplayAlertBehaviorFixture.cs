@@ -52,7 +52,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 			    if (arguments.Title == "WhenCancelOnly")
 			    {
 					Assert.Equal("Message", arguments.Message);
-				    Assert.Equal(null, arguments.Accept);
+				    Assert.Null(arguments.Accept);
 				    Assert.Equal("Cancel", arguments.Cancel);
 				    arguments.SetResult(false);
 			    }

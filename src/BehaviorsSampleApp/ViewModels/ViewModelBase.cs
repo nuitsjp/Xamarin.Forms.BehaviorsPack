@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using BehaviorsSampleApp.Annotations;
 
 namespace BehaviorsSampleApp.ViewModels
 {
@@ -13,7 +12,6 @@ namespace BehaviorsSampleApp.ViewModels
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		[NotifyPropertyChangedInvocator]
 		protected virtual bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
 		{
 			if (Equals(field, value)) return false;

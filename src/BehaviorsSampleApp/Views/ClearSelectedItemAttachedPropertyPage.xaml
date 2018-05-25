@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
              xmlns:bp="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
-             x:Class="BehaviorsSampleApp.Views.ClearSelectedItemAttachedPropertyPage">
+             x:Class="BehaviorsSampleApp.Views.ClearSelectedItemAttachedPropertyPage"
+             Title="ClearSelectedItem Saple">
     <ContentPage.BindingContext>
         <viewModels:ClearSelectedItemAttachedPropertyPageViewModel/>
     </ContentPage.BindingContext>
@@ -14,7 +15,7 @@
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Fruits}"
-                  bp:ListViews.ItemSelectedNotifySelectedItem="{Binding SelectedFruitCommand}">
+                  bp:ListViews.ItemSelectedClearSelectedItem="{Binding SelectedFruitCommand}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

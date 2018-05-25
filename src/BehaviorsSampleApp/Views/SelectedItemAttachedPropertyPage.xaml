@@ -4,7 +4,8 @@
              xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels;assembly=BehaviorsSampleApp"
              xmlns:bp="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              x:Class="BehaviorsSampleApp.Views.SelectedItemAttachedPropertyPage"
-             bp:Pages.Appearing="{Binding AppearingCommand}">
+             bp:Pages.Appearing="{Binding AppearingCommand}"
+             Title="SelectedItemAttachedProperty Sample">
     <ContentPage.BindingContext>
         <viewModels:SelectedItemAttachedPropertyPageViewModel/>
     </ContentPage.BindingContext>

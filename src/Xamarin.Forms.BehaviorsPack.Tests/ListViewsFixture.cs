@@ -19,11 +19,7 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
             var command = new Mock<ICommand>();
             command
                 .Setup(x => x.CanExecute(It.IsAny<SelectedItemChangedEventArgs>()))
-                .Callback<object>(eventArg =>
-                {
-                    Assert.Equal(typeof(SelectedItemChangedEventArgs), eventArg.GetType());
-                    Assert.Equal("One", ((SelectedItemChangedEventArgs)eventArg).SelectedItem);
-                })
+                .Callback<object>(Assert.Null)
                 .Returns(true);
 
             listView.SetValue(ListViews.ItemSelectedProperty, command.Object);
@@ -31,8 +27,8 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
 
             listView.SelectedItem = "One";
 
-            command.Verify(x => x.CanExecute(It.IsAny<SelectedItemChangedEventArgs>()), Times.Once);
-            command.Verify(x => x.Execute(It.IsAny<SelectedItemChangedEventArgs>()), Times.Once);
+            command.Verify(x => x.CanExecute(null), Times.Once);
+            command.Verify(x => x.Execute(null), Times.Once);
             Assert.NotNull(listView.SelectedItem);
         }
 

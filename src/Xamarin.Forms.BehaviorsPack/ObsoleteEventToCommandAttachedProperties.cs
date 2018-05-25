@@ -625,6 +625,46 @@ namespace Xamarin.Forms.BehaviorsPack {
 	}
 
 	[Obsolete]
+	public class ClickGestureRecognizerClicked {
+
+		#region Command
+		[Obsolete]
+        public static readonly BindableProperty CommandProperty =
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(ClickGestureRecognizerClicked), null, propertyChanged:OnCommandChanged);
+
+		[Obsolete]
+        public static ICommand GetCommand(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CommandProperty);
+        }
+
+		[Obsolete]
+		private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is ClickGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.Clicked += OnCommandChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.Clicked -= OnCommandChanged;
+                }
+            }
+		}
+
+		[Obsolete]
+        private static void OnCommandChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetCommand((BindableObject)o);
+            if (command.CanExecute(eventArgs))
+                command.Execute(eventArgs);
+        }
+		#endregion
+	}
+
+	[Obsolete]
 	public class ColumnDefinitionSizeChanged {
 
 		#region Command
