@@ -64,7 +64,7 @@ XAML側では、先程はEventNameを指定していましたが、こちらはN
 <Button Text="Show Display Alert">
     <Button.Behaviors>
         <behaviorsPack:DisplayAlertBehavior
-            NotificationRequest="DisplayRequest"
+            NotificationRequest="{Binding DisplayRequest}"
             Title="Alert Title"
             Message="Please select either."
             Accept="OK"
@@ -107,7 +107,7 @@ private void Foo()
 <Button Text="Show Display Alert">
     <Button.Behaviors>
         <behaviorsPack:DisplayAlertBehavior
-            NotificationRequest="DisplayRequest"/>
+            NotificationRequest="{Binding DisplayRequest}"/>
     </Button.Behaviors>
 </Button>
 ```
