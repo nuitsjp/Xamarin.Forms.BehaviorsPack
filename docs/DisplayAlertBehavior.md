@@ -59,7 +59,7 @@ Bind the DisplayRequest property to NotificationRequest properties of DisplayAle
 <Button Text="Show Display Alert">
     <Button.Behaviors>
         <behaviorsPack:DisplayAlertBehavior
-            NotificationRequest="DisplayRequest"
+            NotificationRequest="{Binding DisplayRequest}"
             Title="Alert Title"
             Message="Please select either."
             Accept="OK"
@@ -102,7 +102,7 @@ XAML is written as:
 <Button Text="Show Display Alert">
     <Button.Behaviors>
         <behaviorsPack:DisplayAlertBehavior
-            NotificationRequest="DisplayRequest"/>
+            NotificationRequest="{Binding DisplayRequest}"/>
     </Button.Behaviors>
 </Button>
 ```
