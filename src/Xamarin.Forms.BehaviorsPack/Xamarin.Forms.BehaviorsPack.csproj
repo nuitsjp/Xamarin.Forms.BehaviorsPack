@@ -5,22 +5,22 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Version>2.0.0</Version>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.1.0</Version>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <FileVersion>2.1.0.0</FileVersion>
     <Authors>Atsushi Nakamura</Authors>
     <Company>Atsushi Nakamura</Company>
     <Title>Xamarin.Forms.BehaviorsPack</Title>
     <Product>Xamarin.Forms.BehaviorsPack</Product>
     <Description>Behavior library for Xamarin.Forms. EventToCommandBehavior, SelectedItemBehavior, DisplayAlertBehavior. DisplayActionSheetBehavior and other.</Description>
-    <PackageLicenseUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors Xamarin.Forms.BehaviorsPack BehaviorsPack</PackageTags>
     <DebugType>full</DebugType>
-    <Copyright>Copyright 2017 - 2018 nuits.jp</Copyright>
+    <Copyright>Copyright 2017 - 2019 nuits.jp</Copyright>
     <PackageReleaseNotes>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/releases</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

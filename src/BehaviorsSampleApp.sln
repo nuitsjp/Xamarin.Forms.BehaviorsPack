@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28621.142
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xamarin.Forms.BehaviorsPack", "Xamarin.Forms.BehaviorsPack\Xamarin.Forms.BehaviorsPack.csproj", "{DD31AF2F-2049-4EA0-B9F6-493A95B93190}"
 EndProject
@@ -225,7 +225,8 @@ Global
 		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.AppStore|x64.ActiveCfg = AppStore|iPhone
 		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.AppStore|x86.ActiveCfg = AppStore|iPhone
-		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{063D3F1A-1F9C-4BD2-99D5-C27FAF32C0E9}.Debug|iPhone.Build.0 = Debug|iPhone
@@ -278,6 +279,8 @@ Global
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.AppStore|x86.Build.0 = Release|x86
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.AppStore|x86.Deploy.0 = Release|x86
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|Any CPU.Build.0 = Debug|x86
+		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|ARM.ActiveCfg = Debug|ARM
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|ARM.Build.0 = Debug|ARM
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -290,6 +293,7 @@ Global
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|x86.Build.0 = Debug|x86
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Debug|x86.Deploy.0 = Debug|x86
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Release|Any CPU.ActiveCfg = Release|x86
+		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Release|Any CPU.Build.0 = Release|x86
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Release|ARM.ActiveCfg = Release|ARM
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Release|ARM.Build.0 = Release|ARM
 		{42A4A792-6205-458B-AF1F-E7B65FB60376}.Release|ARM.Deploy.0 = Release|ARM
