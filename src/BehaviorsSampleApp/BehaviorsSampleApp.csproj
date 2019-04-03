@@ -11,4 +11,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Forms.BehaviorsPack\Xamarin.Forms.BehaviorsPack.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\WebViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

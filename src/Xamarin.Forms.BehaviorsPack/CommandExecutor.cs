@@ -33,7 +33,7 @@ namespace Xamarin.Forms.BehaviorsPack
 				    object propertyValue = eventArgs;
 				    foreach (var propertyPathPart in propertyPathParts)
 				    {
-					    var propInfo = propertyValue.GetType().GetTypeInfo().GetDeclaredProperty(propertyPathPart);
+					    var propInfo = propertyValue.GetType().GetTypeInfo().GetProperty(propertyPathPart);
 					    propertyValue = propInfo.GetValue(propertyValue);
 					    if (propertyValue == null)
 					    {

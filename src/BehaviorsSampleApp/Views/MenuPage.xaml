@@ -13,6 +13,7 @@
             <Button Text="SelectedItemBehavior Sample" Clicked="SelectedItemBehavior_OnClicked"/>
             <Button Text="SelectedItemAttachedProperty Sample" Clicked="SelectedItemAttachedProperty_OnClicked"/>
             <Button Text="ClearSelectedItemAttachedProperty Sample" Clicked="ClearSelectedItemAttachedProperty_OnClicked"/>
+            <Button Text="WebView Sample" Clicked="WebView_Clicked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             xmlns:viewModels="clr-namespace:BehaviorsSampleApp.ViewModels"
+             x:Class="BehaviorsSampleApp.Views.WebViewPage">
+    <ContentPage.BindingContext>
+        <viewModels:WebViewPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Text="Navigate"/>
+        <WebView Grid.Row="1"
+                 Source="https://www.google.com">
+            <WebView.Behaviors>
+                <behaviorsPack:EventToCommandBehavior Command="{Binding NavigatedCommand}"
+                                                  EventArgsPropertyPath="Url"
+                                                  EventName="Navigated" />
+            </WebView.Behaviors>
+        </WebView>
+    </Grid>
+</ContentPage>

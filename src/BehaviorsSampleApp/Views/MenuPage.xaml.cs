@@ -51,5 +51,10 @@ namespace BehaviorsSampleApp.Views
 	    {
 	        Navigation.PushAsync(new ClearSelectedItemAttachedPropertyPage());
 	    }
+
+        private void WebView_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new WebViewPage());
+        }
     }
 }
