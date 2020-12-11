@@ -2,28 +2,51 @@
 <#@ output extension=".cs" #>
 <#@ Assembly Name="System.Core.dll" #>
 <#@ Assembly Name="System.ObjectModel.dll" #>
-<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.3.5.0.169047\lib\netstandard1.0\Xamarin.Forms.Core.dll" #>
-<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.3.5.0.169047\lib\netstandard1.0\Xamarin.Forms.Platform.dll" #>
-<#@ Assembly Name="$(ProjectDir)..\packages\Xamarin.Forms.3.5.0.169047\lib\netstandard1.0\Xamarin.Forms.Xaml.dll" #>
+<#@ Assembly Name="EnvDTE" #>
+<#@ Assembly Name="VSLangProj" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="Xamarin.Forms" #>
 <#@ import namespace="System.Windows.Input" #>
 <#   
-    var assembly = typeof(Page).Assembly;
-    var types = assembly.ExportedTypes
+	var dte = (this.Host as IServiceProvider).GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
+	var templateItem = dte.Solution.FindProjectItem(this.Host.TemplateFile);
+    var project = templateItem.ContainingProject;
+    var vsProject = project.Object as VSLangProj.VSProject;
+
+	Assembly coreAssembly = null;
+
+    foreach(var referenceObj in vsProject.References)
+    {
+        var reference = (VSLangProj.Reference)referenceObj;
+        if(reference.Name == "Xamarin.Forms.Core") 
+		{
+	        coreAssembly = Assembly.LoadFile(reference.Path);
+			break;
+        }		
+    }
+	
+	var bindableObjectType = coreAssembly.GetType("Xamarin.Forms.BindableObject");
+    var types = coreAssembly.ExportedTypes
         .Where(
             x => !x.IsInterface
                 && !x.IsGenericType
-                && x.IsSubclassOf(typeof(BindableObject)))
+                && x.IsSubclassOf(bindableObjectType))
         .OrderBy(x => x.FullName);
 	var excludeInfos = new List<ExcludeInfo>
 	{
-		new ExcludeInfo { Type = typeof(ToolbarItem), EventName = "Activated", EventPropertyName = null  },
-		new ExcludeInfo { Type = typeof(Application), EventName = "PageAppearing", EventPropertyName = null  },
-		new ExcludeInfo { Type = typeof(Application), EventName = "PageDisappearing", EventPropertyName = null  },
-		new ExcludeInfo { Type = typeof(WebView), EventName = "EvaluateJavaScriptRequested", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.ToolbarItem"), EventName = "Activated", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.Application"), EventName = "PageAppearing", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.Application"), EventName = "PageDisappearing", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.WebView"), EventName = "EvaluateJavaScriptRequested", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.DropGestureRecognizer"), EventName = "Drop", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.SwipeItems"), EventName = "CollectionChanged", EventPropertyName = null  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.NavigationPage"), EventName = "InsertPageBeforeRequested", EventPropertyName = "Realize"  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.NavigationPage"), EventName = "PopRequested", EventPropertyName = "Realize"  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.NavigationPage"), EventName = "PopToRootRequested", EventPropertyName = "Realize"  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.NavigationPage"), EventName = "PushRequested", EventPropertyName = "Realize"  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.NavigationPage"), EventName = "RemovePageRequested", EventPropertyName = "Realize"  },
+		new ExcludeInfo { Type = coreAssembly.GetType("Xamarin.Forms.Element"), EventName = "PlatformSet", EventPropertyName = null  },
 	};
 
 #>
