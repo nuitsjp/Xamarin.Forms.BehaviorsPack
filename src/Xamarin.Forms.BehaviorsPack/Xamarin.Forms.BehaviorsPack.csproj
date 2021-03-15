@@ -19,7 +19,20 @@
     <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors Xamarin.Forms.BehaviorsPack BehaviorsPack</PackageTags>
     <DebugType>full</DebugType>
     <Copyright>Copyright 2017 - 2020 nuits.jp</Copyright>
-    <PackageReleaseNotes>https://github.com/nuitsjp/Xamarin.Forms.BehaviorsPack/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      Release 3.0.0
+      - Support for Xamarin.Forms 5.0
+      - Breaking changes due to Xamarin.Forms Breaking changes
+      - Removed Expanders (moved to XamarinCommunityToolkit)
+      - Removed MediaElements (moved to XamarinCommunityToolkit)
+      - Removed MasterDetailPages (because FlyoutPage was added and MasterDetailPage was deprecated)
+      - Support for FlyoutPage
+      - Support for GradientBrush
+      - Support for GeometryGroup
+      - Support for DragLeave of DropGestureRecognizer
+      - Support for CloseRequestedNotifyAnimated of SwipeViews
+      - Support for OpenRequestedNotifyAnimated of SwipeViews
+    </PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
