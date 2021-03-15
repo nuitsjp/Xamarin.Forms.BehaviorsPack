@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Xamarin.Forms.Internals;
+using Xamarin.Forms.Shapes;
 
 namespace Xamarin.Forms.BehaviorsPack {
 
@@ -1081,6 +1081,38 @@ namespace Xamarin.Forms.BehaviorsPack {
 	#region DropGestureRecognizers
 	public static partial class DropGestureRecognizers {
         
+        #region DragLeave
+        public static readonly BindableProperty DragLeaveProperty =
+            BindableProperty.CreateAttached("DragLeave", typeof(ICommand), typeof(DropGestureRecognizers), null, propertyChanged:OnDragLeaveChanged);
+        
+        public static ICommand GetDragLeave(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(DragLeaveProperty);
+        }
+        
+        private static void OnDragLeaveChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is DropGestureRecognizer target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.DragLeave += OnDragLeave;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.DragLeave -= OnDragLeave;
+                }
+            }
+        }
+        
+        private static void OnDragLeave(object o, EventArgs eventArgs)
+        {
+            var command = GetDragLeave((BindableObject)o);
+            if (command.CanExecute(null))
+                command.Execute(null);
+        }
+        #endregion
+        
         #region DragOver
         public static readonly BindableProperty DragOverProperty =
             BindableProperty.CreateAttached("DragOver", typeof(ICommand), typeof(DropGestureRecognizers), null, propertyChanged:OnDragOverChanged);
@@ -1359,36 +1391,137 @@ namespace Xamarin.Forms.BehaviorsPack {
 	}
 	#endregion
 
-	#region Expanders
-	public static partial class Expanders {
+	#region FlyoutPages
+	public static partial class FlyoutPages {
         
-        #region Tapped
-        public static readonly BindableProperty TappedProperty =
-            BindableProperty.CreateAttached("Tapped", typeof(ICommand), typeof(Expanders), null, propertyChanged:OnTappedChanged);
+        #region BackButtonPressed
+        public static readonly BindableProperty BackButtonPressedProperty =
+            BindableProperty.CreateAttached("BackButtonPressed", typeof(ICommand), typeof(FlyoutPages), null, propertyChanged:OnBackButtonPressedChanged);
         
-        public static ICommand GetTapped(BindableObject bindableObject)
+        public static ICommand GetBackButtonPressed(BindableObject bindableObject)
         {
-            return (ICommand)bindableObject.GetValue(TappedProperty);
+            return (ICommand)bindableObject.GetValue(BackButtonPressedProperty);
         }
         
-        private static void OnTappedChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnBackButtonPressedChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (bindable is Expander target)
+            if (bindable is FlyoutPage target)
             {
                 if (oldValue == null && newValue != null)
                 {
-                    target.Tapped += OnTapped;
+                    target.BackButtonPressed += OnBackButtonPressed;
                 }
                 else if (oldValue != null && newValue == null)
                 {
-                    target.Tapped -= OnTapped;
+                    target.BackButtonPressed -= OnBackButtonPressed;
                 }
             }
         }
         
-        private static void OnTapped(object o, EventArgs eventArgs)
+        private static void OnBackButtonPressed(object o, EventArgs eventArgs)
         {
-            var command = GetTapped((BindableObject)o);
+            var command = GetBackButtonPressed((BindableObject)o);
+            if (command.CanExecute(null))
+                command.Execute(null);
+        }
+        #endregion
+        
+        #region BackButtonPressedNotifyHandled
+        public static readonly BindableProperty BackButtonPressedNotifyHandledProperty =
+            BindableProperty.CreateAttached("BackButtonPressedNotifyHandled", typeof(ICommand), typeof(FlyoutPages), null, propertyChanged:OnBackButtonPressedNotifyHandledChanged);
+        
+        public static ICommand GetBackButtonPressedNotifyHandled(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(BackButtonPressedNotifyHandledProperty);
+        }
+        
+        private static void OnBackButtonPressedNotifyHandledChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is FlyoutPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.BackButtonPressed += OnBackButtonPressedNotifyHandled;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.BackButtonPressed -= OnBackButtonPressedNotifyHandled;
+                }
+            }
+        }
+        
+        private static void OnBackButtonPressedNotifyHandled(object o, Xamarin.Forms.BackButtonPressedEventArgs eventArgs)
+        {
+            var command = GetBackButtonPressedNotifyHandled((BindableObject)o);
+            if (command.CanExecute(eventArgs.Handled))
+                command.Execute(eventArgs.Handled);
+        }
+        #endregion
+        
+        #region IsPresentedChanged
+        public static readonly BindableProperty IsPresentedChangedProperty =
+            BindableProperty.CreateAttached("IsPresentedChanged", typeof(ICommand), typeof(FlyoutPages), null, propertyChanged:OnIsPresentedChangedChanged);
+        
+        public static ICommand GetIsPresentedChanged(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(IsPresentedChangedProperty);
+        }
+        
+        private static void OnIsPresentedChangedChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is FlyoutPage target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.IsPresentedChanged += OnIsPresentedChanged;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.IsPresentedChanged -= OnIsPresentedChanged;
+                }
+            }
+        }
+        
+        private static void OnIsPresentedChanged(object o, EventArgs eventArgs)
+        {
+            var command = GetIsPresentedChanged((BindableObject)o);
+            if (command.CanExecute(null))
+                command.Execute(null);
+        }
+        #endregion
+	}
+	#endregion
+
+	#region GradientBrushs
+	public static partial class GradientBrushs {
+        
+        #region InvalidateGradientBrushRequested
+        public static readonly BindableProperty InvalidateGradientBrushRequestedProperty =
+            BindableProperty.CreateAttached("InvalidateGradientBrushRequested", typeof(ICommand), typeof(GradientBrushs), null, propertyChanged:OnInvalidateGradientBrushRequestedChanged);
+        
+        public static ICommand GetInvalidateGradientBrushRequested(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(InvalidateGradientBrushRequestedProperty);
+        }
+        
+        private static void OnInvalidateGradientBrushRequestedChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is GradientBrush target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.InvalidateGradientBrushRequested += OnInvalidateGradientBrushRequested;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.InvalidateGradientBrushRequested -= OnInvalidateGradientBrushRequested;
+                }
+            }
+        }
+        
+        private static void OnInvalidateGradientBrushRequested(object o, EventArgs eventArgs)
+        {
+            var command = GetInvalidateGradientBrushRequested((BindableObject)o);
             if (command.CanExecute(null))
                 command.Execute(null);
         }
@@ -2792,400 +2925,6 @@ namespace Xamarin.Forms.BehaviorsPack {
             var command = GetScrollToRequestedNotifyShouldAnimate((BindableObject)o);
             if (command.CanExecute(eventArgs.ShouldAnimate))
                 command.Execute(eventArgs.ShouldAnimate);
-        }
-        #endregion
-	}
-	#endregion
-
-	#region MasterDetailPages
-	public static partial class MasterDetailPages {
-        
-        #region BackButtonPressed
-        public static readonly BindableProperty BackButtonPressedProperty =
-            BindableProperty.CreateAttached("BackButtonPressed", typeof(ICommand), typeof(MasterDetailPages), null, propertyChanged:OnBackButtonPressedChanged);
-        
-        public static ICommand GetBackButtonPressed(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(BackButtonPressedProperty);
-        }
-        
-        private static void OnBackButtonPressedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MasterDetailPage target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.BackButtonPressed += OnBackButtonPressed;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.BackButtonPressed -= OnBackButtonPressed;
-                }
-            }
-        }
-        
-        private static void OnBackButtonPressed(object o, EventArgs eventArgs)
-        {
-            var command = GetBackButtonPressed((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region BackButtonPressedNotifyHandled
-        public static readonly BindableProperty BackButtonPressedNotifyHandledProperty =
-            BindableProperty.CreateAttached("BackButtonPressedNotifyHandled", typeof(ICommand), typeof(MasterDetailPages), null, propertyChanged:OnBackButtonPressedNotifyHandledChanged);
-        
-        public static ICommand GetBackButtonPressedNotifyHandled(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(BackButtonPressedNotifyHandledProperty);
-        }
-        
-        private static void OnBackButtonPressedNotifyHandledChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MasterDetailPage target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.BackButtonPressed += OnBackButtonPressedNotifyHandled;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.BackButtonPressed -= OnBackButtonPressedNotifyHandled;
-                }
-            }
-        }
-        
-        private static void OnBackButtonPressedNotifyHandled(object o, Xamarin.Forms.BackButtonPressedEventArgs eventArgs)
-        {
-            var command = GetBackButtonPressedNotifyHandled((BindableObject)o);
-            if (command.CanExecute(eventArgs.Handled))
-                command.Execute(eventArgs.Handled);
-        }
-        #endregion
-        
-        #region IsPresentedChanged
-        public static readonly BindableProperty IsPresentedChangedProperty =
-            BindableProperty.CreateAttached("IsPresentedChanged", typeof(ICommand), typeof(MasterDetailPages), null, propertyChanged:OnIsPresentedChangedChanged);
-        
-        public static ICommand GetIsPresentedChanged(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(IsPresentedChangedProperty);
-        }
-        
-        private static void OnIsPresentedChangedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MasterDetailPage target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.IsPresentedChanged += OnIsPresentedChanged;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.IsPresentedChanged -= OnIsPresentedChanged;
-                }
-            }
-        }
-        
-        private static void OnIsPresentedChanged(object o, EventArgs eventArgs)
-        {
-            var command = GetIsPresentedChanged((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-	}
-	#endregion
-
-	#region MediaElements
-	public static partial class MediaElements {
-        
-        #region MediaEnded
-        public static readonly BindableProperty MediaEndedProperty =
-            BindableProperty.CreateAttached("MediaEnded", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnMediaEndedChanged);
-        
-        public static ICommand GetMediaEnded(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(MediaEndedProperty);
-        }
-        
-        private static void OnMediaEndedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.MediaEnded += OnMediaEnded;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.MediaEnded -= OnMediaEnded;
-                }
-            }
-        }
-        
-        private static void OnMediaEnded(object o, EventArgs eventArgs)
-        {
-            var command = GetMediaEnded((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region MediaFailed
-        public static readonly BindableProperty MediaFailedProperty =
-            BindableProperty.CreateAttached("MediaFailed", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnMediaFailedChanged);
-        
-        public static ICommand GetMediaFailed(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(MediaFailedProperty);
-        }
-        
-        private static void OnMediaFailedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.MediaFailed += OnMediaFailed;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.MediaFailed -= OnMediaFailed;
-                }
-            }
-        }
-        
-        private static void OnMediaFailed(object o, EventArgs eventArgs)
-        {
-            var command = GetMediaFailed((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region MediaOpened
-        public static readonly BindableProperty MediaOpenedProperty =
-            BindableProperty.CreateAttached("MediaOpened", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnMediaOpenedChanged);
-        
-        public static ICommand GetMediaOpened(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(MediaOpenedProperty);
-        }
-        
-        private static void OnMediaOpenedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.MediaOpened += OnMediaOpened;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.MediaOpened -= OnMediaOpened;
-                }
-            }
-        }
-        
-        private static void OnMediaOpened(object o, EventArgs eventArgs)
-        {
-            var command = GetMediaOpened((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region PositionRequested
-        public static readonly BindableProperty PositionRequestedProperty =
-            BindableProperty.CreateAttached("PositionRequested", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnPositionRequestedChanged);
-        
-        public static ICommand GetPositionRequested(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(PositionRequestedProperty);
-        }
-        
-        private static void OnPositionRequestedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.PositionRequested += OnPositionRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.PositionRequested -= OnPositionRequested;
-                }
-            }
-        }
-        
-        private static void OnPositionRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetPositionRequested((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region SeekCompleted
-        public static readonly BindableProperty SeekCompletedProperty =
-            BindableProperty.CreateAttached("SeekCompleted", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnSeekCompletedChanged);
-        
-        public static ICommand GetSeekCompleted(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(SeekCompletedProperty);
-        }
-        
-        private static void OnSeekCompletedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.SeekCompleted += OnSeekCompleted;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.SeekCompleted -= OnSeekCompleted;
-                }
-            }
-        }
-        
-        private static void OnSeekCompleted(object o, EventArgs eventArgs)
-        {
-            var command = GetSeekCompleted((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region SeekRequested
-        public static readonly BindableProperty SeekRequestedProperty =
-            BindableProperty.CreateAttached("SeekRequested", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnSeekRequestedChanged);
-        
-        public static ICommand GetSeekRequested(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(SeekRequestedProperty);
-        }
-        
-        private static void OnSeekRequestedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.SeekRequested += OnSeekRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.SeekRequested -= OnSeekRequested;
-                }
-            }
-        }
-        
-        private static void OnSeekRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetSeekRequested((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region SeekRequestedNotifyPosition
-        public static readonly BindableProperty SeekRequestedNotifyPositionProperty =
-            BindableProperty.CreateAttached("SeekRequestedNotifyPosition", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnSeekRequestedNotifyPositionChanged);
-        
-        public static ICommand GetSeekRequestedNotifyPosition(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(SeekRequestedNotifyPositionProperty);
-        }
-        
-        private static void OnSeekRequestedNotifyPositionChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.SeekRequested += OnSeekRequestedNotifyPosition;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.SeekRequested -= OnSeekRequestedNotifyPosition;
-                }
-            }
-        }
-        
-        private static void OnSeekRequestedNotifyPosition(object o, Xamarin.Forms.SeekRequested eventArgs)
-        {
-            var command = GetSeekRequestedNotifyPosition((BindableObject)o);
-            if (command.CanExecute(eventArgs.Position))
-                command.Execute(eventArgs.Position);
-        }
-        #endregion
-        
-        #region StateRequested
-        public static readonly BindableProperty StateRequestedProperty =
-            BindableProperty.CreateAttached("StateRequested", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnStateRequestedChanged);
-        
-        public static ICommand GetStateRequested(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(StateRequestedProperty);
-        }
-        
-        private static void OnStateRequestedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.StateRequested += OnStateRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.StateRequested -= OnStateRequested;
-                }
-            }
-        }
-        
-        private static void OnStateRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetStateRequested((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
-        }
-        #endregion
-        
-        #region VolumeRequested
-        public static readonly BindableProperty VolumeRequestedProperty =
-            BindableProperty.CreateAttached("VolumeRequested", typeof(ICommand), typeof(MediaElements), null, propertyChanged:OnVolumeRequestedChanged);
-        
-        public static ICommand GetVolumeRequested(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(VolumeRequestedProperty);
-        }
-        
-        private static void OnVolumeRequestedChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is MediaElement target)
-            {
-                if (oldValue == null && newValue != null)
-                {
-                    target.VolumeRequested += OnVolumeRequested;
-                }
-                else if (oldValue != null && newValue == null)
-                {
-                    target.VolumeRequested -= OnVolumeRequested;
-                }
-            }
-        }
-        
-        private static void OnVolumeRequested(object o, EventArgs eventArgs)
-        {
-            var command = GetVolumeRequested((BindableObject)o);
-            if (command.CanExecute(null))
-                command.Execute(null);
         }
         #endregion
 	}
@@ -4861,6 +4600,43 @@ namespace Xamarin.Forms.BehaviorsPack {
 	}
 	#endregion
 
+	#region GeometryGroups
+	public static partial class GeometryGroups {
+        
+        #region InvalidateGeometryRequested
+        public static readonly BindableProperty InvalidateGeometryRequestedProperty =
+            BindableProperty.CreateAttached("InvalidateGeometryRequested", typeof(ICommand), typeof(GeometryGroups), null, propertyChanged:OnInvalidateGeometryRequestedChanged);
+        
+        public static ICommand GetInvalidateGeometryRequested(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(InvalidateGeometryRequestedProperty);
+        }
+        
+        private static void OnInvalidateGeometryRequestedChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is GeometryGroup target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.InvalidateGeometryRequested += OnInvalidateGeometryRequested;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.InvalidateGeometryRequested -= OnInvalidateGeometryRequested;
+                }
+            }
+        }
+        
+        private static void OnInvalidateGeometryRequested(object o, EventArgs eventArgs)
+        {
+            var command = GetInvalidateGeometryRequested((BindableObject)o);
+            if (command.CanExecute(null))
+                command.Execute(null);
+        }
+        #endregion
+	}
+	#endregion
+
 	#region Shells
 	public static partial class Shells {
         
@@ -5475,6 +5251,38 @@ namespace Xamarin.Forms.BehaviorsPack {
         }
         #endregion
         
+        #region CloseRequestedNotifyAnimated
+        public static readonly BindableProperty CloseRequestedNotifyAnimatedProperty =
+            BindableProperty.CreateAttached("CloseRequestedNotifyAnimated", typeof(ICommand), typeof(SwipeViews), null, propertyChanged:OnCloseRequestedNotifyAnimatedChanged);
+        
+        public static ICommand GetCloseRequestedNotifyAnimated(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(CloseRequestedNotifyAnimatedProperty);
+        }
+        
+        private static void OnCloseRequestedNotifyAnimatedChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is SwipeView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.CloseRequested += OnCloseRequestedNotifyAnimated;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.CloseRequested -= OnCloseRequestedNotifyAnimated;
+                }
+            }
+        }
+        
+        private static void OnCloseRequestedNotifyAnimated(object o, Xamarin.Forms.CloseRequestedEventArgs eventArgs)
+        {
+            var command = GetCloseRequestedNotifyAnimated((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
+        }
+        #endregion
+        
         #region OpenRequested
         public static readonly BindableProperty OpenRequestedProperty =
             BindableProperty.CreateAttached("OpenRequested", typeof(ICommand), typeof(SwipeViews), null, propertyChanged:OnOpenRequestedChanged);
@@ -5504,6 +5312,38 @@ namespace Xamarin.Forms.BehaviorsPack {
             var command = GetOpenRequested((BindableObject)o);
             if (command.CanExecute(null))
                 command.Execute(null);
+        }
+        #endregion
+        
+        #region OpenRequestedNotifyAnimated
+        public static readonly BindableProperty OpenRequestedNotifyAnimatedProperty =
+            BindableProperty.CreateAttached("OpenRequestedNotifyAnimated", typeof(ICommand), typeof(SwipeViews), null, propertyChanged:OnOpenRequestedNotifyAnimatedChanged);
+        
+        public static ICommand GetOpenRequestedNotifyAnimated(BindableObject bindableObject)
+        {
+            return (ICommand)bindableObject.GetValue(OpenRequestedNotifyAnimatedProperty);
+        }
+        
+        private static void OnOpenRequestedNotifyAnimatedChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is SwipeView target)
+            {
+                if (oldValue == null && newValue != null)
+                {
+                    target.OpenRequested += OnOpenRequestedNotifyAnimated;
+                }
+                else if (oldValue != null && newValue == null)
+                {
+                    target.OpenRequested -= OnOpenRequestedNotifyAnimated;
+                }
+            }
+        }
+        
+        private static void OnOpenRequestedNotifyAnimated(object o, Xamarin.Forms.OpenRequestedEventArgs eventArgs)
+        {
+            var command = GetOpenRequestedNotifyAnimated((BindableObject)o);
+            if (command.CanExecute(eventArgs.Animated))
+                command.Execute(eventArgs.Animated);
         }
         #endregion
         
