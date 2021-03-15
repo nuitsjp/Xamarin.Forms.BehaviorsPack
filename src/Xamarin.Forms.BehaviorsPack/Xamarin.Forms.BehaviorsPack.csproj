@@ -18,7 +18,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Xamarin Forms Behavior Behaviors Xamarin.Forms Xamarin.Forms.Behavior Xamarin.Forms.Behaviors Xamarin.Forms.BehaviorsPack BehaviorsPack</PackageTags>
     <DebugType>full</DebugType>
-    <Copyright>Copyright 2017 - 2020 nuits.jp</Copyright>
+    <Copyright>Copyright 2017 - 2021 nuits.jp</Copyright>
     <PackageReleaseNotes>
       Release 3.0.0
       - Support for Xamarin.Forms 5.0
