@@ -792,6 +792,12 @@ namespace Xamarin.Forms.BehaviorsPack.Tests
         {
             // ReSharper disable once EventNeverSubscribedTo.Local
             public event EventHandler<EventArgs> TestEvent;
+
+            public PageMock()
+            {
+                IsPlatformEnabled = true;
+            }
+
             public void RiseTestEvent(object sender, EventArgs eventArgs)
             {
                 TestEvent?.Invoke(sender, eventArgs);
